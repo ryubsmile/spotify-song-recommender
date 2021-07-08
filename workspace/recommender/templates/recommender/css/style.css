@@ -55,7 +55,5 @@
 }
 
 body{
-    font-family: 'Spotify', 'courier';
-    font-style: normal;
-    font-size: large;
+    font-family: 'Spotify', Helvetica, sans-serif;
 }
