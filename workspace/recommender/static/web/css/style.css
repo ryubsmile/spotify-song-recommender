@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: 900;
+    src: url(fonts/Gotham-Font/GothamPro-Black.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: italic;
+    font-weight: 900;
+    src: url(fonts/Gotham-Font/GothamPro-BlackItalic.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: bold;
+    src: url(fonts/Gotham-Font/GothamPro-Bold.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: italic;
+    font-weight: bold;
+    src: url(fonts/Gotham-Font/GothamPro-BoldItalic.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: 500;
+    src: url(fonts/Gotham-Font/GothamPro-Medium.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: italic;
+    font-weight: 500;
+    src: url(fonts/Gotham-Font/GothamPro-MediumItalic.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: lighter;
+    src: url(fonts/Gotham-Font/GothamPro-Light.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: italic;
+    font-weight: lighter;
+    src: url(fonts/Gotham-Font/GothamPro-LightItalic.woff) format('woff');
+}
+
+body{
+    font-family: 'Spotify', Helvetica, sans-serif;
+}
