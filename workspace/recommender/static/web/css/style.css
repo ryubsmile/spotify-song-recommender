@@ -56,4 +56,34 @@
 
 body{
     font-family: 'Spotify', Helvetica, sans-serif;
+    background-color: black;
+    color: white;
+    margin: 0;
+    height:100%
+}
+
+header{
+    text-align:center;
+    height: 200px;
+}
+
+header div.container{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+span#big-text{
+    font-weight: 500;
+    font-size: 30pt;
+    margin: 0;
+}
+
+h1{
+    font-weight: 500;
+}
+
+p{
+    font-weight: 300;
 }
