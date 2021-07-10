@@ -1,13 +1,39 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import spotipy
 import sys
-sys.path.append('../../')
-# from config import *
-#from spotipy.oauth2 import SpotifyClientCredentials
+import os
+import base64
+import json
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+import config
 
-#client_credentials_manager = SpotifyClientCredentials(client_id = Credentials.cid, client_secret = Credentials.secret)
-#sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
+"""
+Credentials for spotify api request
+"""
+client_id = config.cid
+client_secret = config.secret
+
+def get_headers(client_id, client_secret):
+    """Authorization for Spotify API request"""
+
+    endpoint = "https://accounts.spotify.com/api/token"
+    encoded = base64.b64encode("{}:{}".format(client_id, client_secret).encode('utf-8')).decode('ascii')
+
+    headers = {
+        "Authorization": "Basic {}".format(encoded)
+    }
+
+    payload = {
+        "grant_type": "client_credentials"
+    }
+
+    r = requests.post(endpoint, data=payload, headers=headers)
+
+    access_token = json.loads(r.text)['access_token']
+
+    headers = {
+        "Authorization": "Bearer {}".format(access_token)
+    }
 
 # Home Page
 # Processing CRUD Requests & routing
