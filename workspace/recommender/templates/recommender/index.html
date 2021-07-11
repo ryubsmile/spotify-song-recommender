@@ -26,47 +26,65 @@
         </style>
         <style>
             
+            /* #test{
+                margin: 20px auto;
+                border: 10px black solid;
+                background-color: white;
+                color: black;
+                height: 100px;
+                width: 200px;
+                text-align: center;
+                line-height: 100px;
+                border-radius: 20px;
+            } */
+
+            #test:hover{
+                animation: testAni forwards 0.5s;
+                animation-fill-mode: forwards;
+            }
+            @keyframes testAni {
+                100%{
+                    border-color:white;
+                    color:white;
+                    background-color: black;
+                }
+            }
+
             .tile:hover{
                 animation: fade-in forwards 0.5s;
                 animation-fill-mode: forwards;
             }
             
             @keyframes fade-in{
-                /* only background color = yes, other = white */
-                0%{
-                    border-color: var(--saved-color) ;
-                    color: var(--saved-color) ;
-                    background-color: white;
-                }
-                
                 /* color, border color = yes */
                 100%{
-                    border-color: white;
-                    color: white;
-                    background-color: var(--saved-color) ;
+                    border-color: black;
+                    color: black;
+                    background-color: var(--current-color) ;
                 }
             }
-            
+
             .tile{
-                animation: fade-out forwards 2s;
+                animation: fade-out forwards 3s;
                 animation-fill-mode: forwards;
             }
             
             @keyframes fade-out{
-                /* color, border color = yes */
+                /* only background color = yes, other = black */
                 0%{
-                    border-color: white;
-                    color: white;
-                    background-color: var(--saved-color) ;
+                    border-color: black;
+                    color: black;
+                    background-color: var(--current-color);
                 }
 
-                /* only background color = yes, other = white */
                 100%{
-                    border-color: var(--saved-color) ;
-                    color: var(--saved-color) ;
-                    background-color: white;
+                    border-color: var(--current-color) ;
+                    color: var(--current-color) ;
+                    background-color: black;
                 }
             }
+
+            
             </style>
     </head>
     <body>
@@ -98,5 +116,8 @@
                 </div>
             </div>
         </div>
+        <!-- <div id="test">
+            asasdf
+        </div> -->
     </body>
 </html>

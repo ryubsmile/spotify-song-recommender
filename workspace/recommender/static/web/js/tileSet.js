@@ -37,5 +37,5 @@ function setTileAnimation(self){
     var selfColor = self.style.color;
     var target = document.getElementById('color-save');
 
-    target.innerText = ':root{--saved-color: ' + selfColor + '}';
+    target.innerText = ':root{--current-color: ' + selfColor + '}';
 }

@@ -115,13 +115,13 @@ span#big-text{
 }
 
 .tile{
-    background: white;
-    color: white;
+    background: black;
+    color: black;
     border-radius: 25px;
     line-height: 20vmin;
     font-size: 20pt;
     margin: 10px;
     border-width: 10px;
     border-style: solid;
-    /* border-color: white !important; */
+    /* border-color: black !important; */
 }
