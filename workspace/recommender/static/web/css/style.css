@@ -115,43 +115,13 @@ span#big-text{
 }
 
 .tile{
-    background: black;
-    color: black;
+    background: white;
+    color: white;
     border-radius: 25px;
-    line-height: 15vmin;
+    line-height: 20vmin;
     font-size: 20pt;
     margin: 10px;
     border-width: 10px;
+    border-style: solid;
     /* border-color: white !important; */
-}
-
-@keyframes hvr-ripple-out {
-    100% {
-      top: -12px;
-      right: -12px;
-      bottom: -12px;
-      left: -12px;
-      opacity: 0;
-    }
-}
-.hvr-ripple-out {
-    display: inline-block;
-    vertical-align: middle;
-    transform: perspective(1px) translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    position: relative;
-}
-.hvr-ripple-out::before {
-    content: '';
-    position: absolute;
-    border: black solid 6px;
-    border-radius: 10px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    animation-duration: 1s;
-}
-.hvr-ripple-out:hover::before, .hvr-ripple-out:focus::before, .hvr-ripple-out:active::before {
-    animation-name: hvr-ripple-out;
 }

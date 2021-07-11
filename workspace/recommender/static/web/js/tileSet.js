@@ -1,10 +1,10 @@
 const COLORS = [
-    {r: 102, g: 172, b: 161}, //cyan
-    {r: 192, g: 152, b: 95}, //mustard yellow
-    {r: 73, g: 95, b: 167}, //pastel blue
-    {r: 152, g: 113, b: 123}, //pastel red
-    {r: 128, g: 79, b: 55}, //orange darker
-    {r: 168, g: 180, b: 196} //white cloud
+    {r: 240, g: 159, b: 164}, //pastel red
+    {r: 243, g: 186, b: 180}, //pastel orange
+    {r: 249, g: 219, b: 195}, //pastel pink
+    {r: 229, g: 241, b: 204}, //pastel lightgreen
+    {r: 191, g: 232, b: 216}, //pastel green
+    {r: 201, g: 206, b: 232} //pastel blue
 ];
 
 //set tile height equal to tile width
@@ -18,19 +18,24 @@ function tileHeightSetting(){
         var r = color.r;
         var g = color.g;
         var b = color.b;
-        
-        var tileColor = "background: " + "rgba(" + r + ", " + g + ", " + b + ", " + 1 + "); ";
-        var tileBorder = "border-color: rgba(" + 0 + ", " + 0 + ", " + 0 + ", " + 0.3 + "); " +
-                         "border-style: solid; ";
-        var styleString = tileBorder + tileColor;
+        var colorString = "rgba(" + r + ", " + g + ", " + b + ", " + 1 + "); ";
+
+        var tileBorder = "border-color: " + colorString + "; ";
+        var tileTextColor = "color: " + colorString + "; ";
+        var styleString = tileBorder + tileTextColor;
 
         tileList[i].setAttribute('style', styleString);
     }
     
 }
 
-
-
 window.onload = function(){
     tileHeightSetting();
+}
+
+function setTileAnimation(self){
+    var selfColor = self.style.color;
+    var target = document.getElementById('color-save');
+
+    target.innerText = ':root{--saved-color: ' + selfColor + '}';
 }

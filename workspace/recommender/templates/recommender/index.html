@@ -21,6 +21,53 @@
 
         <title>Spotify Song Recommender</title>
         
+        <style id="color-save">
+            
+        </style>
+        <style>
+            
+            .tile:hover{
+                animation: fade-in forwards 0.5s;
+                animation-fill-mode: forwards;
+            }
+            
+            @keyframes fade-in{
+                /* only background color = yes, other = white */
+                0%{
+                    border-color: var(--saved-color) ;
+                    color: var(--saved-color) ;
+                    background-color: white;
+                }
+                
+                /* color, border color = yes */
+                100%{
+                    border-color: white;
+                    color: white;
+                    background-color: var(--saved-color) ;
+                }
+            }
+            
+            .tile{
+                animation: fade-out forwards 2s;
+                animation-fill-mode: forwards;
+            }
+            
+            @keyframes fade-out{
+                /* color, border color = yes */
+                0%{
+                    border-color: white;
+                    color: white;
+                    background-color: var(--saved-color) ;
+                }
+
+                /* only background color = yes, other = white */
+                100%{
+                    border-color: var(--saved-color) ;
+                    color: var(--saved-color) ;
+                    background-color: white;
+                }
+            }
+            </style>
     </head>
     <body>
         <header>
@@ -31,23 +78,23 @@
         <div id="question">Question Sample?</div> 
         <div class="container">
             <div id="tile-container">
-                <div class="tile hvr-ripple-out">
-                    tile 1
+                <div class="tile" onmouseover="setTileAnimation(this);">
+                    TILE 1
                 </div>
-                <div class="tile">
-                    tile 2 
+                <div class="tile" onmouseover="setTileAnimation(this);">
+                    TILE 2 
                 </div>
-                <div class="tile"> 
-                    tile 3 
+                <div class="tile" onmouseover="setTileAnimation(this);"> 
+                    TILE 3 
                 </div>
-                <div class="tile">
-                    tile 4 
+                <div class="tile" onmouseover="setTileAnimation(this);">
+                    TILE 4 
                     </div>
-                <div class="tile"> 
-                    tile 5 
+                <div class="tile" onmouseover="setTileAnimation(this);"> 
+                    TILE 5 
                 </div>
-                <div class="tile"> 
-                    tile 6 
+                <div class="tile" onmouseover="setTileAnimation(this);"> 
+                    TILE 6 
                 </div>
             </div>
         </div>
