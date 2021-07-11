@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'web/css/style.css' %}">
 
         <!-- javascript linkage -->
+        <script src="{% static 'web/js/tileSet.js' %}"></script>
 
         <!-- favicon settings -->
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
@@ -23,9 +24,32 @@
     </head>
     <body>
         <header>
-            <div class="container">
+            <div class="header-container">
                 <span id="big-text">Spotify Song Recommender</span>
             </div>
         </header>
+        <div id="question">Question Sample?</div> 
+        <div class="container">
+            <div id="tile-container">
+                <div class="tile hvr-ripple-out">
+                    tile 1
+                </div>
+                <div class="tile">
+                    tile 2 
+                </div>
+                <div class="tile"> 
+                    tile 3 
+                </div>
+                <div class="tile">
+                    tile 4 
+                    </div>
+                <div class="tile"> 
+                    tile 5 
+                </div>
+                <div class="tile"> 
+                    tile 6 
+                </div>
+            </div>
+        </div>
     </body>
 </html>
