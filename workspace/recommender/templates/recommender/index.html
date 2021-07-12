@@ -1,3 +1,123 @@
+{% load static %}
 <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head> Testing </head>
+        <!-- css link -->
+        <link rel="stylesheet" type="text/css" href="{% static 'web/css/style.css' %}">
+
+        <!-- javascript linkage -->
+        <script src="{% static 'web/js/tileSet.js' %}"></script>
+
+        <!-- favicon settings -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/images/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/images/favicon-16x16.png' %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}">
+        <!-- favicon settings end -->
+
+        <title>Spotify Song Recommender</title>
+        
+        <style id="color-save">
+            
+        </style>
+        <style>
+            
+            /* #test{
+                margin: 20px auto;
+                border: 10px black solid;
+                background-color: white;
+                color: black;
+                height: 100px;
+                width: 200px;
+                text-align: center;
+                line-height: 100px;
+                border-radius: 20px;
+            } */
+
+            #test:hover{
+                animation: testAni forwards 0.5s;
+                animation-fill-mode: forwards;
+            }
+            @keyframes testAni {
+                100%{
+                    border-color:white;
+                    color:white;
+                    background-color: black;
+                }
+            }
+
+            .tile:hover{
+                animation: fade-in forwards 0.5s;
+                animation-fill-mode: forwards;
+            }
+            
+            @keyframes fade-in{
+                /* color, border color = yes */
+                100%{
+                    border-color: black;
+                    color: black;
+                    background-color: var(--current-color) ;
+                }
+            }
+
+            .tile{
+                animation: fade-out forwards 3s;
+                animation-fill-mode: forwards;
+            }
+            
+            @keyframes fade-out{
+                /* only background color = yes, other = black */
+                0%{
+                    border-color: black;
+                    color: black;
+                    background-color: var(--current-color);
+                }
+
+                100%{
+                    border-color: var(--current-color) ;
+                    color: var(--current-color) ;
+                    background-color: black;
+                }
+            }
+
+            
+            </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                <span id="big-text">Spotify Song Recommender</span>
+            </div>
+        </header>
+        <div id="question">Question Sample?</div> 
+        <div class="container">
+            <div id="tile-container">
+                <div class="tile" onmouseover="setTileAnimation(this);">
+                    TILE 1
+                </div>
+                <div class="tile" onmouseover="setTileAnimation(this);">
+                    TILE 2 
+                </div>
+                <div class="tile" onmouseover="setTileAnimation(this);"> 
+                    TILE 3 
+                </div>
+                <div class="tile" onmouseover="setTileAnimation(this);">
+                    TILE 4 
+                    </div>
+                <div class="tile" onmouseover="setTileAnimation(this);"> 
+                    TILE 5 
+                </div>
+                <div class="tile" onmouseover="setTileAnimation(this);"> 
+                    TILE 6 
+                </div>
+            </div>
+        </div>
+        <!-- <div id="test">
+            asasdf
+        </div> -->
+    </body>
+</html>
