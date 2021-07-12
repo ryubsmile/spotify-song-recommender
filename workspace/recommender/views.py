@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import requests
 import sys
 import os
 import base64
@@ -34,36 +35,45 @@ def get_headers(client_id, client_secret):
     headers = {
         "Authorization": "Bearer {}".format(access_token)
     }
+    return headers
+
+def getArtistId (artist):
+    """ Get ArtistId by name"""
+
+    url = "https://api.spotify.com/v1/search?q=artist:{}&type=artist".format(artist)
+    headers = get_headers(client_id, client_secret)
+
+    r = requests.get(url, headers=headers)
+    raw = json.loads(r.text)
+    items = raw['artists']['items']
+    artistId = items[0]['id']
+
+    return artistId
+
+def getArtistTopTracks(artist, country):
+    artistId = getArtistId(artist)
+    url = "https://api.spotify.com/v1/artists/{}/top-tracks?country={}".format(artistId, country)
+    headers = get_headers(client_id, client_secret)
+    r = requests.get(url, headers=headers)
+    raw = json.loads(r.text)
+    total = raw['tracks'][:5]
+    data = []
+    for i in total:
+        data.append({i['name']: [{'artist': i['album']['artists'][0]['name']}, {'link': i['album']['external_urls']['spotify']}, {'image': i['album']['images'][0]['url']}]})
+    return data
 
 # Home Page
 # Processing CRUD Requests & routing
 def index(request):
     if request.method == 'GET':
-        # artist_name = []
-        # track_name = []
-        # popularity = []
-        # track_id = []
-        # for i in range(0,10000,50):
-        #     track_results = sp.search(q='year:2018', type='track', limit=50,offset=i)
-        #     for i, t in enumerate(track_results['tracks']['items']):
-        #         artist_name.append(t['artists'][0]['name'])
-        #         track_name.append(t['name'])
-        #         track_id.append(t['id'])
-        #         popularity.append(t['popularity'])
-        # print(artist_name)
-
+        data = getArtistTopTracks('BTS', 'KR')
         return render(request, 'recommender/index.html', 
-            # {
-            #     'data': data
-            # }
-        
+            {
+                'data': data
+            }
         )
     elif request.method == 'POST':
         return render(request, 'recommender/index.html', 
-            # {
-            #     'data': data
-            # }
-        
         )
 
 # Final Recommendation Pages
