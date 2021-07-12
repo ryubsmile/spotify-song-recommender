@@ -21,6 +21,13 @@ def detail(request):
     )
 
 def result(request):
+    buttonName = request.GET.get('choice')
+    
+    context = {
+        'buttonName' : buttonName
+        # 'data : data
+    }
+
     return render(request, 'recommender/result.html',
-        # data
+        context
     )

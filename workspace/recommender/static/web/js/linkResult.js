@@ -1,19 +1,21 @@
-var clickFrom = "";
+//gets this as parameter
+function parseStringOfButton(self){
+    var buttonRawString = self.textContent;
+    var buttonText;
 
-function saveOrigin(self){
-    clickFrom = self;
-    /*
-    
-        parse clickFrom
-    
-    */
+    while(buttonRawString.includes('\n')){ buttonRawString = buttonRawString.replace('\n',''); }
+    while(buttonRawString.includes(' ')){ buttonRawString = buttonRawString.replace(' ',''); }
+
+    setInputAs(buttonRawString);
 }
 
-function setText(text){
-    var target = document.getElementById('result-container');
-    target.textContent = text;
+//set input hidden value as the text
+function setInputAs(text){
+    var target = document.getElementById('button-kind');
+    target.value = text;
 }
 
-// window.onload = function(){
-//     setText(clickFrom);
-// }
+function submitValue(){
+    var target = document.getElementById('tile-data');
+    target.submit();
+}

@@ -25,7 +25,7 @@
         <style id="color-save"></style>
         <style>
             
-            /* #test{
+            /* javascript:;test{
                 margin: 20px auto;
                 border: 10px black solid;
                 background-color: white;
@@ -92,31 +92,33 @@
                 <span id="big-text">Spotify Song Recommender</span>
             </div>
         </header>
-        <div id="question">Question Sample?</div> 
+
+        <div class="subtitle">CHOOSE A TILE</div> 
+
         <div class="container">
-            <div id="tile-container">
-                <div class="tile t1" onmouseover="setTileAnimation(this);">
-                    <a href="result/" onclick="setText(this);">TILE 1</a>
-                </div>
-                <div class="tile t2" onmouseover="setTileAnimation(this);">
-                    <a href="result/" onclick="setText(this);">TILE 2</a> 
-                </div>
-                <div class="tile t3" onmouseover="setTileAnimation(this);"> 
-                    <a href="result/" onclick="setText(this);">TILE 3</a> 
-                </div>
-                <div class="tile t4" onmouseover="setTileAnimation(this);">
-                    <a href="result/" onclick="setText(this);">TILE 4</a> 
+            <form id="tile-data" name="tile-data" action="result/" method="GET" accept-charset="UTF-8">
+                <input type="hidden" id="button-kind" name="choice" value="">
+                <div id="tile-container">
+                    <div class="tile t1" onmouseover="setTileAnimation(this);">
+                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">STUDY</a>
                     </div>
-                <div class="tile t5" onmouseover="setTileAnimation(this);"> 
-                    <a href="result/" onclick="setText(this);">TILE 5</a> 
+                    <div class="tile t2" onmouseover="setTileAnimation(this);">
+                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">LOFI</a> 
+                    </div>
+                    <div class="tile t3" onmouseover="setTileAnimation(this);"> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">DRIVE</a> 
+                    </div>
+                    <div class="tile t4" onmouseover="setTileAnimation(this);">
+                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">CHILL</a> 
+                        </div>
+                    <div class="tile t5" onmouseover="setTileAnimation(this);"> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">SLEEP</a> 
+                    </div>
+                    <div class="tile t6" onmouseover="setTileAnimation(this);"> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">TILE 6</a> 
+                    </div>
                 </div>
-                <div class="tile t6" onmouseover="setTileAnimation(this);"> 
-                    <a href="result/" onclick="setText(this);">TILE 6</a> 
-                </div>
-            </div>
+            </form>
         </div>
-        <!-- <div id="test">
-            asasdf
-        </div> -->
     </body>
 </html>

@@ -99,14 +99,15 @@ header{
     height: 100%;
 }
 
-span#big-text{
+#big-text{
     font-weight: 500;
     font-size: 5vmin;
     margin: 0;
 }
 
-#question{
-    font-weight: 300;
+.subtitle{
+    font-weight: 500;
+    font-size: 30px;
     text-align:center;
     margin: 30px 0 60px 0;
 }
