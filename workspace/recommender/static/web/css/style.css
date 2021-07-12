@@ -64,6 +64,15 @@ p{
 }
 /* lowest settings end */
 
+a{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+    height: 100%;
+
+}
+
 html{
     height: 100%;
     width: 100%;

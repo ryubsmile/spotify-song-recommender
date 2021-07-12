@@ -11,6 +11,7 @@
 
         <!-- javascript linkage -->
         <script src="{% static 'web/js/tileSet.js' %}"></script>
+        <script src="{% static 'web/js/linkResult.js' %}"></script>
 
         <!-- favicon settings -->
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
@@ -21,9 +22,7 @@
 
         <title>Spotify Song Recommender</title>
         
-        <style id="color-save">
-            
-        </style>
+        <style id="color-save"></style>
         <style>
             
             /* #test{
@@ -85,7 +84,7 @@
             }
 
             
-            </style>
+        </style>
     </head>
     <body>
         <header>
@@ -96,23 +95,23 @@
         <div id="question">Question Sample?</div> 
         <div class="container">
             <div id="tile-container">
-                <div class="tile" onmouseover="setTileAnimation(this);">
-                    TILE 1
+                <div class="tile t1" onmouseover="setTileAnimation(this);">
+                    <a href="result/" onclick="setText(this);">TILE 1</a>
                 </div>
-                <div class="tile" onmouseover="setTileAnimation(this);">
-                    TILE 2 
+                <div class="tile t2" onmouseover="setTileAnimation(this);">
+                    <a href="result/" onclick="setText(this);">TILE 2</a> 
                 </div>
-                <div class="tile" onmouseover="setTileAnimation(this);"> 
-                    TILE 3 
+                <div class="tile t3" onmouseover="setTileAnimation(this);"> 
+                    <a href="result/" onclick="setText(this);">TILE 3</a> 
                 </div>
-                <div class="tile" onmouseover="setTileAnimation(this);">
-                    TILE 4 
+                <div class="tile t4" onmouseover="setTileAnimation(this);">
+                    <a href="result/" onclick="setText(this);">TILE 4</a> 
                     </div>
-                <div class="tile" onmouseover="setTileAnimation(this);"> 
-                    TILE 5 
+                <div class="tile t5" onmouseover="setTileAnimation(this);"> 
+                    <a href="result/" onclick="setText(this);">TILE 5</a> 
                 </div>
-                <div class="tile" onmouseover="setTileAnimation(this);"> 
-                    TILE 6 
+                <div class="tile t6" onmouseover="setTileAnimation(this);"> 
+                    <a href="result/" onclick="setText(this);">TILE 6</a> 
                 </div>
             </div>
         </div>

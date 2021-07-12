@@ -19,3 +19,8 @@ def detail(request):
         # }
     
     )
+
+def result(request):
+    return render(request, 'recommender/result.html',
+        # data
+    )

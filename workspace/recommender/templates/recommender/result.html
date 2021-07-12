@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- css link -->
+        <link rel="stylesheet" type="text/css" href="{% static 'web/css/style.css' %}">
+
+        <!-- javascript linkage -->
+        <script src="{% static 'web/js/linkResult.js' %}"></script>
+
+        <!-- favicon settings -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/images/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/images/favicon-16x16.png' %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}">
+        <!-- favicon settings end -->
+
+        <title>Spotify Song Recommender</title>
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                <span id="big-text">Spotify Song Recommender</span>
+            </div>
+        </header>
+        <div id="result">here is your song.</div> 
+        <div class="container">
+            <div id="result-container">
+                the song
+            </div>
+        </div>
+    </body>
+</html>
