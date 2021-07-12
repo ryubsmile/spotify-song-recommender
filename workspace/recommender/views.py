@@ -59,7 +59,7 @@ def getArtistTopTracks(artist, country):
     total = raw['tracks'][:5]
     data = []
     for i in total:
-        data.append({i['name']: i['album']['external_urls']['spotify']})
+        data.append({i['name']: [{'artist': i['album']['artists'][0]['name']}, {'link': i['album']['external_urls']['spotify']}, {'image': i['album']['images'][0]['url']}]})
     return data
 
 # Home Page
@@ -74,7 +74,6 @@ def index(request):
         )
     elif request.method == 'POST':
         return render(request, 'recommender/index.html', 
-        
         )
 
 # Final Recommendation Pages
