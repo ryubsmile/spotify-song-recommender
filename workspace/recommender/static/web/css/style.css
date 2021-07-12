@@ -54,6 +54,74 @@
     src: url(fonts/Gotham-Font/GothamPro-LightItalic.woff) format('woff');
 }
 
+/* lowest settings */
+h1{
+    font-weight: 500;
+}
+
+p{
+    font-weight: 300;
+}
+/* lowest settings end */
+
+html{
+    height: 100%;
+    width: 100%;
+}
+
 body{
     font-family: 'Spotify', Helvetica, sans-serif;
+    background-color: black;
+    color: white;
+    margin: 0;
+    height:100%;
+    width: 100%;
+}
+
+header{
+    text-align:center;
+    height: 200px;
+}
+
+.header-container{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+span#big-text{
+    font-weight: 500;
+    font-size: 5vmin;
+    margin: 0;
+}
+
+#question{
+    font-weight: 300;
+    text-align:center;
+    margin: 30px 0 60px 0;
+}
+
+.container{
+    text-align: center;
+}
+
+#tile-container{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 90vmin;
+    height: 60vmin;
+    margin: 0 auto;
+}
+
+.tile{
+    background: black;
+    color: black;
+    border-radius: 25px;
+    line-height: 20vmin;
+    font-size: 20pt;
+    margin: 10px;
+    border-width: 10px;
+    border-style: solid;
+    /* border-color: black !important; */
 }
