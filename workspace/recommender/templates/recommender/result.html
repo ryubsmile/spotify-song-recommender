@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- css link -->
-        <link rel="stylesheet" type="text/css" href="{% static 'web/css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'web/css/style2.css' %}">
 
         <!-- javascript linkage -->
         <script src="{% static 'web/js/linkResult.js' %}"></script>
@@ -19,18 +19,15 @@
         <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}">
         <!-- favicon settings end -->
 
-        <title>Spotify Song Recommender</title>
+        <title>Recommended Playlist</title>
     </head>
     <body>
-        <header>
-            <div class="header-container">
-                <span id="big-text">Spotify Song Recommender</span>
-            </div>
-        </header>
-        <div class="subtitle">here is your song.</div> 
         <div class="container">
-            <div id="result-container">
-                {{ buttonName }}
+            <header>
+                Your Recommended Playlist for [genre]...
+            </header>
+            <div id="result">
+                
             </div>
         </div>
     </body>

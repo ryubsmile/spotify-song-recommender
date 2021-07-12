@@ -11,20 +11,11 @@ def index(request):
     
     )
 
-# Front end rendering
-def detail(request):
-    return render(request, 'recommender/index.html', 
-        # {
-        #     'data': data
-        # }
-    
-    )
-
 def result(request):
-    buttonName = request.GET.get('choice')
-    
+    tileName = request.GET.get('choice')
+
     context = {
-        'buttonName' : buttonName
+        'tileName' : tileName
         # 'data : data
     }
 

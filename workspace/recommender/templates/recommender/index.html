@@ -23,102 +23,47 @@
         <title>Spotify Song Recommender</title>
         
         <style id="color-save"></style>
-        <style>
-            
-            /* javascript:;test{
-                margin: 20px auto;
-                border: 10px black solid;
-                background-color: white;
-                color: black;
-                height: 100px;
-                width: 200px;
-                text-align: center;
-                line-height: 100px;
-                border-radius: 20px;
-            } */
-
-            #test:hover{
-                animation: testAni forwards 0.5s;
-                animation-fill-mode: forwards;
-            }
-            @keyframes testAni {
-                100%{
-                    border-color:white;
-                    color:white;
-                    background-color: black;
-                }
-            }
-
-            .tile:hover{
-                animation: fade-in forwards 0.5s;
-                animation-fill-mode: forwards;
-            }
-            
-            @keyframes fade-in{
-                /* color, border color = yes */
-                100%{
-                    border-color: black;
-                    color: black;
-                    background-color: var(--current-color) ;
-                }
-            }
-
-            .tile{
-                animation: fade-out forwards 3s;
-                animation-fill-mode: forwards;
-            }
-            
-            @keyframes fade-out{
-                /* only background color = yes, other = black */
-                0%{
-                    border-color: black;
-                    color: black;
-                    background-color: var(--current-color);
-                }
-
-                100%{
-                    border-color: var(--current-color) ;
-                    color: var(--current-color) ;
-                    background-color: black;
-                }
-            }
-
-            
-        </style>
     </head>
     <body>
+        <!-- start of header -->
         <header>
             <div class="header-container">
                 <span id="big-text">Spotify Song Recommender</span>
             </div>
         </header>
+        <!-- end of header -->
 
-        <div class="subtitle">CHOOSE A TILE</div> 
+        <!-- subtitle -->
+        <div class="subtitle" id="pg1">CHOOSE A TILE!</div> 
 
+        <!-- start of main container -->
         <div class="container">
-            <form id="tile-data" name="tile-data" action="result/" method="GET" accept-charset="UTF-8">
+            <!-- data input taker -->
+            <form id="tile-data" name="tile-data" action="result/" method="POST" accept-charset="UTF-8">
+                <!-- data input sender -->
                 <input type="hidden" id="button-kind" name="choice" value="">
                 <div id="tile-container">
-                    <div class="tile t1" onmouseover="setTileAnimation(this);">
-                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">STUDY</a>
+                    <div class="tile" onmouseover="setTileAnimation(this);">
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">STUDY</a>
                     </div>
-                    <div class="tile t2" onmouseover="setTileAnimation(this);">
-                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">LOFI</a> 
+                    <div class="tile" onmouseover="setTileAnimation(this);">
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">LOFI</a> 
                     </div>
-                    <div class="tile t3" onmouseover="setTileAnimation(this);"> 
-                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">DRIVE</a> 
+                    <div class="tile" onmouseover="setTileAnimation(this);"> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">DRIVE</a> 
                     </div>
-                    <div class="tile t4" onmouseover="setTileAnimation(this);">
-                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">CHILL</a> 
+                    <div class="tile" onmouseover="setTileAnimation(this);">
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">CHILL</a> 
                         </div>
-                    <div class="tile t5" onmouseover="setTileAnimation(this);"> 
-                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">SLEEP</a> 
+                    <div class="tile" onmouseover="setTileAnimation(this);"> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">SLEEP</a> 
                     </div>
-                    <div class="tile t6" onmouseover="setTileAnimation(this);"> 
-                        <a href="javascript:;" onclick="parseStringOfButton(this); submitValue();">TILE 6</a> 
+                    <div class="tile" onmouseover="setTileAnimation(this);"> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">TILE 6</a> 
                     </div>
                 </div>
             </form>
         </div>
+        <!-- end of main container -->
     </body>
 </html>
