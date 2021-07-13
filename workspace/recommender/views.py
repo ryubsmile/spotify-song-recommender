@@ -62,26 +62,58 @@ def getArtistTopTracks(artist, country):
         data.append({i['name']: [{'artist': i['album']['artists'][0]['name']}, {'link': i['album']['external_urls']['spotify']}, {'image': i['album']['images'][0]['url']}]})
     return data
 
+def getGenrePlaylist(genre):
+    url = "https://api.spotify.com/v1/browse/categories/{}/playlists?limit=10".format(genre)
+    headers = get_headers(client_id, client_secret)
+    r = requests.get(url, headers=headers)
+    raw = json.loads(r.text)
+    playlistId = raw['playlists']['items'][0]['id']
+    
+    return playlistId
+
+def getPlaylist(genre):
+    playListId = getGenrePlaylist(genre)
+    url = "https://api.spotify.com/v1/playlists/{}".format(playListId)
+    headers = get_headers(client_id, client_secret)
+    r = requests.get(url, headers=headers)
+    raw = json.loads(r.text)
+    data = []
+    for i in range(9):
+        songLink = raw['tracks']['items'][i]['track']['external_urls']['spotify']
+        songImage = raw['tracks']['items'][i]['track']['album']['images'][0]['url']
+        #songId = raw['tracks']['items'][i]['track']['album']['id']
+        songName = raw['tracks']['items'][i]['track']['name']
+        artistName = raw['tracks']['items'][i]['track']['artists'][0]['name']
+        data.append({'songName': songName, 'artistName': artistName, 'image': songImage, 'link': songLink})
+    return data
+
 # Home Page
 # Processing CRUD Requests & routing
 def index(request):
     if request.method == 'GET':
-        data = getArtistTopTracks('BTS', 'KR')
+        # Return categories
+        genre = ['chill', 'pop', 'sleep', 'workout', "study", "summer", 'rainyday', "classical", "dance"]
+        genre_kind = {'Driving song': genre[0]}
+        data = getPlaylist("acoustic")
+        print(data)
         return render(request, 'recommender/index.html', 
             {
-                'data': data
+                'genre': genre_kind
             }
         )
     elif request.method == 'POST':
+        # Receive genre type
         return render(request, 'recommender/index.html', 
         )
 
 # Final Recommendation Pages
 # Front end rendering with result data
-def detail(request):
-    return render(request, 'recommender/index.html', 
-        # {
-        #     'data': data
-        # }
-    
-    )
+def result(request):
+    if request.method == 'GET':
+        data = getPlaylist('chill')
+        return render(request, 'recommender/result.html', 
+            {
+                'data': data
+            }
+        
+        )
