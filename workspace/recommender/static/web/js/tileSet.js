@@ -4,15 +4,15 @@ const COLORS = [
     {r: 249, g: 219, b: 195}, //pastel pink
     {r: 229, g: 241, b: 204}, //pastel lightgreen
     {r: 191, g: 232, b: 216}, //pastel green
-    {r: 201, g: 206, b: 232} //pastel blue
+    {r: 201, g: 206, b: 232}, //pastel blue
 ];
 
-//set tile height equal to tile width
-function tileHeightSetting(){
+//set tile color
+function setTileStyle(){
     var tileContainer = document.querySelector('#tile-container');
     var tileList = document.querySelectorAll('.tile');
     var sampleTile = tileList[0];
-
+    
     for(var i = 0; i < tileList.length; i++){
         var color = COLORS[i];
         var r = color.r;
@@ -29,13 +29,11 @@ function tileHeightSetting(){
     
 }
 
-window.onload = function(){
-    tileHeightSetting();
-}
-
+//tile animation that changes color of tiles when hover
 function setTileAnimation(self){
     var selfColor = self.style.color;
     var target = document.getElementById('color-save');
 
     target.innerText = ':root{--current-color: ' + selfColor + '}';
 }
+

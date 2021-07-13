@@ -64,6 +64,15 @@ p{
 }
 /* lowest settings end */
 
+a{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+    height: 100%;
+
+}
+
 html{
     height: 100%;
     width: 100%;
@@ -80,7 +89,7 @@ body{
 
 header{
     text-align:center;
-    height: 200px;
+    height: 180px;
 }
 
 .header-container{
@@ -90,16 +99,18 @@ header{
     height: 100%;
 }
 
-span#big-text{
-    font-weight: 500;
+#big-text{
+    font-weight: bold;
     font-size: 5vmin;
     margin: 0;
 }
 
-#question{
-    font-weight: 300;
+.subtitle{
+    font-weight: 500;
+    font-size: 30px;
     text-align:center;
-    margin: 30px 0 60px 0;
+    margin: 2vh 0 3vh 0;
+    color: inherit;
 }
 
 .container{
@@ -118,10 +129,73 @@ span#big-text{
     background: black;
     color: black;
     border-radius: 25px;
-    line-height: 20vmin;
+    line-height: 600%;
     font-size: 20pt;
+    font-weight: 700;
     margin: 10px;
     border-width: 10px;
     border-style: solid;
     /* border-color: black !important; */
+    animation: fade-out forwards 3s;
+    animation-fill-mode: forwards;
+}
+
+/* only background color = yes, other = black */
+@keyframes fade-out{
+    0%{ border-color: black; color: black; background-color: var(--current-color); }
+    100%{ border-color: var(--current-color); color: var(--current-color); background-color: black; }
+}
+
+.tile:hover{
+    animation: fade-in forwards 0.75s;
+    animation-fill-mode: both;
+}
+
+/* color, border color = yes */
+@keyframes fade-in{
+    0%{ background-color: black; color: var(--current-color);}
+    100%{ border-color: black; color: black; background-color: var(--current-color); }
+}
+
+#big-text{
+    animation: follow-color 2s alternate;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes follow-color {
+    0%{ color: currentColor; }
+    100%{ color: var(--current-color); }
+}
+ 
+.special-one{
+    animation: swoop 0.5s forwards;
+    animation-fill-mode: forwards;
+    border-radius: 25px;
+    border-color: black; 
+    background-color: var(--current-color);
+}
+
+@keyframes swoop{
+    0%{
+        transform: scale(0.8, 0.8);
+    }
+
+    50%{
+        transform: scale(0.7, 0.7);
+    }
+
+    100%{
+        transform: scale(0.8, 0.8);
+    }
+}
+
+.special-one-text{
+    animation: none;
+    color:black;
+    line-height: 600%;
+    font-size: 20pt;
+    margin-top:10px;
+    font-weight: 700;
 }

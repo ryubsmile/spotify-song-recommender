@@ -9,8 +9,9 @@
         <!-- css link -->
         <link rel="stylesheet" type="text/css" href="{% static 'web/css/style.css' %}">
 
-        <!-- javascript linkage -->
+        <!-- javascript link -->
         <script src="{% static 'web/js/tileSet.js' %}"></script>
+        <script src="{% static 'web/js/linkResult.js' %}"></script>
 
         <!-- favicon settings -->
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
@@ -21,103 +22,108 @@
 
         <title>Spotify Song Recommender</title>
         
-        <style id="color-save">
-            
-        </style>
-        <style>
-            
-            /* #test{
-                margin: 20px auto;
-                border: 10px black solid;
-                background-color: white;
-                color: black;
-                height: 100px;
-                width: 200px;
-                text-align: center;
-                line-height: 100px;
-                border-radius: 20px;
-            } */
+        <style id="color-save"></style>
+        <script>
+            window.onload = function(){
+                setTileStyle();
 
-            #test:hover{
-                animation: testAni forwards 0.5s;
-                animation-fill-mode: forwards;
+                objToArray();
+                setTileText();
             }
-            @keyframes testAni {
-                100%{
-                    border-color:white;
-                    color:white;
-                    background-color: black;
+
+            obj = "{{genre|safe}}";
+
+            function objToArray(){
+                obj = obj.replace('[','');
+                obj = obj.replace(']','');
+
+                while(obj.includes('\'')){
+                    obj = obj.replace('\'','');
+                    obj = obj.replace(' ', '');
+                }
+
+                obj = obj.split(",");
+                //obj = ["genre1", "genre2", ... ]
+            }
+
+            function setTileText(){
+                var tiles = document.getElementsByTagName('a');
+                var randomIndices = pickRandomSixIndices(obj);
+
+                for(var i = 0; i < tiles.length; i++){
+                    var tile = tiles[i];
+                    var genre = obj[randomIndices[i]].toUpperCase();
+                    tile.textContent = genre;
+                    if(genre.length > 6){
+                        tile.style.fontSize = '17pt';
+                    }
                 }
             }
 
-            .tile:hover{
-                animation: fade-in forwards 0.5s;
-                animation-fill-mode: forwards;
-            }
-            
-            @keyframes fade-in{
-                /* color, border color = yes */
-                100%{
-                    border-color: black;
-                    color: black;
-                    background-color: var(--current-color) ;
-                }
-            }
-
-            .tile{
-                animation: fade-out forwards 3s;
-                animation-fill-mode: forwards;
-            }
-            
-            @keyframes fade-out{
-                /* only background color = yes, other = black */
-                0%{
-                    border-color: black;
-                    color: black;
-                    background-color: var(--current-color);
+            function pickRandomSixIndices(arr){
+                var existingElements = [];
+                var indices = [];
+                //var min = 0;
+                var max = arr.length; //exclusive
+                var pointer = -1;
+                
+                //random number between 0 ~ max
+                for(var i = 0; i < 6;){
+                    pointer = Math.floor(Math.random() * max);
+                    if(!existingElements.includes(pointer)){
+                        existingElements.push(pointer);
+                        indices.push(pointer);
+                        i++;
+                    }
                 }
 
-                100%{
-                    border-color: var(--current-color) ;
-                    color: var(--current-color) ;
-                    background-color: black;
-                }
+                return indices;
             }
-
-            
-            </style>
+        </script>
     </head>
     <body>
+        <!-- start of header -->
         <header>
             <div class="header-container">
                 <span id="big-text">Spotify Song Recommender</span>
             </div>
         </header>
-        <div id="question">Question Sample?</div> 
+        <!-- end of header -->
+
+        <!-- subtitle -->
+        <div class="subtitle" id="pg1">CHOOSE A TILE!</div> 
+
+        <!-- start of main container -->
         <div class="container">
-            <div id="tile-container">
-                <div class="tile" onmouseover="setTileAnimation(this);">
-                    TILE 1
-                </div>
-                <div class="tile" onmouseover="setTileAnimation(this);">
-                    TILE 2 
-                </div>
-                <div class="tile" onmouseover="setTileAnimation(this);"> 
-                    TILE 3 
-                </div>
-                <div class="tile" onmouseover="setTileAnimation(this);">
-                    TILE 4 
+            <!-- data input taker -->
+            <form id="tile-data" name="tile-data" action="result/" method="POST" accept-charset="UTF-8">
+                <!-- data input sender -->
+                {%csrf_token%} 
+                <input type="hidden" id="button-kind" name="choice" value="">
+                <div id="tile-container">
+                    <div class="tile" onmouseover="setTileAnimation(this);">
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);"> </a>
                     </div>
-                <div class="tile" onmouseover="setTileAnimation(this);"> 
-                    TILE 5 
+                    <div class="tile" onmouseover="setTileAnimation(this);">
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">LOFI</a> 
+                    </div>
+                    <div class="tile" onmouseover="setTileAnimation(this);"> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">DRIVE</a> 
+                    </div>
+                    <div class="tile" onmouseover="setTileAnimation(this);">
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">CHILL</a> 
+                        </div>
+                    <div class="tile" onmouseover="setTileAnimation(this);"> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">SLEEP</a> 
+                    </div>
+                    <div class="tile" onmouseover="setTileAnimation(this);"> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">TILE 6</a> 
+                    </div>
                 </div>
-                <div class="tile" onmouseover="setTileAnimation(this);"> 
-                    TILE 6 
-                </div>
-            </div>
+            </form>
         </div>
-        <!-- <div id="test">
-            asasdf
-        </div> -->
+        <!-- end of main container -->
+
+
     </body>
 </html>

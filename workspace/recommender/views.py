@@ -63,7 +63,7 @@ def getPlaylist(genre):
         data.append({'songName': songName, 'albumName': albumName, 'artistName': artistName, 'image': songImage, 'link': songLink, 'duration': songLength})
     return data
 
-genre = ['chill', 'pop', 'sleep', 'workout', "study", "summer", 'rainyday', "classical", "dance"]
+genre = ['chill', 'pop', 'sleep', 'workout', 'study', 'summer', 'rainy-day', 'classical', 'dance']
 genre_kind = {'Driving song': genre[0]}
 
 # Home Page
@@ -76,15 +76,18 @@ def index(request):
         )
     elif request.method == 'POST':
         return render(request, 'recommender/index.html', 
+        
         )
 
 # Result Page
 def result(request):
-    if request.method == 'GET':
-        data = getPlaylist(genre[0])
+    if request.method == 'POST':
+
+        tile = request.POST.get('choice').lower()
+        data = getPlaylist(tile)
         return render(request, 'recommender/result.html', 
             {
-                'data': data
+                'data': data,
+                'genre': tile,
             }
-        
         )
