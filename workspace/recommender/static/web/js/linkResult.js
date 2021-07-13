@@ -14,11 +14,11 @@ function setInputAs(text){
     target.value = text;
 }
 
-function setAsSpecialOne(self){
+function clickedTile(self){
     var parent = self.parentElement;
 
-    parent.className = "special-one";
-    self.className = "special-one-text";
+    parent.className = "clicked-tile";
+    self.className = "clicked-tile-text";
 
     //at the end of this animation, submit data
     parent.addEventListener('animationend', () =>{

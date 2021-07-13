@@ -54,6 +54,8 @@
                     var tile = tiles[i];
                     var genre = obj[randomIndices[i]].toUpperCase();
                     tile.textContent = genre;
+
+                    //dynamic font-sizing
                     if(genre.length > 6){
                         tile.style.fontSize = '17pt';
                     }
@@ -102,28 +104,26 @@
                 <input type="hidden" id="button-kind" name="choice" value="">
                 <div id="tile-container">
                     <div class="tile" onmouseover="setTileAnimation(this);">
-                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);"> </a>
+                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);"> </a>
                     </div>
                     <div class="tile" onmouseover="setTileAnimation(this);">
-                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">LOFI</a> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);">LOFI</a> 
                     </div>
                     <div class="tile" onmouseover="setTileAnimation(this);"> 
-                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">DRIVE</a> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);">DRIVE</a> 
                     </div>
                     <div class="tile" onmouseover="setTileAnimation(this);">
-                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">CHILL</a> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);">CHILL</a> 
                         </div>
                     <div class="tile" onmouseover="setTileAnimation(this);"> 
-                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">SLEEP</a> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);">SLEEP</a> 
                     </div>
                     <div class="tile" onmouseover="setTileAnimation(this);"> 
-                        <a href="javascript:;" onclick="parseStringOfButton(this); setAsSpecialOne(this);">TILE 6</a> 
+                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);">TILE 6</a> 
                     </div>
                 </div>
             </form>
         </div>
         <!-- end of main container -->
-
-
     </body>
 </html>

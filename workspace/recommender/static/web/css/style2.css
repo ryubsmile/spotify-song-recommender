@@ -43,31 +43,43 @@
 @font-face {
     font-family: 'Spotify';
     font-style: normal;
-    font-weight: lighter;
+    font-weight: 400;
+    src: url(fonts/Gotham-Font/GothamPro.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: italic;
+    font-weight: 400;
+    src: url(fonts/Gotham-Font/GothamPro-Italic.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: 300;
     src: url(fonts/Gotham-Font/GothamPro-Light.woff) format('woff');
 }
 
 @font-face {
     font-family: 'Spotify';
     font-style: italic;
-    font-weight: lighter;
+    font-weight: 300;
     src: url(fonts/Gotham-Font/GothamPro-LightItalic.woff) format('woff');
 }
 
-
-html, body, .container{
+html, body, div.container{
     width: inherit;
     height: inherit;
     font-family: 'Spotify', Helvetica, sans-serif;
     background-color: #111;
-}
-
-body{
-    background-color: black;
     color: white;
+    margin: 0;
 }
 
-.container{
+body, div{ display: block; }
+
+div.container{
     padding-left:150px;
     padding-right:100px;
     margin: 10px;
@@ -76,11 +88,7 @@ body{
 header{
     padding: 150px 0 0 10px;
     height: 100px;
-    display: flex;
-    vertical-align: bottom;
-}
-
-.header{
+    display: block;
     line-height: 0;
 }
 
@@ -88,37 +96,38 @@ h1{
     font-weight: 900;
     font-size: 10vw;
     margin: 0 auto;
+    display: block;
 }
 
-p{
-    font-weight: 300;
-}
-
+/* song row style 1 */
 div.a-song{
     display: grid;
     grid-template-columns: 100px 6fr 2fr 80px 80px;
     height: 100px;
     padding: 5px;
-}
-
-.a-song div, index, song-info, .play{
+    font-weight: 400;
     margin: auto 0;
-    font-weight: 500;
-    
 }
 
-.result-container{
+/* top row explains what each column is. */
+.top-row{ font-weight: 500 !important; }
+
+/* for tags inside song row */
+div.a-song div, index, song-info, img.play{ margin: inherit; }
+
+div.result-container{
     margin: 10px;
     margin-bottom:200px;
 }
 
-.song-cell{
+/* song row style 2, excluding the explanation row */
+div.song-cell{
     border-radius: 10px;
     font-size: 14pt;
     color: #B3B3B3;
 }
 
-.song-cell:hover{
+div.song-cell:hover{
     background-color: #333;
     color:white;
 }
@@ -128,7 +137,7 @@ index{
     display: block;
 }
 
-.main{
+div.main{
     display: grid;
     grid-template-columns: 100px 1fr;
 }
@@ -138,34 +147,22 @@ img.image{
     display: inline-block;
 }
 
-song-info{
-    display:inline-block;
-}
+song-info{ display:inline-block; }
+
+name, artist, .album{ display: block; }
 
 name{
-    display:block;
     margin-bottom: 12px;
     color:white;
 }
 
-artist{
-    display:block;
-}
+.album{ font-size: 10pt; }
 
-div.img{
-    text-align: center;
-}
-
-.album:hover{
-    font-size: 10pt;
-}
+div.img{ text-align: center; }
 
 img.play{
     height: 50px;
     display: none;
-
 }
 
-img.play:hover{
-    transform: scale(1.2,1.2);
-}
+img.play:hover{ transform: scale(1.2,1.2); }
