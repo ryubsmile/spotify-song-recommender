@@ -57,8 +57,10 @@ def getPlaylist(genre):
         songLink = raw['tracks']['items'][i]['track']['external_urls']['spotify']
         songImage = raw['tracks']['items'][i]['track']['album']['images'][0]['url']
         songName = raw['tracks']['items'][i]['track']['name']
+        albumName = raw['tracks']['items'][i]['track']['album']['name']
         artistName = raw['tracks']['items'][i]['track']['artists'][0]['name']
-        data.append({'songName': songName, 'artistName': artistName, 'image': songImage, 'link': songLink})
+        songLength = raw['tracks']['items'][i]['track']['duration_ms'] / 60000
+        data.append({'songName': songName, 'albumName': albumName, 'artistName': artistName, 'image': songImage, 'link': songLink, 'duration': songLength})
     return data
 
 genre = ['chill', 'pop', 'sleep', 'workout', "study", "summer", 'rainyday', "classical", "dance"]
