@@ -59,6 +59,7 @@ html, body, .container{
     width: inherit;
     height: inherit;
     font-family: 'Spotify', Helvetica, sans-serif;
+    background-color: #111;
 }
 
 body{
@@ -67,8 +68,8 @@ body{
 }
 
 .container{
-    background-color: #111;
-    padding-left:230px;
+    padding-left:150px;
+    padding-right:100px;
     margin: 10px;
 }
 
@@ -95,15 +96,14 @@ p{
 
 div.a-song{
     display: grid;
-    grid-template-columns: 50px 4fr 3fr 3fr;
-    height: 50px;
+    grid-template-columns: 100px 6fr 2fr 80px 80px;
+    height: 100px;
     padding: 5px;
 }
 
-.a-song div, index, song-info{
+.a-song div, index, song-info, .play{
     margin: auto 0;
-    color: #B3B3B3;
-    font-weight: 300;
+    font-weight: 500;
     
 }
 
@@ -113,11 +113,14 @@ div.a-song{
 }
 
 .song-cell{
-    border-radius: 3px;
+    border-radius: 10px;
+    font-size: 14pt;
+    color: #B3B3B3;
 }
 
 .song-cell:hover{
     background-color: #333;
+    color:white;
 }
 
 index{
@@ -126,13 +129,12 @@ index{
 }
 
 .main{
-    height: 40px;
     display: grid;
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: 100px 1fr;
 }
 
-img{
-    height: 40px;
+img.image{
+    height: 90px;
     display: inline-block;
 }
 
@@ -142,8 +144,28 @@ song-info{
 
 name{
     display:block;
+    margin-bottom: 12px;
+    color:white;
 }
 
 artist{
     display:block;
+}
+
+div.img{
+    text-align: center;
+}
+
+.album:hover{
+    font-size: 10pt;
+}
+
+img.play{
+    height: 50px;
+    display: none;
+
+}
+
+img.play:hover{
+    transform: scale(1.2,1.2);
 }

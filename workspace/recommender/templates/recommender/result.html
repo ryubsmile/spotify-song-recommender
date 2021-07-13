@@ -51,39 +51,55 @@
                 
                 //the row
                 var aSongRow = document.getElementsByClassName('a-song song-cell')[index];
+
+                var rawTime = playlist[index]["duration"];
+                var minutes = add0(Math.floor(rawTime));
+                var seconds = add0(Math.floor((rawTime - minutes) * 60));
+
                 aSongRow.innerHTML = 
                 (
-                "<index>" + (index + 1) + "</index>" + 
-                "<div class=\"main\">" + 
-                    "<img src=\"" + playlist[index]["image"] + "\">" +
-                    "<song-info>" + 
-                        "<name>" + playlist[index]["songName"] + "</name>" +
-                        "<artist>" + playlist[index]["artistName"] + "</artist>" +
-                    "</song-info>" +
-                "</div>" +
-                "<div>huh</div>" + 
-                "<div>3:31</div>"
+                    "<index>" + (index + 1) + "</index>" + 
+                    "<div class=\"main\">" + 
+                        "<img class=\"image\" src=\"" + playlist[index]["image"] + "\">" +
+                        "<song-info>" + 
+                            "<name>" + playlist[index]["songName"] + "</name>" +
+                            "<artist>" + playlist[index]["artistName"] + "</artist>" +
+                        "</song-info>" +
+                    "</div>" +
+                    "<div class=\"album\">" + playlist[index]["albumName"] + "</div>" + 
+                    "<div>" + minutes + ":" + seconds + "</div>" +
+                    "<div class=\"img\">" + 
+                        "<a href=\"" + playlist[index]["link"] + "\">" +
+                        "<img class=\"play\" src=\"{% static 'web/images/images.png' %}\">" +
+                        "</a>" +
+                    "</div>"
                 );
-
-                /*
-                <index>1</index>
-                <div class="main">
-                    <img src="https://i.scdn.co/image/ab67616d0000b27350403f0964cf67ff0a48514d">
-                    <song-info>
-                        <name>Payphone</name>
-                        <artist>Maroon5</artist>
-                    </song-info>
-                </div>
-                <div>huh</div>
-                <div>3:31</div>
-                */
      
+                aSongRow.setAttribute('onmouseover',"displayButton(this)");
+                aSongRow.setAttribute('onmouseout',"hideButton(this)");
+
+            }
+
+            function add0(num){
+                if(num < 10){
+                    return "0" + num;
+                }else{
+                    return num;
+                }
             }
 
             function createPlaylist(){
                 for(var i = 0; i < playlist.length; i++){
                     createSingleSongCell(i);
                 }
+            }
+
+            function displayButton(self){
+                self.lastElementChild.lastElementChild.lastElementChild.style.display = "inline";
+            }
+
+            function hideButton(self){
+                self.lastElementChild.lastElementChild.lastElementChild.style.display = "";
             }
 
         </script>
