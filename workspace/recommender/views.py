@@ -8,9 +8,7 @@ import json
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 import config
 
-"""
-Credentials for spotify api request
-"""
+### Credentials for spotify api request
 client_id = config.cid
 client_secret = config.secret
 
@@ -37,51 +35,54 @@ def get_headers(client_id, client_secret):
     }
     return headers
 
-def getArtistId (artist):
-    """ Get ArtistId by name"""
-
-    url = "https://api.spotify.com/v1/search?q=artist:{}&type=artist".format(artist)
-    headers = get_headers(client_id, client_secret)
-
-    r = requests.get(url, headers=headers)
-    raw = json.loads(r.text)
-    items = raw['artists']['items']
-    artistId = items[0]['id']
-
-    return artistId
-
-def getArtistTopTracks(artist, country):
-    artistId = getArtistId(artist)
-    url = "https://api.spotify.com/v1/artists/{}/top-tracks?country={}".format(artistId, country)
+# Get playlist Id's of a genre
+def getGenrePlaylist(genre):
+    url = "https://api.spotify.com/v1/browse/categories/{}/playlists?limit=10".format(genre)
     headers = get_headers(client_id, client_secret)
     r = requests.get(url, headers=headers)
     raw = json.loads(r.text)
-    total = raw['tracks'][:5]
+    playlistId = raw['playlists']['items'][0]['id']
+    return playlistId
+
+# Get tracks of a playlist
+def getPlaylist(genre):
+    playListId = getGenrePlaylist(genre)
+    url = "https://api.spotify.com/v1/playlists/{}".format(playListId)
+    headers = get_headers(client_id, client_secret)
+    r = requests.get(url, headers=headers)
+    raw = json.loads(r.text)
     data = []
-    for i in total:
-        data.append({i['name']: [{'artist': i['album']['artists'][0]['name']}, {'link': i['album']['external_urls']['spotify']}, {'image': i['album']['images'][0]['url']}]})
+    # Get 9 tracks
+    for i in range(9):
+        songLink = raw['tracks']['items'][i]['track']['external_urls']['spotify']
+        songImage = raw['tracks']['items'][i]['track']['album']['images'][0]['url']
+        songName = raw['tracks']['items'][i]['track']['name']
+        artistName = raw['tracks']['items'][i]['track']['artists'][0]['name']
+        data.append({'songName': songName, 'artistName': artistName, 'image': songImage, 'link': songLink})
     return data
 
+genre = ['chill', 'pop', 'sleep', 'workout', "study", "summer", 'rainyday', "classical", "dance"]
+genre_kind = {'Driving song': genre[0]}
+
 # Home Page
-# Processing CRUD Requests & routing
 def index(request):
     if request.method == 'GET':
-        data = getArtistTopTracks('BTS', 'KR')
         return render(request, 'recommender/index.html', 
             {
-                'data': data
+                'genre': genre
             }
         )
     elif request.method == 'POST':
         return render(request, 'recommender/index.html', 
         )
 
-# Final Recommendation Pages
-# Front end rendering with result data
-def detail(request):
-    return render(request, 'recommender/index.html', 
-        # {
-        #     'data': data
-        # }
-    
-    )
+# Result Page
+def result(request):
+    if request.method == 'GET':
+        data = getPlaylist(genre[0])
+        return render(request, 'recommender/result.html', 
+            {
+                'data': data
+            }
+        
+        )
