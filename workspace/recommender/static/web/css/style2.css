@@ -54,21 +54,10 @@
     src: url(fonts/Gotham-Font/GothamPro-LightItalic.woff) format('woff');
 }
 
-/* lowest settings */
-h1{
-    font-weight: 500;
-    font-size: 3vw;
-}
-
-p{
-    font-weight: 300;
-}
-/* lowest settings end */
 
 html, body, .container{
-    width: 100%;
-    height: 100%;
-    margin: 0;
+    width: inherit;
+    height: inherit;
     font-family: 'Spotify', Helvetica, sans-serif;
 }
 
@@ -78,18 +67,83 @@ body{
 }
 
 .container{
-    margin-left:20vw;
     background-color: #111;
-    padding-left:30px;
+    padding-left:230px;
+    margin: 10px;
 }
 
 header{
-    padding: 100px 0 40px 0;
-    font-weight: 500;
-    font-size: 30pt;
+    padding: 150px 0 0 10px;
+    height: 100px;
+    display: flex;
+    vertical-align: bottom;
 }
 
-stress{
-    font-weight: bold;
-    text-decoration: underline overline;
+.header{
+    line-height: 0;
+}
+
+h1{
+    font-weight: 900;
+    font-size: 10vw;
+    margin: 0 auto;
+}
+
+p{
+    font-weight: 300;
+}
+
+div.a-song{
+    display: grid;
+    grid-template-columns: 50px 4fr 3fr 3fr;
+    height: 50px;
+    padding: 5px;
+}
+
+.a-song div, index, song-info{
+    margin: auto 0;
+    color: #B3B3B3;
+    font-weight: 300;
+    
+}
+
+.result-container{
+    margin: 10px;
+    margin-bottom:200px;
+}
+
+.song-cell{
+    border-radius: 3px;
+}
+
+.song-cell:hover{
+    background-color: #333;
+}
+
+index{
+    text-align: center;
+    display: block;
+}
+
+.main{
+    height: 40px;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+}
+
+img{
+    height: 40px;
+    display: inline-block;
+}
+
+song-info{
+    display:inline-block;
+}
+
+name{
+    display:block;
+}
+
+artist{
+    display:block;
 }
