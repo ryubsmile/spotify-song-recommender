@@ -57,6 +57,7 @@
 /* lowest settings */
 h1{
     font-weight: 500;
+    font-size: 3vw;
 }
 
 p{
@@ -86,4 +87,9 @@ header{
     padding: 100px 0 40px 0;
     font-weight: 500;
     font-size: 30pt;
+}
+
+stress{
+    font-weight: bold;
+    text-decoration: underline overline;
 }

@@ -20,6 +20,7 @@ function setAsSpecialOne(self){
     parent.className = "special-one";
     self.className = "special-one-text";
 
+    //at the end of this animation, submit data
     parent.addEventListener('animationend', () =>{
         submitValue();
     });

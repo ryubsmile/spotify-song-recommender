@@ -24,11 +24,22 @@
     <body>
         <div class="container">
             <header>
-                Your Recommended Playlist for [genre]...
+                <h1>
+                    <stress>{{genre|safe}}</stress>
+                </h1>
             </header>
             <div id="result">
-                
+                songName, artistName, imagelink, songlink
             </div>
         </div>
+        <script>
+            function stringToJson(){
+                var rawString = "{{ data | safe }}";
+                while(rawString.includes("'")){
+                    rawString = rawString.replace("'", "\"");
+                }
+                return JSON.parse(rawString);
+            }
+        </script>
     </body>
 </html>
