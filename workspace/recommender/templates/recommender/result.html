@@ -65,7 +65,7 @@
                     "<div class=\"album\">" + playlist[index]["albumName"] + "</div>" + 
                     "<div>" + minutes + ":" + seconds + "</div>" +
                     "<div class=\"img\">" + 
-                        "<a href=\"" + playlist[index]["link"] + "\">" +
+                        "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + playlist[index]["link"] + "\">" +
                         "<img class=\"play\" src=\"{% static 'web/images/images.png' %}\">" +
                         "</a>" +
                     "</div>"
@@ -107,10 +107,12 @@
                 <!-- 여기 크게 지금 선택한 사진 보이게 하면 조을듯 근데 시작땐 애니메이션으로 -->
 
                 <!-- incompatible genres: 
-                keyerror: rainy-day, study, dance
-                working: summer, sleep, workout, pop, chill, classical
-                -->
+                keyerror: rainy-day, study, dance, r-n-b, acoustic, 
+                folk, happy, hip-hop, singer-songwriter, club, edm, disco, guitar, 
+                house, industrial, new-age, road-trip, 
 
+                working: summer, sleep, workout, pop, chill, classical, party, holidays, ambient
+                -->
             </header>
             <div class="result-container">
                 <div id="result">

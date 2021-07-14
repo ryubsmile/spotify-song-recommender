@@ -63,7 +63,7 @@ def getPlaylist(genre):
         data.append({'songName': songName, 'albumName': albumName, 'artistName': artistName, 'image': songImage, 'link': songLink, 'duration': songLength})
     return data
 
-genre = ['chill', 'pop', 'sleep', 'workout', 'study', 'summer', 'rainy-day', 'classical', 'dance']
+genre = ['chill', 'pop', 'sleep', 'workout', 'party', 'summer', 'holidays', 'classical', 'ambient']
 
 # Home Page
 def index(request):
