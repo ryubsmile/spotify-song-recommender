@@ -23,13 +23,12 @@
 
         <script>
             let playlist;
-            var raw;
             
             window.onload = function(){
                 playlist = {{ data|safe }};
                 setGenreFirstLetterCap();
                 createPlaylist();
-            }
+            };
             
             function setGenreFirstLetterCap(){
                 var genre = "{{ genre|safe }}";
@@ -37,7 +36,6 @@
                 genre = genre.replace(genre[0], genre[0].toUpperCase());
                 target.textContent = genre;
             }
-            
 
             function createSingleSongCell(index){
                 
@@ -70,10 +68,10 @@
                         "</a>" +
                     "</div>"
                 );
-     
-                aSongRow.setAttribute('onmouseover',"displayButton(this)");
-                aSongRow.setAttribute('onmouseout',"hideButton(this)");
-
+                //attribute for hover
+                aSongRow.setAttribute('onmouseover', 'displayButton(this);');
+                aSongRow.setAttribute('onmouseout', 'hideButton(this);');
+                aSongRow.setAttribute('onclick', 'selectedRow(this);')
             }
 
             function add0(num){
@@ -90,14 +88,37 @@
                 }
             }
 
+            //show button on mouse over
             function displayButton(self){
                 self.lastElementChild.lastElementChild.lastElementChild.style.display = "inline";
             }
 
+            //hide button on mouse out
             function hideButton(self){
-                self.lastElementChild.lastElementChild.lastElementChild.style.display = "";
+                //if the button is selected, don't hide.
+                if(self.id !== 'selected'){
+                    self.lastElementChild.lastElementChild.lastElementChild.style.display = "";
+                }
             }
 
+            //select row
+            function selectedRow(rowSelected){
+                var rowSelectedBefore = document.getElementById('selected');
+
+                //null check, for initial none-selected.
+                if(rowSelectedBefore !== null){ 
+                    //row before loses the id
+                    rowSelectedBefore.id = '';
+                    //and its button gets hidden
+                    hideButton(rowSelectedBefore); 
+                }
+
+                //for the case of same row getting clicked again, lose (not gain) its property.
+                if(rowSelected !== rowSelectedBefore){
+                    rowSelected.id = 'selected';
+                }
+
+            }
         </script>
     </head>
     <body>
