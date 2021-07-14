@@ -100,6 +100,12 @@ h1{
     display: block;
 }
 
+div.result-container{
+    margin: 10px;
+    margin-bottom:200px;
+    font-family: 'verdana', 'arial', sans-serif;
+}
+
 /* song row style 1 */
 div.a-song{
     display: grid;
@@ -116,10 +122,6 @@ div.a-song{
 /* for tags inside song row */
 div.a-song div, index, song-info, img.play{ margin: inherit; }
 
-div.result-container{
-    margin: 10px;
-    margin-bottom:200px;
-}
 
 /* song row style 2, excluding the explanation row */
 div.song-cell{
@@ -133,9 +135,7 @@ div.song-cell:hover{
     color:white;
 }
 
-div.song-cell#selected{
-    background-color: #555;
-}
+div.song-cell#selected{ background-color: #555; }
 
 index{
     text-align: center;
@@ -160,9 +160,14 @@ name, artist, .album{ display: block; }
 name{
     margin-bottom: 12px;
     color:white;
+    display: block;
 }
 
-.album{ font-size: 10pt; }
+name::first-line{
+    display: block;
+}
+
+.album{ padding-right: 40px; }
 
 div.img{ text-align: center; }
 
