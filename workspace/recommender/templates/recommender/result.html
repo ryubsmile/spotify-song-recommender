@@ -23,10 +23,11 @@
 
         <script>
             let playlist;
+            var raw;
             
             window.onload = function(){
+                playlist = {{ data|safe }};
                 setGenreFirstLetterCap();
-                playlistToJson();
                 createPlaylist();
             }
             
@@ -37,13 +38,6 @@
                 target.textContent = genre;
             }
             
-            function playlistToJson(){
-                var rawPlaylist = "{{ data|safe }}";
-                while(rawPlaylist.includes("'")){
-                    rawPlaylist = rawPlaylist.replace("'", "\"");
-                }
-                playlist = JSON.parse(rawPlaylist);
-            }
 
             function createSingleSongCell(index){
                 
@@ -111,6 +105,12 @@
             <header>
                 <h1 id="genre">!GENRE NAME COMES HERE!</h1> 
                 <!-- 여기 크게 지금 선택한 사진 보이게 하면 조을듯 근데 시작땐 애니메이션으로 -->
+
+                <!-- incompatible genres: 
+                keyerror: rainy-day, study, dance
+                working: summer, sleep, workout, pop, chill, classical
+                -->
+
             </header>
             <div class="result-container">
                 <div id="result">
@@ -147,6 +147,7 @@
                         </div>
                     </div>
                      -->
+
                 </div>
             </div>
         </div>
