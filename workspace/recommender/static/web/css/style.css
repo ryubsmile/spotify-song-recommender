@@ -73,6 +73,7 @@ html, body{
     height: inherit;
     width: inherit;
     margin: 0;
+    user-select: none;
 }
 
 h1{ font-weight: 500; }

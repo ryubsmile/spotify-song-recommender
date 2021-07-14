@@ -75,6 +75,7 @@ html, body, div.container{
     background-color: #111;
     color: white;
     margin: 0;
+    user-select: none;
 }
 
 body, div{ display: block; }
@@ -130,6 +131,10 @@ div.song-cell{
 div.song-cell:hover{
     background-color: #333;
     color:white;
+}
+
+div.song-cell#selected{
+    background-color: #555;
 }
 
 index{
