@@ -27,12 +27,28 @@ function makeSingleTile(){
 
     tile.innerHTML = 
     (
-        "<a href=\"javascript:;\" onclick=\"parseStringOfButton(this); clickedTile(this);\">TILE</a>"
+        "<a href=\"javascript:;\" onclick=\"setInputAs(this); clickedTile(this);\">TILE</a>"
     );
 
     tile.setAttribute('onmouseover',"setTileAnimation(this);");
 }
 
+//set tile color
+function setTileStyle(){
+    var tileContainer = document.querySelector('#tile-container');
+    var tileList = document.querySelectorAll('.tile');
+    
+    for(var i = 0; i < tileList.length; i++){
+        var color = COLORS[i];
+        var colorString = "rgba(" + color.r + ", " + color.g + ", " + color.b + ", " + 1 + "); ";
+
+        var tileBorder = "border-color: " + colorString + "; ";
+        var tileTextColor = "color: " + colorString + "; ";
+        var styleString = tileBorder + tileTextColor;
+
+        tileList[i].setAttribute('style', styleString);
+    }
+}
 
 /*
 * sets tile text contents according to the value given by the 'obj' object.
@@ -45,14 +61,7 @@ function setTileText(){
     for(var i = 0; i < tiles.length; i++){
         var tile = tiles[i];
         var genre = obj[randomIndices[i]].toUpperCase();
-        tile.textContent = genre;
-
-        //dynamic font-sizing
-        const FONT_RESIZE_THRESHOLD = 6; 
-
-        if(genre.length > FONT_RESIZE_THRESHOLD){ 
-            tile.style.fontSize = '17pt'; 
-        }
+        tile.textContent = (genre !== null)? genre : "";
     }
 }
 
@@ -79,33 +88,10 @@ function pickRandomIndices(max, times){
     return indices;
 }
 
-//set tile color
-function setTileStyle(){
-    var tileContainer = document.querySelector('#tile-container');
-    var tileList = document.querySelectorAll('.tile');
-    var sampleTile = tileList[0];
-    
-    for(var i = 0; i < tileList.length; i++){
-        var color = COLORS[i];
-        var r = color.r;
-        var g = color.g;
-        var b = color.b;
-        var colorString = "rgba(" + r + ", " + g + ", " + b + ", " + 1 + "); ";
-
-        var tileBorder = "border-color: " + colorString + "; ";
-        var tileTextColor = "color: " + colorString + "; ";
-        var styleString = tileBorder + tileTextColor;
-
-        tileList[i].setAttribute('style', styleString);
-    }
-    
-}
-
 //tile animation that changes color of tiles when hover
 function setTileAnimation(self){
     var selfColor = self.style.color;
     var target = document.getElementById('color-save');
 
-    target.innerText = ':root{--current-color: ' + selfColor + '}';
+    target.innerText = ':root{--theme-color: ' + selfColor + '}';
 }
-

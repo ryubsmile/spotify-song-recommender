@@ -10,7 +10,9 @@ function createSingleSongCell(index){
     var aSongRow = document.createElement('div');
     aSongRow.className = 'a-song song-cell';
     var target = document.getElementById('result');
+    hr = document.createElement('hr');
     target.appendChild(aSongRow);
+    target.appendChild(hr);
 
     var rawTime = playlist[index]["duration"];
     var minutes = add0(Math.floor(rawTime));
@@ -28,7 +30,7 @@ function createSingleSongCell(index){
             "</song-info>" +
         "</div>" +
         "<div class=\"album\">" + playlist[index]["albumName"] + "</div>" + 
-        "<div>" + minutes + ":" + seconds + "</div>" +
+        "<div class=\"length\">" + minutes + ":" + seconds + "</div>" +
         "<div class=\"img\">" + 
             "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + playlist[index]["link"] + "\">" +
             "<img class=\"play\" src=\"../../static/web/images/images.png\">" +
