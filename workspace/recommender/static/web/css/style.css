@@ -43,26 +43,39 @@
 @font-face {
     font-family: 'Spotify';
     font-style: normal;
-    font-weight: lighter;
+    font-weight: 400;
+    src: url(fonts/Gotham-Font/GothamPro.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: italic;
+    font-weight: 400;
+    src: url(fonts/Gotham-Font/GothamPro-Italic.woff) format('woff');
+}
+
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: 300;
     src: url(fonts/Gotham-Font/GothamPro-Light.woff) format('woff');
 }
 
 @font-face {
     font-family: 'Spotify';
     font-style: italic;
-    font-weight: lighter;
+    font-weight: 300;
     src: url(fonts/Gotham-Font/GothamPro-LightItalic.woff) format('woff');
 }
 
-/* lowest settings */
-h1{
-    font-weight: 500;
+html, body{
+    height: inherit;
+    width: inherit;
+    margin: 0;
 }
 
-p{
-    font-weight: 300;
-}
-/* lowest settings end */
+h1{ font-weight: 500; }
 
 a{
     text-decoration: none;
@@ -70,58 +83,46 @@ a{
     display: block;
     width: 100%;
     height: 100%;
-
-}
-
-html{
-    height: 100%;
-    width: 100%;
 }
 
 body{
     font-family: 'Spotify', Helvetica, sans-serif;
-    background-color: black;
+    background-color: #111;
     color: white;
-    margin: 0;
-    height:100%;
-    width: 100%;
+    text-align: center;
 }
 
 header{
-    text-align:center;
     height: 180px;
 }
 
-.header-container{
+div.header-container{
     align-items: center;
     display: flex;
     justify-content: center;
     height: 100%;
 }
 
-#big-text{
+span#big-text{
     font-weight: bold;
-    font-size: 5vmin;
+    font-size: 5vw;
     margin: 0;
 }
 
-.subtitle{
+div.subtitle{
     font-weight: 500;
     font-size: 30px;
-    text-align:center;
     margin: 2vh 0 3vh 0;
-    color: inherit;
+    color: white;
 }
 
-.container{
-    text-align: center;
-}
+div.container{ text-align: center; }
 
-#tile-container{
+div#tile-container{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
-    width: 90vmin;
-    height: 60vmin;
+    width: 51vw;
+    height: 34vw;
     margin: 0 auto;
 }
 
@@ -135,12 +136,11 @@ header{
     margin: 10px;
     border-width: 10px;
     border-style: solid;
-    /* border-color: black !important; */
+
     animation: fade-out forwards 3s;
     animation-fill-mode: forwards;
 }
 
-/* only background color = yes, other = black */
 @keyframes fade-out{
     0%{ border-color: black; color: black; background-color: var(--current-color); }
     100%{ border-color: var(--current-color); color: var(--current-color); background-color: black; }
@@ -151,25 +151,22 @@ header{
     animation-fill-mode: both;
 }
 
-/* color, border color = yes */
 @keyframes fade-in{
     0%{ background-color: black; color: var(--current-color);}
     100%{ border-color: black; color: black; background-color: var(--current-color); }
 }
 
-#big-text{
+/* #big-text{
     animation: follow-color 2s alternate;
     animation-fill-mode: forwards;
     animation-iteration-count: infinite;
 }
-
-
 @keyframes follow-color {
     0%{ color: currentColor; }
     100%{ color: var(--current-color); }
-}
- 
-.special-one{
+}*/
+
+.clicked-tile{
     animation: swoop 0.5s forwards;
     animation-fill-mode: forwards;
     border-radius: 25px;
@@ -178,20 +175,12 @@ header{
 }
 
 @keyframes swoop{
-    0%{
-        transform: scale(0.8, 0.8);
-    }
-
-    50%{
-        transform: scale(0.7, 0.7);
-    }
-
-    100%{
-        transform: scale(0.8, 0.8);
-    }
+      0%{ transform: scale(0.8, 0.8); }
+     50%{ transform: scale(0.7, 0.7); }
+    100%{ transform: scale(0.8, 0.8); }
 }
 
-.special-one-text{
+.clicked-tile-text{
     animation: none;
     color:black;
     line-height: 600%;
@@ -199,3 +188,5 @@ header{
     margin-top:10px;
     font-weight: 700;
 }
+
+/* 800px width: shrink */

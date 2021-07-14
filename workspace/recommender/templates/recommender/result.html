@@ -24,9 +24,7 @@
         <script>
             let playlist;
             
-            window.onload = displayData;
-            
-            function displayData(){
+            window.onload = function(){
                 setGenreFirstLetterCap();
                 playlistToJson();
                 createPlaylist();
@@ -50,34 +48,46 @@
             function createSingleSongCell(index){
                 
                 //the row
-                var aSongRow = document.getElementsByClassName('a-song song-cell')[index];
+                var aSongRow = document.createElement('div');
+                aSongRow.className = 'a-song song-cell';
+                var target = document.getElementById('result');
+                target.appendChild(aSongRow);
+
+                var rawTime = playlist[index]["duration"];
+                var minutes = add0(Math.floor(rawTime));
+                var seconds = add0(Math.floor((rawTime - minutes) * 60));
+
+                //draw html
                 aSongRow.innerHTML = 
                 (
-                "<index>" + (index + 1) + "</index>" + 
-                "<div class=\"main\">" + 
-                    "<img src=\"" + playlist[index]["image"] + "\">" +
-                    "<song-info>" + 
-                        "<name>" + playlist[index]["songName"] + "</name>" +
-                        "<artist>" + playlist[index]["artistName"] + "</artist>" +
-                    "</song-info>" +
-                "</div>" +
-                "<div>huh</div>" + 
-                "<div>3:31</div>"
+                    "<index>" + (index + 1) + "</index>" + 
+                    "<div class=\"main\">" + 
+                        "<img class=\"image\" src=\"" + playlist[index]["image"] + "\">" +
+                        "<song-info>" + 
+                            "<name>" + playlist[index]["songName"] + "</name>" +
+                            "<artist>" + playlist[index]["artistName"] + "</artist>" +
+                        "</song-info>" +
+                    "</div>" +
+                    "<div class=\"album\">" + playlist[index]["albumName"] + "</div>" + 
+                    "<div>" + minutes + ":" + seconds + "</div>" +
+                    "<div class=\"img\">" + 
+                        "<a href=\"" + playlist[index]["link"] + "\">" +
+                        "<img class=\"play\" src=\"{% static 'web/images/images.png' %}\">" +
+                        "</a>" +
+                    "</div>"
                 );
-
-                /*
-                <index>1</index>
-                <div class="main">
-                    <img src="https://i.scdn.co/image/ab67616d0000b27350403f0964cf67ff0a48514d">
-                    <song-info>
-                        <name>Payphone</name>
-                        <artist>Maroon5</artist>
-                    </song-info>
-                </div>
-                <div>huh</div>
-                <div>3:31</div>
-                */
      
+                aSongRow.setAttribute('onmouseover',"displayButton(this)");
+                aSongRow.setAttribute('onmouseout',"hideButton(this)");
+
+            }
+
+            function add0(num){
+                if(num < 10){
+                    return "0" + num;
+                }else{
+                    return num;
+                }
             }
 
             function createPlaylist(){
@@ -86,43 +96,57 @@
                 }
             }
 
+            function displayButton(self){
+                self.lastElementChild.lastElementChild.lastElementChild.style.display = "inline";
+            }
+
+            function hideButton(self){
+                self.lastElementChild.lastElementChild.lastElementChild.style.display = "";
+            }
+
         </script>
     </head>
     <body>
         <div class="container">
             <header>
-                <div class="header">
-                    <h1 id="genre">!GENRE NAME COMES HERE!</h1>
-                </div>
+                <h1 id="genre">!GENRE NAME COMES HERE!</h1> 
+                <!-- 여기 크게 지금 선택한 사진 보이게 하면 조을듯 근데 시작땐 애니메이션으로 -->
             </header>
             <div class="result-container">
                 <div id="result">
-                    <div class="a-song" style="border-bottom: 1px #444444 solid; margin-bottom: 20px; padding-bottom: 0">
-                        <index>#</index>
-                        <div>Title</div>
-                        <div>Album</div>
-                        <div>Length</div>
+                    <div class="a-song" style="border-bottom: 1px #444444 solid; margin-bottom: 20px; padding-bottom: 0;">
+                        <index style="font-weight:500">#</index>
+                        <div class="top-row">Title</div>
+                        <div class="top-row">Album</div>
+                        <div class="top-row">Length</div>
                     </div>
 
-                    <!-- song 1 -->
-                    <div class="a-song song-cell">1</div>
-                    <!-- song 2 -->
-                    <div class="a-song song-cell">2</div>
-                    <!-- song 3 -->
-                    <div class="a-song song-cell">3</div>
-                    <!-- song 4 -->
-                    <div class="a-song song-cell">4</div>
-                    <!-- song 5 -->
-                    <div class="a-song song-cell">5</div>
-                    <!-- song 6 -->
-                    <div class="a-song song-cell">6</div>
-                    <!-- song 7 -->
-                    <div class="a-song song-cell">7</div>
-                    <!-- song 8 -->
-                    <div class="a-song song-cell">8</div>
-                    <!-- song 9 -->
-                    <div class="a-song song-cell">9</div>
-                    
+                    <!-- 플리 링크 새창에서 띄우고 노리퍼러 -->
+
+                    <!-- songs displayed here dynamically via javascript -->
+                    <!-- sample html for design purposes:
+                    <div class="a-song song-cell" onmouseover="displayButton(this)" onmouseout="hideButton(this)">
+                        <index>8</index>
+                        <div class="main">
+                            <img class="image" src="https://i.scdn.co/image/ab67616d0000b273cf51b13c8bdabe63d896cfd8">
+                            <song-info>
+                                <name>
+                                    Super sleepy attention, close positive whispers, inaudible whispers Pt.1
+                                </name>
+                                <artist>RoseASMR</artist>
+                            </song-info>
+                        </div>
+                        <div class="album">
+                            Super sleepy attention, close positive whispers, inaudible whispers
+                        </div>
+                        <div>04:39</div>
+                        <div class="img">
+                            <a href="https://open.spotify.com/track/0fU7os8IzBtcblVO0YeIsR">
+                                <img class="play" src="/static/web/images/images.png">
+                            </a>
+                        </div>
+                    </div>
+                     -->
                 </div>
             </div>
         </div>
