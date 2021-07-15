@@ -11,7 +11,7 @@ function createTile(genreIndex){
     tile.className = "tile";
 
     var textString = GENRE[genreIndex].toUpperCase();
-    tile.textContent = textString;
+    tile.textContent = "#"+textString;
 
     tile.href = "javascript:;";
     tile.style.backgroundImage = "url(../static/" + GENRE_DICT[GENRE[genreIndex]] + ")";
@@ -57,3 +57,4 @@ function submitInput(){
     var form = document.getElementById('tile-data');
     form.submit();
 }
+

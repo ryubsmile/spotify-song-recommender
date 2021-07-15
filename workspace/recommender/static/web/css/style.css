@@ -151,12 +151,16 @@ a.tile{
     color: white;
 }
 
+:root{
+    --image-alpha: rgba(0,0,0, 0.5);
+}
+
 a.tile::before{
     z-index: -1;
     position: absolute;
     top: 0px; bottom: 0px; left: 0px; right: 0px; 
     content: "";
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--image-alpha);
 }
 
 @media(max-width: 600px){
