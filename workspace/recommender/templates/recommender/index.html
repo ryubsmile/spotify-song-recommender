@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'web/css/style.css' %}">
 
         <!-- javascript link -->
-        <script src="{% static 'web/js/linkResult.js' %}"></script>
+        <script src="{% static 'web/js/tileConfig.js' %}"></script>
 
         <!-- favicon settings -->
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
@@ -22,21 +22,23 @@
         <title>Spotify Song Recommender</title>
 
         <script>
-            const genre_dict = {{ genre_dict | safe }};
-            const genre = {{ genre | safe }};
-        </script>
+            const GENRE_DICT = {{ genre_dict | safe }};
+            const GENRE = {{ genre | safe }};
+            const NUMBER_OF_TILES = 6; //edit as you update
 
+            window.onload = function(){
+                renderTiles(NUMBER_OF_TILES);
+            }
+        </script>
     </head>
     <body>
         <!-- start of header -->
         <header>
             <div class="header-texts">
-                <h1>
-                    <span>Spotify Song </span> <span>Recommender</span>
-                </h1>
+                <h1><span>Spotify Song </span> <span>Recommender</span></h1>
+                <!-- subtitle -->
                 <h2>Click on a tile to listen to a playlist.</h2> 
             </div>
-            <!-- subtitle -->
         </header>
         <!-- end of header -->
 
@@ -44,11 +46,12 @@
         <div class="container">
             <!-- data input taker -->
             <form id="tile-data" name="tile-data" action="result/" method="POST" accept-charset="UTF-8">
+                <!-- cookie validator -->
                 {%csrf_token%} 
                 <!-- data input sender -->
-                <input type="hidden" id="button-kind" name="choice" value="">
+                <input type="hidden" id="input-send" name="choice" value="">
                 <div id="tile-container">
-                    <!-- tiles drawn dynamically by js -->
+                    <!-- tiles drawn here via js -->
                 </div>
             </form>
         </div>
