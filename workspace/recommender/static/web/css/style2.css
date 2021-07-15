@@ -89,7 +89,6 @@ header{
 
 div.header-gradient{
     background: linear-gradient(rgba(var(--bg-color),0.5), rgba(var(--bg-color), 0.3), rgba(var(--bg-color), 0.2));
-
 }
 
 div.body-gradient{

@@ -78,17 +78,12 @@ def index(request):
 def result(request):
     if request.method == 'POST':
 
-        raw = request.POST.get('choice').lower()
-        tmp = raw.split("|")
-        genr = tmp[0]
-        color = tmp[1]
-
-        data = getPlaylist(genr)
+        tile = request.POST.get('choice').lower()
+        data = getPlaylist(tile)
 
         return render(request, 'recommender/result.html', 
             {
-                'genre': genr,
+                'genre': tile,
                 'data': data,
-                'color': color,
             }
         )

@@ -88,10 +88,20 @@ function selectedRow(rowSelected){
 
 }
 
-function setBgColor(colorRGB){
-    var target = document.getElementById('bg-color');
-    colorRGB = colorRGB.replace("rgb(", "");
-    colorRGB = colorRGB.replace(")", "");
+function setBgColor(){
+    const COLORS = [
+        {r: 240, g: 159, b: 164}, //pastel red
+        {r: 243, g: 186, b: 180}, //pastel orange
+        {r: 249, g: 219, b: 195}, //pastel pink
+        {r: 229, g: 241, b: 204}, //pastel lightgreen
+        {r: 191, g: 232, b: 216}, //pastel green
+        {r: 201, g: 206, b: 232}, //pastel blue
+    ];
 
-    target.innerText = ':root{--bg-color: ' + colorRGB + '}';
+    random = Math.floor(Math.random() * COLORS.length);
+    const color = COLORS[random];
+
+    var target = document.getElementById('bg-color');
+    target.innerText = ':root{--bg-color: ' + color.r + "," + color.g + "," + color.b + '}';
+    console.log(':root{--bg-color: ' + color.r + "," + color.g + "," + color.b + '}');
 }

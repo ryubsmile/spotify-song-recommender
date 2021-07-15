@@ -26,15 +26,13 @@
         <script>
             let playlist;
             let genre;
-            let color;
             
             window.onload = function(){
                 playlist = {{ data|safe }};
                 genre = "{{ genre|safe }}";
-                color = "{{ color|safe }}";
                 setGenreFirstLetterCap();
                 createPlaylist();
-                setBgColor(color);
+                setBgColor();
             };
         </script>
     </head>
