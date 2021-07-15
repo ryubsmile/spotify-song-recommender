@@ -19,81 +19,35 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/images/favicon-16x16.png' %}">
         <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}">
         <!-- favicon settings end -->
-
+        
         <title>Spotify Song Recommender</title>
         
         <style id="color-save"></style>
         <script>
+            let obj;
+            const NUM_OF_TILES = 6;
             window.onload = function(){
+                //takes genre json data as 'GET' method when rendered
+                obj = {{ genre|safe }};
+                renderTiles(NUM_OF_TILES);
                 setTileStyle();
-
-                objToArray();
                 setTileText();
-            }
-
-            obj = "{{genre|safe}}";
-
-            function objToArray(){
-                obj = obj.replace('[','');
-                obj = obj.replace(']','');
-
-                while(obj.includes('\'')){
-                    obj = obj.replace('\'','');
-                    obj = obj.replace(' ', '');
-                }
-
-                obj = obj.split(",");
-                //obj = ["genre1", "genre2", ... ]
-            }
-
-            function setTileText(){
-                var tiles = document.getElementsByTagName('a');
-                var randomIndices = pickRandomSixIndices(obj);
-
-                for(var i = 0; i < tiles.length; i++){
-                    var tile = tiles[i];
-                    var genre = obj[randomIndices[i]].toUpperCase();
-                    tile.textContent = genre;
-
-                    //dynamic font-sizing
-                    if(genre.length > 6){
-                        tile.style.fontSize = '17pt';
-                    }
-                }
-            }
-
-            function pickRandomSixIndices(arr){
-                var existingElements = [];
-                var indices = [];
-                //var min = 0;
-                var max = arr.length; //exclusive
-                var pointer = -1;
-                
-                //random number between 0 ~ max
-                for(var i = 0; i < 6;){
-                    pointer = Math.floor(Math.random() * max);
-                    if(!existingElements.includes(pointer)){
-                        existingElements.push(pointer);
-                        indices.push(pointer);
-                        i++;
-                    }
-                }
-
-                return indices;
-            }
+            };
         </script>
     </head>
     <body>
         <!-- start of header -->
         <header>
             <div class="header-container">
-                <span id="big-text">Spotify Song Recommender</span>
+                <span id="big-text">
+                    <span>Spotify Song </span> <span>Recommender</span>
+                </span>
+                <div class="subtitle" id="pg1">Click on a tile to listen to a playlist.</div> 
             </div>
+            <!-- subtitle -->
         </header>
         <!-- end of header -->
 
-        <!-- subtitle -->
-        <div class="subtitle" id="pg1">CHOOSE A TILE!</div> 
 
         <!-- start of main container -->
         <div class="container">
@@ -103,24 +57,7 @@
                 {%csrf_token%} 
                 <input type="hidden" id="button-kind" name="choice" value="">
                 <div id="tile-container">
-                    <div class="tile" onmouseover="setTileAnimation(this);">
-                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);"> </a>
-                    </div>
-                    <div class="tile" onmouseover="setTileAnimation(this);">
-                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);">LOFI</a> 
-                    </div>
-                    <div class="tile" onmouseover="setTileAnimation(this);"> 
-                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);">DRIVE</a> 
-                    </div>
-                    <div class="tile" onmouseover="setTileAnimation(this);">
-                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);">CHILL</a> 
-                        </div>
-                    <div class="tile" onmouseover="setTileAnimation(this);"> 
-                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);">SLEEP</a> 
-                    </div>
-                    <div class="tile" onmouseover="setTileAnimation(this);"> 
-                        <a href="javascript:;" onclick="parseStringOfButton(this); clickedTile(this);">TILE 6</a> 
-                    </div>
+                    <!-- tiles drawn dynamically by js -->
                 </div>
             </form>
         </div>

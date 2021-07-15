@@ -9,8 +9,8 @@
         <!-- css link -->
         <link rel="stylesheet" type="text/css" href="{% static 'web/css/style2.css' %}">
 
-        <!-- javascript linkage -->
-        <script src="{% static 'web/js/linkResult.js' %}"></script>
+        <!-- javascript link -->
+        <script src="{% static 'web/js/playlistSet.js' %}"></script>
 
         <!-- favicon settings -->
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
@@ -21,132 +21,75 @@
 
         <title>Recommended Playlist</title>
 
+        <style id="bg-color"></style>
+
         <script>
             let playlist;
+            let genre;
             
             window.onload = function(){
+                playlist = {{ data|safe }};
+                genre = "{{ genre|safe }}";
                 setGenreFirstLetterCap();
-                playlistToJson();
                 createPlaylist();
-            }
-            
-            function setGenreFirstLetterCap(){
-                var genre = "{{ genre|safe }}";
-                target = document.getElementById('genre');
-                genre = genre.replace(genre[0], genre[0].toUpperCase());
-                target.textContent = genre;
-            }
-            
-            function playlistToJson(){
-                var rawPlaylist = "{{ data|safe }}";
-                while(rawPlaylist.includes("'")){
-                    rawPlaylist = rawPlaylist.replace("'", "\"");
-                }
-                playlist = JSON.parse(rawPlaylist);
-            }
-
-            function createSingleSongCell(index){
-                
-                //the row
-                var aSongRow = document.createElement('div');
-                aSongRow.className = 'a-song song-cell';
-                var target = document.getElementById('result');
-                target.appendChild(aSongRow);
-
-                var rawTime = playlist[index]["duration"];
-                var minutes = add0(Math.floor(rawTime));
-                var seconds = add0(Math.floor((rawTime - minutes) * 60));
-
-                //draw html
-                aSongRow.innerHTML = 
-                (
-                    "<index>" + (index + 1) + "</index>" + 
-                    "<div class=\"main\">" + 
-                        "<img class=\"image\" src=\"" + playlist[index]["image"] + "\">" +
-                        "<song-info>" + 
-                            "<name>" + playlist[index]["songName"] + "</name>" +
-                            "<artist>" + playlist[index]["artistName"] + "</artist>" +
-                        "</song-info>" +
-                    "</div>" +
-                    "<div class=\"album\">" + playlist[index]["albumName"] + "</div>" + 
-                    "<div>" + minutes + ":" + seconds + "</div>" +
-                    "<div class=\"img\">" + 
-                        "<a href=\"" + playlist[index]["link"] + "\">" +
-                        "<img class=\"play\" src=\"{% static 'web/images/images.png' %}\">" +
-                        "</a>" +
-                    "</div>"
-                );
-     
-                aSongRow.setAttribute('onmouseover',"displayButton(this)");
-                aSongRow.setAttribute('onmouseout',"hideButton(this)");
-
-            }
-
-            function add0(num){
-                if(num < 10){
-                    return "0" + num;
-                }else{
-                    return num;
-                }
-            }
-
-            function createPlaylist(){
-                for(var i = 0; i < playlist.length; i++){
-                    createSingleSongCell(i);
-                }
-            }
-
-            function displayButton(self){
-                self.lastElementChild.lastElementChild.lastElementChild.style.display = "inline";
-            }
-
-            function hideButton(self){
-                self.lastElementChild.lastElementChild.lastElementChild.style.display = "";
-            }
-
+                setBgColor();
+            };
         </script>
     </head>
     <body>
         <div class="container">
-            <header>
-                <h1 id="genre">!GENRE NAME COMES HERE!</h1> 
-                <!-- 여기 크게 지금 선택한 사진 보이게 하면 조을듯 근데 시작땐 애니메이션으로 -->
-            </header>
-            <div class="result-container">
-                <div id="result">
-                    <div class="a-song" style="border-bottom: 1px #444444 solid; margin-bottom: 20px; padding-bottom: 0;">
-                        <index style="font-weight:500">#</index>
-                        <div class="top-row">Title</div>
-                        <div class="top-row">Album</div>
-                        <div class="top-row">Length</div>
-                    </div>
+            <div class="header-gradient">
+                <header>
+                    <h1 id="genre">ERROR</h1> 
+                    <!-- 여기 크게 지금 선택한 사진 보이게 하면 조을듯 근데 시작땐 애니메이션으로 -->
 
-                    <!-- 플리 링크 새창에서 띄우고 노리퍼러 -->
+                    <!-- incompatible genres: 
+                    keyerror: rainy-day, study, dance, r-n-b, acoustic, 
+                    folk, happy, hip-hop, singer-songwriter, club, edm, disco, guitar, 
+                    house, industrial, new-age, road-trip, 
 
-                    <!-- songs displayed here dynamically via javascript -->
-                    <!-- sample html for design purposes:
-                    <div class="a-song song-cell" onmouseover="displayButton(this)" onmouseout="hideButton(this)">
-                        <index>8</index>
-                        <div class="main">
-                            <img class="image" src="https://i.scdn.co/image/ab67616d0000b273cf51b13c8bdabe63d896cfd8">
-                            <song-info>
-                                <name>
-                                    Super sleepy attention, close positive whispers, inaudible whispers Pt.1
-                                </name>
-                                <artist>RoseASMR</artist>
-                            </song-info>
+                    working: summer, sleep, workout, pop, chill, classical, party, holidays, ambient
+                    -->
+                </header>
+            </div>
+            <div class="body-gradient">
+                <div class="result-container">
+                    <div id="result">
+                        <div class="a-song" style="border-bottom: 1px #444444 solid; margin-bottom: 20px; padding-bottom: 0;">
+                            <index style="font-weight:500">#</index>
+                            <div class="top-row">Title</div>
+                            <div class="top-row album">Album</div>
+                            <div class="top-row length">Length</div>
                         </div>
-                        <div class="album">
-                            Super sleepy attention, close positive whispers, inaudible whispers
+
+                        <!-- 플리 링크 새창에서 띄우고 노리퍼러 -->
+
+                        <!-- songs displayed here dynamically via javascript -->
+                        <!-- sample html for design purposes:
+                        <div class="a-song song-cell" onmouseover="displayButton(this)" onmouseout="hideButton(this)">
+                            <index>8</index>
+                            <div class="main">
+                                <img class="image" src="https://i.scdn.co/image/ab67616d0000b273cf51b13c8bdabe63d896cfd8">
+                                <song-info>
+                                    <name>
+                                        Super sleepy attention, close positive whispers, inaudible whispers Pt.1
+                                    </name>
+                                    <artist>RoseASMR</artist>
+                                </song-info>
+                            </div>
+                            <div class="album">
+                                Super sleepy attention, close positive whispers, inaudible whispers
+                            </div>
+                            <div>04:39</div>
+                            <div class="img">
+                                <a href="https://open.spotify.com/track/0fU7os8IzBtcblVO0YeIsR">
+                                    <img class="play" src="/static/web/images/images.png">
+                                </a>
+                            </div>
                         </div>
-                        <div>04:39</div>
-                        <div class="img">
-                            <a href="https://open.spotify.com/track/0fU7os8IzBtcblVO0YeIsR">
-                                <img class="play" src="/static/web/images/images.png">
-                            </a>
-                        </div>
+                        -->
+
                     </div>
-                     -->
                 </div>
             </div>
         </div>

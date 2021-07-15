@@ -1,24 +1,14 @@
-//gets this as parameter
-function parseStringOfButton(self){
-    var buttonRawString = self.textContent;
-
-    while(buttonRawString.includes('\n')){ buttonRawString = buttonRawString.replace('\n',''); }
-    while(buttonRawString.includes(' ')){ buttonRawString = buttonRawString.replace(' ',''); }
-
-    setInputAs(buttonRawString);
-}
-
 //set input hidden value as the text
-function setInputAs(text){
+function setInputAs(self){
     var target = document.getElementById('button-kind');
-    target.value = text;
+    target.value = self.textContent;
 }
 
 function clickedTile(self){
     var parent = self.parentElement;
 
-    parent.className = "clicked-tile";
-    self.className = "clicked-tile-text";
+    parent.id = "clicked-tile";
+    self.id = "clicked-tile-text";
 
     //at the end of this animation, submit data
     parent.addEventListener('animationend', () =>{
@@ -30,7 +20,6 @@ function submitValue(){
     var target = document.getElementById('tile-data');
     target.submit();
 }
-
 
 
 
