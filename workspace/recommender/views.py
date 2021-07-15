@@ -53,7 +53,7 @@ def getPlaylist(genre):
     raw = json.loads(r.text)
     data = []
     # Get 9 tracks
-    for i in range(9):
+    for i in range(13):
         songLink = raw['tracks']['items'][i]['track']['external_urls']['spotify']
         songImage = raw['tracks']['items'][i]['track']['album']['images'][0]['url']
         songName = raw['tracks']['items'][i]['track']['name']
@@ -64,26 +64,29 @@ def getPlaylist(genre):
     return data
 
 genre = ['chill', 'pop', 'sleep', 'workout', 'party', 'summer', 'holidays', 'classical', 'ambient']
+genre_dict = {}
+for i in genre:
+    genre_dict[i] = 'workspace/recommender/images/{}.jpg'.format(i)
 
 # Home Page
 def index(request):
     if request.method == 'GET':
         return render(request, 'recommender/index.html', 
             {
-                'genre': genre
+                'genre': genre_dict
             }
         )
+
 
 # Result Page
 def result(request):
     if request.method == 'POST':
-
         tile = request.POST.get('choice').lower()
         data = getPlaylist(tile)
-
         return render(request, 'recommender/result.html', 
             {
                 'genre': tile,
                 'data': data,
+                
             }
         )
