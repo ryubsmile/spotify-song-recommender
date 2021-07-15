@@ -66,14 +66,15 @@ def getPlaylist(genre):
 genre = ['chill', 'pop', 'sleep', 'workout', 'party', 'summer', 'holidays', 'classical', 'ambient']
 genre_dict = {}
 for i in genre:
-    genre_dict[i] = 'workspace/recommender/images/{}.jpg'.format(i)
+    genre_dict[i] = 'web/images/{}.jpg'.format(i)
 
 # Home Page
 def index(request):
     if request.method == 'GET':
         return render(request, 'recommender/index.html', 
             {
-                'genre': genre_dict
+                'genre_dict': genre_dict,
+                'genre': genre,
             }
         )
 
