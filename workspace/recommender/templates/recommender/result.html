@@ -21,68 +21,77 @@
 
         <title>Recommended Playlist</title>
 
+        <style id="bg-color"></style>
+
         <script>
             let playlist;
             let genre;
+            let color;
             
             window.onload = function(){
                 playlist = {{ data|safe }};
                 genre = "{{ genre|safe }}";
+                color = "{{ color|safe }}";
                 setGenreFirstLetterCap();
                 createPlaylist();
+                setBgColor(color);
             };
         </script>
     </head>
     <body>
         <div class="container">
-            <header>
-                <h1 id="genre">ERROR</h1> 
-                <!-- 여기 크게 지금 선택한 사진 보이게 하면 조을듯 근데 시작땐 애니메이션으로 -->
+            <div class="header-gradient">
+                <header>
+                    <h1 id="genre">ERROR</h1> 
+                    <!-- 여기 크게 지금 선택한 사진 보이게 하면 조을듯 근데 시작땐 애니메이션으로 -->
 
-                <!-- incompatible genres: 
-                keyerror: rainy-day, study, dance, r-n-b, acoustic, 
-                folk, happy, hip-hop, singer-songwriter, club, edm, disco, guitar, 
-                house, industrial, new-age, road-trip, 
+                    <!-- incompatible genres: 
+                    keyerror: rainy-day, study, dance, r-n-b, acoustic, 
+                    folk, happy, hip-hop, singer-songwriter, club, edm, disco, guitar, 
+                    house, industrial, new-age, road-trip, 
 
-                working: summer, sleep, workout, pop, chill, classical, party, holidays, ambient
-                -->
-            </header>
-            <div class="result-container">
-                <div id="result">
-                    <div class="a-song" style="border-bottom: 1px #444444 solid; margin-bottom: 20px; padding-bottom: 0;">
-                        <index style="font-weight:500">#</index>
-                        <div class="top-row">Title</div>
-                        <div class="top-row album">Album</div>
-                        <div class="top-row length">Length</div>
+                    working: summer, sleep, workout, pop, chill, classical, party, holidays, ambient
+                    -->
+                </header>
+            </div>
+            <div class="body-gradient">
+                <div class="result-container">
+                    <div id="result">
+                        <div class="a-song" style="border-bottom: 1px #444444 solid; margin-bottom: 20px; padding-bottom: 0;">
+                            <index style="font-weight:500">#</index>
+                            <div class="top-row">Title</div>
+                            <div class="top-row album">Album</div>
+                            <div class="top-row length">Length</div>
+                        </div>
+
+                        <!-- 플리 링크 새창에서 띄우고 노리퍼러 -->
+
+                        <!-- songs displayed here dynamically via javascript -->
+                        <!-- sample html for design purposes:
+                        <div class="a-song song-cell" onmouseover="displayButton(this)" onmouseout="hideButton(this)">
+                            <index>8</index>
+                            <div class="main">
+                                <img class="image" src="https://i.scdn.co/image/ab67616d0000b273cf51b13c8bdabe63d896cfd8">
+                                <song-info>
+                                    <name>
+                                        Super sleepy attention, close positive whispers, inaudible whispers Pt.1
+                                    </name>
+                                    <artist>RoseASMR</artist>
+                                </song-info>
+                            </div>
+                            <div class="album">
+                                Super sleepy attention, close positive whispers, inaudible whispers
+                            </div>
+                            <div>04:39</div>
+                            <div class="img">
+                                <a href="https://open.spotify.com/track/0fU7os8IzBtcblVO0YeIsR">
+                                    <img class="play" src="/static/web/images/images.png">
+                                </a>
+                            </div>
+                        </div>
+                        -->
+
                     </div>
-
-                    <!-- 플리 링크 새창에서 띄우고 노리퍼러 -->
-
-                    <!-- songs displayed here dynamically via javascript -->
-                    <!-- sample html for design purposes:
-                    <div class="a-song song-cell" onmouseover="displayButton(this)" onmouseout="hideButton(this)">
-                        <index>8</index>
-                        <div class="main">
-                            <img class="image" src="https://i.scdn.co/image/ab67616d0000b273cf51b13c8bdabe63d896cfd8">
-                            <song-info>
-                                <name>
-                                    Super sleepy attention, close positive whispers, inaudible whispers Pt.1
-                                </name>
-                                <artist>RoseASMR</artist>
-                            </song-info>
-                        </div>
-                        <div class="album">
-                            Super sleepy attention, close positive whispers, inaudible whispers
-                        </div>
-                        <div>04:39</div>
-                        <div class="img">
-                            <a href="https://open.spotify.com/track/0fU7os8IzBtcblVO0YeIsR">
-                                <img class="play" src="/static/web/images/images.png">
-                            </a>
-                        </div>
-                    </div>
-                     -->
-
                 </div>
             </div>
         </div>

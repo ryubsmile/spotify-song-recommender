@@ -96,21 +96,20 @@ body{
 }
 
 header{
-    height: 300px;
+    height: 250px;
 }
 
 div.header-container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     height: 100%;
 }
 
 span#big-text{
     font-weight: bold;
     font-size: 40px;
-    margin: 0;
+    margin-top: 100px;
 }
 
 div.subtitle{
@@ -185,5 +184,25 @@ div#tile-container{
     color:black;
 }
 
+@media(max-width: 700px){
+    div.container{
+        padding-bottom: 100px;
+    }
 
-/* 800px width: shrink */
+    header{
+        height: 300px;
+    }
+
+    div#tile-container{
+        grid-template-columns: 1fr 1fr;
+        width: 68vmin;
+        height: 102vmin;
+    }
+
+    span#big-text span{
+        display: block;
+        padding-bottom: 20px;
+    }
+
+
+}

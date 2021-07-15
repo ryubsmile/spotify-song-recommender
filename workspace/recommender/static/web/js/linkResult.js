@@ -1,7 +1,7 @@
 //set input hidden value as the text
 function setInputAs(self){
     var target = document.getElementById('button-kind');
-    target.value = self.textContent;
+    target.value = self.textContent + "|" + self.parentElement.style["color"];
 }
 
 function clickedTile(self){
@@ -20,7 +20,6 @@ function submitValue(){
     var target = document.getElementById('tile-data');
     target.submit();
 }
-
 
 
 

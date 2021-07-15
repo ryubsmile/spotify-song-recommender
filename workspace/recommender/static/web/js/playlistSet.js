@@ -87,3 +87,11 @@ function selectedRow(rowSelected){
     }
 
 }
+
+function setBgColor(colorRGB){
+    var target = document.getElementById('bg-color');
+    colorRGB = colorRGB.replace("rgb(", "");
+    colorRGB = colorRGB.replace(")", "");
+
+    target.innerText = ':root{--bg-color: ' + colorRGB + '}';
+}
