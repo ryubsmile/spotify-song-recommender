@@ -64,12 +64,16 @@ def getPlaylist(genre):
     return data
 
 genre = ['chill', 'pop', 'sleep', 'workout', 'party', 'summer', 'holidays', 'classical', 'ambient']
+genre_dict = {}
+for i in genre:
+    genre_dict[i] = 'workspace/recommender/images/{}.jpg'.format(i)
+
 # Home Page
 def index(request):
     if request.method == 'GET':
         return render(request, 'recommender/index.html', 
             {
-                'genre': genre
+                'genre': genre_dict
             }
         )
 
@@ -77,15 +81,12 @@ def index(request):
 # Result Page
 def result(request):
     if request.method == 'POST':
-
         tile = request.POST.get('choice').lower()
         data = getPlaylist(tile)
-        path = 'workspace/recommender/images/{}.jpg'.format(tile)
-
         return render(request, 'recommender/result.html', 
             {
                 'genre': tile,
                 'data': data,
-                'imagePath': path
+                
             }
         )
