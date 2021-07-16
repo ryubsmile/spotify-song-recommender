@@ -16,10 +16,17 @@ function createTile(genreIndex){
     tile.href = "javascript:;";
     tile.style.backgroundImage = "url(../static/" + GENRE_DICT[GENRE[genreIndex]] + ")";
     tile.setAttribute('onclick', 'sendTextAsInput(\"' + textString + '\")');
+    tile.setAttribute('onmouseover', 'toggleAlpha(this);')
+    tile.setAttribute('onmouseout', 'toggleAlpha(this);')
 
     var parent = document.getElementById('tile-container');
     parent.appendChild(tile);
 }
+
+function toggleAlpha(selfElement){
+    selfElement.id = (selfElement.id === "")? "highlighted" : "";
+}
+
 
 //creates non duplicate 0~max random integers array size of size
 //indices => used to access genre[index]

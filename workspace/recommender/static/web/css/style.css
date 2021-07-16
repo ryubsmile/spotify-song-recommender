@@ -141,7 +141,6 @@ a.tile{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center; 
-    background-size: 100% 100%;
     width: 100%;
     height: 100%;
     display: flex;
@@ -152,7 +151,8 @@ a.tile{
 }
 
 :root{
-    --image-alpha: rgba(0,0,0, 0.5);
+    --image-alpha: rgba(0,0,0, 0.7);
+    --image-alpha-recover: rgba(0,0,0,0.3);
 }
 
 a.tile::before{
@@ -162,6 +162,21 @@ a.tile::before{
     content: "";
     background-color: var(--image-alpha);
 }
+
+a.tile#highlighted{
+    animation: change-bg-size 0.7s forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes change-bg-size {
+    0%{ background-size: auto 100%;}
+    100%{ background-size: auto 110%;}
+}
+
+a.tile#highlighted::before{
+    animation: change-alpha 1s forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes change-alpha { 100%{background-color: var(--image-alpha-recover);}}
 
 @media(max-width: 600px){
     header{
