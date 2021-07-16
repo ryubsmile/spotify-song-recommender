@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- css link -->
+        <link rel="stylesheet" type="text/css" href="{% static 'web/css/style-genre.css' %}">
+
+        <!-- javascript link -->
+        <script src="{% static 'web/js/genreRec.js' %}"></script>
+        <script src="{% static 'web/js/sender.js' %}"></script>
+
+
+        <!-- favicon settings -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/images/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/images/favicon-16x16.png' %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}">
+        <!-- favicon settings end -->
+        
+        <title>Recommendations by Genre</title>
+
+        <script>
+            INPUT_TAG_ID = 'input-send';
+            FORM_TAG_ID = 'tile-data';
+
+            //data receive
+            GENRE_DICT = {{ genre_dict | safe }};
+            GENRE = {{ genre | safe }};
+            NUMBER_OF_TILES = 6; 
+            //edit as you update
+        </script>
+    </head>
+    <body>
+        <!-- start of header -->
+        <header>
+            <div class="header-texts">
+                <h1>Choose By Genre</h1>
+                <!-- subtitle -->
+                <h2>Click on a tile to listen to a playlist.</h2>
+                <a class="refresh" href="./">
+                    <img src="{% static 'web/images/refresh-icon.png' %}">
+                </a>
+            </div>
+        </header>
+        <!-- end of header -->
+
+        <!-- start of main container -->
+        <div class="container">
+            <!-- data input taker -->
+            <form id="tile-data" action="../result/" method="POST" accept-charset="UTF-8">
+                <!-- cookie validator -->
+                {%csrf_token%} 
+                <!-- data input sender -->
+                <input type="hidden" id="input-send" name="genre" value="">
+                <input type="hidden" id="input-send" name="rec-kind" value="genre">
+                <div id="tile-container">
+                    <!-- tiles drawn here via js -->
+                </div>
+            </form>
+        </div>
+        <!-- end of main container -->
+    </body>
+</html>

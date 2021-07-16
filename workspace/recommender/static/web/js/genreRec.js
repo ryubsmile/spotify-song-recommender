@@ -1,3 +1,11 @@
+let GENRE_DICT;
+let GENRE;
+let NUMBER_OF_TILES;
+
+window.onload = function(){
+    renderTiles(NUMBER_OF_TILES);
+}
+
 function renderTiles(tileAmount){
     const randomIntArray = pickRandomIndices(GENRE.length, tileAmount);
 
@@ -14,7 +22,7 @@ function createTile(genreIndex){
     tile.textContent = "#"+textString;
 
     tile.href = "javascript:;";
-    tile.style.backgroundImage = "url(../static/" + GENRE_DICT[GENRE[genreIndex]] + ")";
+    tile.style.backgroundImage = "url(../../static/" + GENRE_DICT[GENRE[genreIndex]] + ")";
     tile.setAttribute('onclick', 'sendTextAsInput(\"' + textString + '\")');
     tile.setAttribute('onmouseover', 'toggleAlpha(this);')
     tile.setAttribute('onmouseout', 'toggleAlpha(this);')
@@ -26,7 +34,6 @@ function createTile(genreIndex){
 function toggleAlpha(selfElement){
     selfElement.id = (selfElement.id === "")? "highlighted" : "";
 }
-
 
 //creates non duplicate 0~max random integers array size of size
 //indices => used to access genre[index]
@@ -47,21 +54,3 @@ function pickRandomIndices(max, size){
 
     return indices;
 }
-
-function sendTextAsInput(inputText){
-    setInputAs(inputText);
-    submitInput();
-}
-
-//set input hidden value as the text
-function setInputAs(input){
-    var inputSender = document.getElementById('input-send');
-    inputSender.value = input;
-}
-
-//submit input as form data
-function submitInput(){
-    var form = document.getElementById('tile-data');
-    form.submit();
-}
-

@@ -68,26 +68,39 @@ genre_dict = {}
 for i in genre:
     genre_dict[i] = 'web/images/{}.jpg'.format(i)
 
+
 # Home Page
 def index(request):
     if request.method == 'GET':
-        return render(request, 'recommender/index.html', 
+        return render(request, 'recommender/index.html',
+            {
+            }
+        )
+
+# Genre Page
+def byGenre(request):
+    if request.method == 'GET':
+        return render(request, 'recommender/genre.html', 
             {
                 'genre_dict': genre_dict,
                 'genre': genre,
             }
         )
 
+# Song Page
+def bySong(request):
+    return render(request, 'recommender/song.html')
 
 # Result Page
 def result(request):
     if request.method == 'POST':
-        tile = request.POST.get('choice').lower()
+        recType = request.POST.get('rec-kind') # 'by-genre' or 'by-song'
+        tile = request.POST.get('genre').lower()
         data = getPlaylist(tile)
         return render(request, 'recommender/result.html', 
             {
+                'recType': recType,
                 'genre': tile,
                 'data': data,
-                
             }
         )

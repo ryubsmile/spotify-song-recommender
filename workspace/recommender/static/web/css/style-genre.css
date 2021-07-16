@@ -90,8 +90,43 @@ header{
     height: 150px;
 }
 
+a.refresh{
+    display: inline;
+}
+
+a.refresh img{
+    height: 30px;
+    width: 30px;
+    filter: brightness(0) invert(1);
+}
+
+a.refresh img:hover{
+    animation: upside-down 1s forwards;
+    animation-iteration-count: infinite;
+}
+
+@keyframes upside-down {
+    0%{
+        transform: none;
+    }
+
+    40%{
+        transform: rotate(180deg);
+    }
+
+    60%{
+        transform: rotate(360deg);
+    }
+
+    100%{
+        transform: rotate(360deg);
+
+    }
+}
+
 div.header-texts{
     margin-top: 50px;
+    align-items: center;
 }
 
 h1{ 
@@ -103,6 +138,7 @@ h1{
 h2{
     font-weight: 400;
     margin-top: 20px;
+    margin-bottom: 20px;
     font-size: 1em;
 }
 
@@ -179,10 +215,6 @@ a.tile#highlighted::before{
 @keyframes change-alpha { 100%{background-color: var(--image-alpha-recover);}}
 
 @media(max-width: 600px){
-    header{
-        height: 200px;
-    }
-
     h1 span{
         display: block;
         padding-bottom: 20px;
