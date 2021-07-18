@@ -7,11 +7,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- css link -->
-        <link rel="stylesheet" type="text/css" href="{% static 'web/css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'web/css/style-index.css' %}">
 
         <!-- javascript link -->
-        <script src="{% static 'web/js/tileSet.js' %}"></script>
-        <script src="{% static 'web/js/linkResult.js' %}"></script>
+        <!-- <script src="{% static 'web/js/sender.js' %}"></script> -->
 
         <!-- favicon settings -->
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
@@ -21,44 +20,26 @@
         <!-- favicon settings end -->
         
         <title>Spotify Song Recommender</title>
-        
-        <style id="color-save"></style>
+
         <script>
-            let obj;
-            const NUM_OF_TILES = 6;
-            window.onload = function(){
-                //takes genre json data as 'GET' method when rendered
-                obj = {{ genre|safe }};
-                renderTiles(NUM_OF_TILES);
-                setTileStyle();
-                setTileText();
-            };
         </script>
     </head>
     <body>
         <!-- start of header -->
         <header>
-            <div class="header-container">
-                <span id="big-text">
-                    <span>Spotify Song </span> <span>Recommender</span>
-                </span>
-                <div class="subtitle" id="pg1">Click on a tile to listen to a playlist.</div> 
-            </div>
-            <!-- subtitle -->
+            Song Recommender
+
+            Get Recommendations based on... 
         </header>
         <!-- end of header -->
 
-
         <!-- start of main container -->
         <div class="container">
-            <!-- data input taker -->
-            <form id="tile-data" name="tile-data" action="result/" method="POST" accept-charset="UTF-8">
-                <!-- data input sender -->
-                {%csrf_token%} 
-                <input type="hidden" id="button-kind" name="choice" value="">
-                <div id="tile-container">
-                    <!-- tiles drawn dynamically by js -->
-                </div>
+            <form id="by-genre" action="by-genre/" method="GET" accept-charset="UTF-8">
+                <input type="submit" value="genre">
+            </form>
+            <form id="by-song" action="by-song/" method="GET" accept-charset="UTF-8">
+                <input type="submit" value="song">
             </form>
         </div>
         <!-- end of main container -->
