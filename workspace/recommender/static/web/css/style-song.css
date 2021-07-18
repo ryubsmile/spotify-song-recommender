@@ -79,10 +79,10 @@ html, body{
     font-family: 'Spotify', Helvetica, sans-serif;
     background-color: #111;
     color: white;
-    text-align: center;
 }
 
 div, h1, header{
+    font-family: inherit;
     /* border: 1px solid red; */
 }
 
@@ -104,4 +104,92 @@ h2{
     font-size: 1em;
     font-weight: 400;
     margin-top: 20px;
+}
+
+div.container{
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    font-family: 'verdana', 'arial', sans-serif
+}
+
+div.search-area{
+    margin-left: 10vw;
+    margin-right: 5vw;
+    text-align: left;
+}
+
+div.search-area input{
+    height: 40px;
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 50px;
+    border: none;
+    border-radius: 20px;
+    font-family:'arial', sans-serif;
+    font: 'arial' 400 15px;
+}
+
+div.search-area input:focus{
+    outline: none;
+}
+
+div.autocom-box{
+    /* display: none; */
+}
+
+div.search-area.active div.autocom-box{
+    display: block;
+}
+
+div.autocom-box li{
+    list-style: none;
+    padding: 7px;
+    cursor: default;
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    background-color: #101010;
+    color: #FFFFFFAA;
+    font-family: verdana, sans-serif;
+    font-weight: 400;
+    border-radius: 5px;
+  }
+
+div.autocom-box li:hover{
+    background-color: #FFFFFF22;
+}
+
+li img{
+    height: 35px;
+    width: 35px;
+    display: inline-block;
+}
+
+song-info{ 
+    display:inline-block; 
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+song-info, name, artist, length{ 
+    display: block; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+name{
+    margin-bottom: 3px;
+    color: white;
+    font-size: 12px;
+    padding-right: 10px;
+}
+
+artist{
+    font-size: 9px;
+    padding-right: 8px;
+}
+
+length{
+    font-size: 9px;
+    margin: auto 10px auto 0;
 }

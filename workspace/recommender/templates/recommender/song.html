@@ -8,28 +8,62 @@
 
         <!-- css link -->
         <link rel="stylesheet" type="text/css" href="{% static 'web/css/style-song.css' %}">
-
+        
         <!-- favicon settings -->
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
         <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/images/favicon-32x32.png' %}">
         <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/images/favicon-16x16.png' %}">
         <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}">
         <!-- favicon settings end -->
-
+        
         <title>Recommendations Based On Your Picks</title>
 
+        <script>
+
+        </script>
     </head>
     <body>
         <!-- start of header -->
         <header>
             <h1>Choose By Your Favorite Songs</h1>
-            <h2>Search and Pick 3+ Songs You Like</h2>
+            <h2>Search and Pick 3 Songs You Like</h2>
         </header>
         <!-- end of header -->
-
+        
         <!-- main container -->
         <div class="container">
-            <input type="text">
-        </div> 
-    </body>
-</html>
+            <div class="search-area">
+                <input 
+                    type="search" 
+                    name="search" 
+                    placeholder="Search for your favorite song"
+                    spellcheck="false"
+                    autocomplete="off"
+                >
+
+                <div class="autocom-box"> 
+                    <li>
+                        <img src="https://i.scdn.co/image/ab67616d0000b27354809f3656aaa68510596908">
+                        <song-info>
+                            <name>Lovefool - Nicky Romero Remiasdf;alsdkfjas;ldkfjx</name>
+                            <artist>twocolors</artist>
+                        </song-info>
+                        <length>03:29</length>
+                    </li>
+                </div>
+                <div id="test"> </div>
+            </div>
+            <form id="fav-songs" action="result/" method="POST">
+                <!-- cookie validator -->
+                {%csrf_token%}
+            </form>
+        </div>
+
+            <!-- javascript link -->
+            <script src="{% static 'web/js/songsRec.js' %}"></script>
+            <script src="{% static 'web/js/suggestions.js' %}"></script>
+            <script>
+                autoComCell;
+            </script>
+        </body>
+        </html>

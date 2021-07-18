@@ -19,8 +19,7 @@ function createSingleSongCell(index){
     var seconds = add0(Math.floor((rawTime - minutes) * 60));
 
     //draw html
-    aSongRow.innerHTML = 
-    (
+    aSongRow.innerHTML = (
         "<index>" + (index + 1) + "</index>" + 
         "<div class=\"main\">" + 
             "<img class=\"image\" src=\"" + playlist[index]["image"] + "\">" +
