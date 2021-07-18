@@ -27,20 +27,25 @@
     <body>
         <!-- start of header -->
         <header>
-            Song Recommender
-
-            Get Recommendations based on... 
+            <h1>Song Recommender</h1>
+            <h2>Get Recommendations Based on </h2>
         </header>
         <!-- end of header -->
 
         <!-- start of main container -->
         <div class="container">
-            <form id="by-genre" action="by-genre/" method="GET" accept-charset="UTF-8">
-                <input type="submit" value="genre">
-            </form>
-            <form id="by-song" action="by-song/" method="GET" accept-charset="UTF-8">
-                <input type="submit" value="song">
-            </form>
+            <div id="choice-container">
+                <a href="by-song/">
+                    <div class="tile">
+                        Song
+                    </div>
+                </a>
+                <a href="by-genre/">
+                    <div class="tile">
+                        Genre
+                    </div>
+                </a>
+            </div>
         </div>
         <!-- end of main container -->
     </body>

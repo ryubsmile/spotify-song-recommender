@@ -69,18 +69,25 @@
     src: url(fonts/Gotham-Font/GothamPro-LightItalic.woff) format('woff');
 }
 
-html, body, div {
-    background-color: #111;
-    height: inherit;
+html, body{
+    height: 100%;
     width: inherit;
+    margin: 0;
+    user-select: none;
+    text-align: center;
+    font-weight: 400;
+    font-family: 'Spotify', Helvetica, sans-serif;
+    background-color: #111;
     color: white;
     text-align: center;
-    margin: 0;
-    font-family: 'Spotify', Helvetica, sans-serif;
 }
 
 div, h1, header{
-    /* border: 1px solid orange; */
+    /* border: 1px solid red; */
+}
+
+header{
+    height: 150px;
 }
 
 h1, h2{
@@ -97,42 +104,4 @@ h2{
     font-size: 1em;
     font-weight: 400;
     margin-top: 20px;
-}
-
-header{
-    height: 150px;
-}
-
-a{
-    text-decoration: none;
-    color: inherit;
-}
-
-div#choice-container{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 90vmin;
-    height: 45vmin;
-    margin: 20px auto 70px;
-    text-align: center;
-    gap: 30px;
-}
-
-div.tile{
-    font-family: 'verdana', 'arial', sans-serif;
-    width: 100%;
-    height: 100%;
-    background-color: gray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-@media(max-width: 600px){
-    div#choice-container{
-        grid-template-columns: 1fr;
-        width: 80vw;
-        height: 160vw;
-    }
-
 }
