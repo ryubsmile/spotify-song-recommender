@@ -38,7 +38,7 @@ def result(request):
     if request.method == 'POST':
         recType = request.POST.get('rec-kind') # 'by-genre' or 'by-song'
         tile = request.POST.get('genre').lower()
-        data = getPlaylist(tile)
+        data = spotify.getPlaylist(tile)
         return render(request, 'recommender/result.html', 
             {
                 'recType': recType,
