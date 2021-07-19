@@ -89,11 +89,24 @@ def byGenre(request):
 
 # Song Page
 def bySong(request):
-    return render(request, 'recommender/song.html')
+    if request.method == 'GET':
+        return render(request, 'recommender/song.html')
+    if request.method == 'POST':
+        # keyword for search
+        test = request.POST.get('search') 
+
+        return render(request, 'recommender/song.html',
+            {
+                # return search auto completion playlist, 
+                # just like genre json structure
+                'autocompletionList': test,
+            }
+        )
 
 # Result Page
 def result(request):
     if request.method == 'POST':
+        #if(request.POST.get('rec-kind')){
         recType = request.POST.get('rec-kind') # 'by-genre' or 'by-song'
         tile = request.POST.get('genre').lower()
         data = getPlaylist(tile)

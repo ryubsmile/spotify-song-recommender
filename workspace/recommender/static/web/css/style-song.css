@@ -129,12 +129,12 @@ div.search-area input{
     font: 'arial' 400 15px;
 }
 
-div.search-area input:focus{
+div.search-area input[type=search]:focus{
     outline: none;
 }
 
-div.autocom-box{
-    /* display: none; */
+div.search-area div.autocom-box{
+    display: none;
 }
 
 div.search-area.active div.autocom-box{

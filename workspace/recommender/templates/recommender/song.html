@@ -33,16 +33,22 @@
         <!-- main container -->
         <div class="container">
             <div class="search-area">
-                <input 
+                <form method="POST" name="search-form" id="search-form">
+                    <!-- search input -->
+                    <input 
                     type="search" 
                     name="search" 
+                    id="search"
                     placeholder="Search for your favorite song"
                     spellcheck="false"
                     autocomplete="off"
-                >
+                    >
+                    <!-- cookie validator -->
+                    {%csrf_token%} 
+                </form>
 
                 <div class="autocom-box"> 
-                    <li>
+                    <li onclick="select(this)">
                         <img src="https://i.scdn.co/image/ab67616d0000b27354809f3656aaa68510596908">
                         <song-info>
                             <name>Lovefool - Nicky Romero Remiasdf;alsdkfjas;ldkfjx</name>
@@ -56,7 +62,11 @@
             <form id="fav-songs" action="result/" method="POST">
                 <!-- cookie validator -->
                 {%csrf_token%}
+
+                {{ autocompletionList | safe }}
+                search input
             </form>
+
         </div>
 
             <!-- javascript link -->

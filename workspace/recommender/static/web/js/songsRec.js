@@ -1,16 +1,15 @@
 const searchArea = document.querySelector('.search-area');
-const searchBox = searchArea.querySelector('input');
+const searchBox = document.getElementById('search');
 const suggBox = searchArea.querySelector('.autocom-box');
 
 const testDiv = document.getElementById('test');
-const NUMBER_OF_AUTOCOMS = 5;
+const NUMBER_OF_AUTOCOMS = 10;
 let autoComCell;
 
 function renderAutocom(){
-    for(var i = 0; i < NUMBER_OF_AUTOCOMS; i++){
-        if(autoComCell[i]){
+    for(var i = 0; i < Math.min(NUMBER_OF_AUTOCOMS, autoComCell.length); i++){
+        if(autoComCell[i]) // null check
             makeAutocom(i);
-        }
     }
 }
 
@@ -30,25 +29,36 @@ function makeAutocom(index){
         "</song-info>" +
         "<length>" + minutes + ":" + seconds + "</length>"
     );
+
+    autoComCell.setAttribute('onclick','select(this)');
 }
 
-//if select, save the data onto the right side
+// if select, save the data onto the right side
+// and make the input box blank
 function select(selfElement){
-    let selectData = selfElement.textContent;
-    searchBox.value = selectData;
+    let selectHTML = selfElement.innerHTML;
+
+
+    searchBox.value = "";
+    searchArea.classList.remove('active');
 }
 
 searchBox.onkeyup = (e) => {
     let userData = e.target.value;
-
     if(userData){
         searchArea.classList.add('active');
         /*
-         * 
+         * submit keyword and 
+         * receive data
          */
-
-
     }else{
         searchArea.classList.remove('active');
     }
+}
+
+function add0(num){
+    if(num < 10){
+        return "0" + num;
+    }
+    return num;
 }
