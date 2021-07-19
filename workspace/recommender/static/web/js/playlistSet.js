@@ -103,5 +103,4 @@ function setBgColor(){
 
     var target = document.getElementById('bg-color');
     target.innerText = ':root{--bg-color: ' + color.r + "," + color.g + "," + color.b + '}';
-    console.log(':root{--bg-color: ' + color.r + "," + color.g + "," + color.b + '}');
 }
