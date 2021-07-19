@@ -29,7 +29,7 @@
             
             window.onload = function(){
                 playlist = {{ data|safe }};
-                genre = "{{ genre|safe }}";
+                genre = "{{ title|safe }}";
                 setGenreFirstLetterCap();
                 createPlaylist();
                 setBgColor();

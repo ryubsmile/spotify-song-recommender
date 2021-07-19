@@ -55,16 +55,35 @@
                             <artist>twocolors</artist>
                         </song-info>
                         <length>03:29</length>
+                        <input type="hidden" name="song" value="12-340sdf98">
+                    </li>
+
+                    <li onclick="select(this)">
+                        <img src="https://i.scdn.co/image/ab67616d0000b27354809f3656aaa68510596908">
+                        <song-info>
+                            <name>My favorite song is hi my name is</name>
+                            <artist>twocolors</artist>
+                        </song-info>
+                        <length>03:29</length>
+                        <input type="hidden" name="song" value="12-34098">
                     </li>
                 </div>
                 <div id="test"> </div>
             </div>
-            <form id="fav-songs" action="result/" method="POST">
+            <form id="fav-songs" action="../result/" method="POST">
+                <input type="hidden" name="trackIds" id="trackIds">
+                <!-- {{ autocompletionList | safe }}
+                    search input -->
+                <div class="select-area">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </div>
+                <!-- submit form: get() -->
+                <button>submit</button> 
                 <!-- cookie validator -->
                 {%csrf_token%}
-
-                {{ autocompletionList | safe }}
-                search input
+                <input type="hidden" name="rec-kind" value="by-song">
             </form>
 
         </div>

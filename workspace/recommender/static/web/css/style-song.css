@@ -109,20 +109,26 @@ h2{
 div.container{
     display: grid;
     grid-template-columns: 5fr 4fr;
-    font-family: 'verdana', 'arial', sans-serif
+    font-family: 'verdana', 'arial', sans-serif;
 }
 
 div.search-area{
-    margin-left: 10vw;
-    margin-right: 5vw;
+    margin-left: 8vw;
+    margin-right: 4vw;
     text-align: left;
+    padding: 8px;
+    height: fit-content;
+    border-radius: 10px;
+    background-color: #202020;
+}
+
+div.search-area.active{
 }
 
 div.search-area input{
     height: 40px;
     width: 100%;
     padding: 0 20px;
-    margin-bottom: 50px;
     border: none;
     border-radius: 20px;
     font-family:'arial', sans-serif;
@@ -133,6 +139,10 @@ div.search-area input[type=search]:focus{
     outline: none;
 }
 
+div.search-area.active input{
+    margin-bottom: 15px;
+}
+
 div.search-area div.autocom-box{
     display: none;
 }
@@ -141,7 +151,7 @@ div.search-area.active div.autocom-box{
     display: block;
 }
 
-div.autocom-box li{
+li{
     list-style: none;
     padding: 7px;
     cursor: default;
@@ -152,9 +162,10 @@ div.autocom-box li{
     font-family: verdana, sans-serif;
     font-weight: 400;
     border-radius: 5px;
+    margin-top: 8px;
   }
 
-div.autocom-box li:hover{
+li:hover{
     background-color: #FFFFFF22;
 }
 
@@ -167,7 +178,7 @@ li img{
 song-info{ 
     display:inline-block; 
     margin-top: auto;
-    margin-bottom: 0;
+    margin-bottom: 2px;
 }
 
 song-info, name, artist, length{ 
@@ -175,6 +186,7 @@ song-info, name, artist, length{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: left;
 }
 
 name{
@@ -192,4 +204,15 @@ artist{
 length{
     font-size: 9px;
     margin: auto 10px auto 0;
+}
+
+div.select-area{
+}
+
+div.select-area li{
+    height: 35px;
+    width: 80%;
+    margin-bottom: 30px;
+    background-color: #FFFFFF11;
+    /* display: none; */
 }
