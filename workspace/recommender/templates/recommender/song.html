@@ -6,20 +6,93 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <!-- css link -->
+        <link rel="stylesheet" type="text/css" href="{% static 'web/css/style-song.css' %}">
+        
         <!-- favicon settings -->
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
         <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/images/favicon-32x32.png' %}">
         <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/images/favicon-16x16.png' %}">
         <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}">
         <!-- favicon settings end -->
-
+        
         <title>Recommendations Based On Your Picks</title>
 
+        <script>
+
+        </script>
     </head>
     <body>
-        <input>
-        <input>
-        <input>
+        <!-- start of header -->
+        <header>
+            <h1>Choose By Your Favorite Songs</h1>
+            <h2>Search and Pick 3 Songs You Like</h2>
+        </header>
+        <!-- end of header -->
+        
+        <!-- main container -->
+        <div class="container">
+            <div class="search-area">
+                <form method="POST" name="search-form" id="search-form">
+                    <!-- search input -->
+                    <input 
+                    type="search" 
+                    name="search" 
+                    id="search"
+                    placeholder="Search for your favorite song"
+                    spellcheck="false"
+                    autocomplete="off"
+                    >
+                    <!-- cookie validator -->
+                    {%csrf_token%} 
+                </form>
 
-    </body>
-</html>
+                <div class="autocom-box"> 
+                    <li onclick="select(this)">
+                        <img src="https://i.scdn.co/image/ab67616d0000b27354809f3656aaa68510596908">
+                        <song-info>
+                            <name>Lovefool - Nicky Romero Remiasdf;alsdkfjas;ldkfjx</name>
+                            <artist>twocolors</artist>
+                        </song-info>
+                        <length>03:29</length>
+                        <input type="hidden" name="song" value="12-340sdf98">
+                    </li>
+
+                    <li onclick="select(this)">
+                        <img src="https://i.scdn.co/image/ab67616d0000b27354809f3656aaa68510596908">
+                        <song-info>
+                            <name>My favorite song is hi my name is</name>
+                            <artist>twocolors</artist>
+                        </song-info>
+                        <length>03:29</length>
+                        <input type="hidden" name="song" value="12-34098">
+                    </li>
+                </div>
+                <div id="test"> </div>
+            </div>
+            <form id="fav-songs" action="../result/" method="POST">
+                <input type="hidden" name="trackIds" id="trackIds">
+                <!-- {{ autocompletionList | safe }}
+                    search input -->
+                <div class="select-area">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </div>
+                <!-- submit form: get() -->
+                <button>submit</button> 
+                <!-- cookie validator -->
+                {%csrf_token%}
+                <input type="hidden" name="rec-kind" value="by-song">
+            </form>
+
+        </div>
+
+            <!-- javascript link -->
+            <script src="{% static 'web/js/songsRec.js' %}"></script>
+            <script src="{% static 'web/js/suggestions.js' %}"></script>
+            <script>
+                autoComCell;
+            </script>
+        </body>
+        </html>

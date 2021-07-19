@@ -39,7 +39,6 @@
         <header>
             <div class="header-texts">
                 <h1>Choose By Genre</h1>
-                <!-- subtitle -->
                 <h2>Click on a tile to listen to a playlist.</h2>
                 <a class="refresh" href="./">
                     <img src="{% static 'web/images/refresh-icon.png' %}">
@@ -56,7 +55,7 @@
                 {%csrf_token%} 
                 <!-- data input sender -->
                 <input type="hidden" id="input-send" name="genre" value="">
-                <input type="hidden" id="input-send" name="rec-kind" value="genre">
+                <input type="hidden" id="input-send" name="rec-kind" value="by-genre">
                 <div id="tile-container">
                     <!-- tiles drawn here via js -->
                 </div>

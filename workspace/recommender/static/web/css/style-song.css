@@ -1,0 +1,218 @@
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: 900;
+    src: url(fonts/Gotham-Font/GothamPro-Black.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: italic;
+    font-weight: 900;
+    src: url(fonts/Gotham-Font/GothamPro-BlackItalic.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: bold;
+    src: url(fonts/Gotham-Font/GothamPro-Bold.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: italic;
+    font-weight: bold;
+    src: url(fonts/Gotham-Font/GothamPro-BoldItalic.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: 500;
+    src: url(fonts/Gotham-Font/GothamPro-Medium.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: italic;
+    font-weight: 500;
+    src: url(fonts/Gotham-Font/GothamPro-MediumItalic.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: 400;
+    src: url(fonts/Gotham-Font/GothamPro.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: italic;
+    font-weight: 400;
+    src: url(fonts/Gotham-Font/GothamPro-Italic.woff) format('woff');
+}
+
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: normal;
+    font-weight: 300;
+    src: url(fonts/Gotham-Font/GothamPro-Light.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Spotify';
+    font-style: italic;
+    font-weight: 300;
+    src: url(fonts/Gotham-Font/GothamPro-LightItalic.woff) format('woff');
+}
+
+html, body{
+    height: 100%;
+    width: inherit;
+    margin: 0;
+    user-select: none;
+    text-align: center;
+    font-weight: 400;
+    font-family: 'Spotify', Helvetica, sans-serif;
+    background-color: #111;
+    color: white;
+}
+
+div, h1, header{
+    font-family: inherit;
+    /* border: 1px solid red; */
+}
+
+header{
+    height: 150px;
+}
+
+h1, h2{
+    margin: 0;
+}
+
+h1{
+    font-size: 2em;
+    font-weight: 500;
+    margin-top: 50px;
+}
+
+h2{
+    font-size: 1em;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+div.container{
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    font-family: 'verdana', 'arial', sans-serif;
+}
+
+div.search-area{
+    margin-left: 8vw;
+    margin-right: 4vw;
+    text-align: left;
+    padding: 8px;
+    height: fit-content;
+    border-radius: 10px;
+    background-color: #202020;
+}
+
+div.search-area.active{
+}
+
+div.search-area input{
+    height: 40px;
+    width: 100%;
+    padding: 0 20px;
+    border: none;
+    border-radius: 20px;
+    font-family:'arial', sans-serif;
+    font: 'arial' 400 15px;
+}
+
+div.search-area input[type=search]:focus{
+    outline: none;
+}
+
+div.search-area.active input{
+    margin-bottom: 15px;
+}
+
+div.search-area div.autocom-box{
+    display: none;
+}
+
+div.search-area.active div.autocom-box{
+    display: block;
+}
+
+li{
+    list-style: none;
+    padding: 7px;
+    cursor: default;
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    background-color: #101010;
+    color: #FFFFFFAA;
+    font-family: verdana, sans-serif;
+    font-weight: 400;
+    border-radius: 5px;
+    margin-top: 8px;
+  }
+
+li:hover{
+    background-color: #FFFFFF22;
+}
+
+li img{
+    height: 35px;
+    width: 35px;
+    display: inline-block;
+}
+
+song-info{ 
+    display:inline-block; 
+    margin-top: auto;
+    margin-bottom: 2px;
+}
+
+song-info, name, artist, length{ 
+    display: block; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+}
+
+name{
+    margin-bottom: 3px;
+    color: white;
+    font-size: 12px;
+    padding-right: 10px;
+}
+
+artist{
+    font-size: 9px;
+    padding-right: 8px;
+}
+
+length{
+    font-size: 9px;
+    margin: auto 10px auto 0;
+}
+
+div.select-area{
+}
+
+div.select-area li{
+    height: 35px;
+    width: 80%;
+    margin-bottom: 30px;
+    background-color: #FFFFFF11;
+    /* display: none; */
+}
