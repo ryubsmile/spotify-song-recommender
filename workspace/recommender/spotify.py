@@ -60,3 +60,25 @@ def getPlaylist(genre):
         songLength = raw['tracks']['items'][i]['track']['duration_ms'] / 60000
         data.append({'songName': songName, 'albumName': albumName, 'artistName': artistName, 'image': songImage, 'link': songLink, 'duration': songLength})
     return data
+
+# Search a song by title
+def searchTrack(name):
+    url = "https://api.spotify.com/v1/search?q={}&type=track&limit=5".format(name)
+    headers = get_headers(client_id, client_secret)
+    r = requests.get(url, headers = headers)
+    raw = json.loads(r.text)
+    data = []
+    # Get 5 tracks
+    for i in range(5):
+        songLink = raw['tracks']['items'][i]['external_urls']['spotify']
+        songImage = raw['tracks']['items'][i]['album']['images'][0]['url']
+        songName = raw['tracks']['items'][i]['name']
+        songId = raw['tracks']['items'][i]['id']
+        albumName = raw['tracks']['items'][i]['album']['name']
+        artistName = raw['tracks']['items'][i]['artists'][0]['name']
+        artistId = raw['tracks']['items'][i]['artists'][0]['id']
+        songLength = raw['tracks']['items'][i]['duration_ms'] / 60000
+        data.append({'songName': songName, 'songId': songId, 'albumName': albumName, 'artistName': artistName, 'artistId': artistId, 'image': songImage, 'link': songLink, 'duration': songLength})
+    return data
+
+# Add more data : 

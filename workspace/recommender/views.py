@@ -36,12 +36,12 @@ def bySong(request):
     if request.method == 'POST':
         # keyword for search
         keyword = request.POST.get('search') 
-
+        searchedTracks = spotify.searchTrack(keyword)
         return render(request, 'recommender/song.html',
             {
                 # return search auto completion playlist, 
                 # receives getPlaylist() json structure
-                'autocompletionList': keyword,
+                'autocompletionList': searchedTracks,
             }
         )
 
@@ -52,7 +52,7 @@ def result(request):
         
         if recType == "by-genre":
             tile = request.POST.get('genre').lower()
-            data = getPlaylist(tile)
+            data = spotify.getPlaylist(tile)
             return render(request, 'recommender/result.html', 
                 {
                     'recType': recType,
