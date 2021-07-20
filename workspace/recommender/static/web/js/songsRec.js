@@ -1,17 +1,41 @@
 const searchArea = document.querySelector('.search-area');
 const searchBox = document.getElementById('search');
+const searchForm = document.getElementById('search-form');
+
 const suggBox = searchArea.querySelector('.autocom-box');
 
 const selectArea= document.querySelector('.select-area');
 const selectBoxes = selectArea.querySelectorAll('li');
 
-const testDiv = document.getElementById('test');
-let autoComCell;
+searchBox.onkeyup = (e) => {
+    let userData = e.target.value;
+    if(userData){
+        searchArea.classList.add('active');
+        // searchForm.submit();
+        // action: reload/
+        reloadData(searchForm);
 
-const NUMBER_OF_AUTOCOMS = 10;
+    }else{
+        searchArea.classList.remove('active');
+    }
+}
+
+function reloadData(userData){
+    var ajax = new XMLHttpRequest();
+    var data = userData;
+    var formData = new FormData(data);
+    ajax.open('POST', '../reload/', true);
+    ajax.send(formData);
+}
+
+window.onload = function(){
+    //renderAutocom();
+}
+
+const NUMBER_OF_AUTOCOMS = 5;
 function renderAutocom(){
-    for(var i = 0; i < Math.min(NUMBER_OF_AUTOCOMS, autoComCell.length); i++){
-        if(autoComCell[i]) // null check
+    for(var i = 0; i < Math.min(NUMBER_OF_AUTOCOMS, autoComList.length); i++){
+        if(autoComList[i]) // null check
             makeAutocom(i);
     }
 }
@@ -82,19 +106,6 @@ function submitForm(){
 
     let inputTag = document.getElementById('trackIds');
     inputTag.value = trackIds;
-}
-
-searchBox.onkeyup = (e) => {
-    let userData = e.target.value;
-    if(userData){
-        searchArea.classList.add('active');
-        /*
-         * submit keyword and 
-         * receive data
-         */
-    }else{
-        searchArea.classList.remove('active');
-    }
 }
 
 function add0(num){

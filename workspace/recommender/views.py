@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
+
 import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
@@ -33,21 +35,23 @@ def byGenre(request):
 def bySong(request):
     if request.method == 'GET':
         return render(request, 'recommender/song.html')
+    
+
+# Song Page Auto Completion Reload
+def reload(request):
     if request.method == 'POST':
         # keyword for search
         keyword = request.POST.get('search') 
         searchedTracks = spotify.searchTrack(keyword)
         return render(request, 'recommender/song.html',
             {
-                # return search auto completion playlist, 
-                # receives getPlaylist() json structure
-                'autocompletionList': searchedTracks,
+                'autoCompletion': searchedTracks,
             }
         )
 
 # Result Page
 def result(request):
-    if request.method == 'POST':
+    if request.is_ajax and request.method == 'POST':
         recType = request.POST.get('rec-kind') # 'by-genre' or 'by-song'
         
         if recType == "by-genre":

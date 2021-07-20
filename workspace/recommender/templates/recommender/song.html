@@ -33,7 +33,7 @@
         <!-- main container -->
         <div class="container">
             <div class="search-area">
-                <form method="POST" name="search-form" id="search-form">
+                <form method="POST" name="search-form" id="search-form" action="../reload/">
                     <!-- search input -->
                     <input 
                     type="search" 
@@ -42,33 +42,14 @@
                     placeholder="Search for your favorite song"
                     spellcheck="false"
                     autocomplete="off"
+                    autofocus="true"
                     >
                     <!-- cookie validator -->
                     {%csrf_token%} 
+                    <div class="autocom-box"> 
+                        <!-- here auto completion is done by js -->
+                    </div>
                 </form>
-
-                <div class="autocom-box"> 
-                    <li onclick="select(this)">
-                        <img src="https://i.scdn.co/image/ab67616d0000b27354809f3656aaa68510596908">
-                        <song-info>
-                            <name>Lovefool - Nicky Romero Remiasdf;alsdkfjas;ldkfjx</name>
-                            <artist>twocolors</artist>
-                        </song-info>
-                        <length>03:29</length>
-                        <input type="hidden" name="song" value="12-340sdf98">
-                    </li>
-
-                    <li onclick="select(this)">
-                        <img src="https://i.scdn.co/image/ab67616d0000b27354809f3656aaa68510596908">
-                        <song-info>
-                            <name>My favorite song is hi my name is</name>
-                            <artist>twocolors</artist>
-                        </song-info>
-                        <length>03:29</length>
-                        <input type="hidden" name="song" value="12-34098">
-                    </li>
-                </div>
-                <div id="test"> </div>
             </div>
             <form id="fav-songs" action="../result/" method="POST">
                 <input type="hidden" name="trackIds" id="trackIds">
@@ -89,10 +70,10 @@
         </div>
 
             <!-- javascript link -->
+            <!-- <script>
+                let autoComList = {{ autoCompletion|safe }}
+            </script> -->
             <script src="{% static 'web/js/songsRec.js' %}"></script>
             <script src="{% static 'web/js/suggestions.js' %}"></script>
-            <script>
-                autoComCell;
-            </script>
         </body>
         </html>
