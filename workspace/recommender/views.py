@@ -4,6 +4,7 @@ from django.http import JsonResponse
 
 import sys
 import os
+import json
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 import spotify
 
@@ -41,13 +42,12 @@ def bySong(request):
 def reload(request):
     if request.method == 'POST':
         # keyword for search
-        keyword = request.POST.get('search') 
-        searchedTracks = spotify.searchTrack(keyword)
-        return render(request, 'recommender/song.html',
-            {
-                'autoCompletion': searchedTracks,
-            }
-        )
+        keyword = request.body.decode("UTF-8");
+        emptyList = [{}]
+        searchedTracks = json.dumps(spotify.searchTrack(keyword)) if keyword != "" else emptyList
+        print(searchedTracks) 
+
+        return HttpResponse(searchedTracks)
 
 # Result Page
 def result(request):

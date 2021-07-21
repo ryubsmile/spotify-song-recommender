@@ -33,7 +33,7 @@
         <!-- main container -->
         <div class="container">
             <div class="search-area">
-                <form method="POST" name="search-form" id="search-form" action="../reload/">
+                <form method="POST" name="search-form" id="search-form" action="">
                     <!-- search input -->
                     <input 
                     type="search" 
@@ -70,10 +70,7 @@
         </div>
 
             <!-- javascript link -->
-            <!-- <script>
-                let autoComList = {{ autoCompletion|safe }}
-            </script> -->
             <script src="{% static 'web/js/songsRec.js' %}"></script>
-            <script src="{% static 'web/js/suggestions.js' %}"></script>
+            <script src="{% static 'web/js/autoComplete.js' %}"></script>
         </body>
         </html>
