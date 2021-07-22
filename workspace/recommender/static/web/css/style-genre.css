@@ -70,6 +70,7 @@
 }
 
 html, body{
+    font-size: 1.25rem;
     height: 100%;
     width: inherit;
     margin: 0;
@@ -83,7 +84,7 @@ html, body{
 }
 
 header{
-    height: 150px;
+    height: 200px;
 }
 
 a.refresh{
@@ -117,7 +118,7 @@ a.refresh img:hover{
 }
 
 div.header-texts{
-    margin-top: 50px;
+    margin-top: 80px;
     align-items: center;
 }
 
@@ -176,6 +177,7 @@ a.tile{
     justify-content: center;
     position: relative;
     color: white;
+    font-size: 0.7em;
 }
 
 :root{
