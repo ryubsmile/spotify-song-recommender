@@ -33,66 +33,40 @@
         <!-- main container -->
         <div class="container">
             <div class="search-area">
-                <form method="POST" name="search-form" id="search-form">
-                    <!-- search input -->
-                    <input 
-                    type="search" 
-                    name="search" 
-                    id="search"
-                    placeholder="Search for your favorite song"
-                    spellcheck="false"
-                    autocomplete="off"
-                    >
-                    <!-- cookie validator -->
-                    {%csrf_token%} 
-                </form>
-
+                <!-- search input -->
+                <input 
+                type="search" 
+                name="search" 
+                id="search"
+                placeholder="Maroon 5 Sugar"
+                spellcheck="false"
+                autocomplete="off"
+                autofocus="true"
+                >
+                <!-- cookie validator -->
                 <div class="autocom-box"> 
-                    <li onclick="select(this)">
-                        <img src="https://i.scdn.co/image/ab67616d0000b27354809f3656aaa68510596908">
-                        <song-info>
-                            <name>Lovefool - Nicky Romero Remiasdf;alsdkfjas;ldkfjx</name>
-                            <artist>twocolors</artist>
-                        </song-info>
-                        <length>03:29</length>
-                        <input type="hidden" name="song" value="12-340sdf98">
-                    </li>
-
-                    <li onclick="select(this)">
-                        <img src="https://i.scdn.co/image/ab67616d0000b27354809f3656aaa68510596908">
-                        <song-info>
-                            <name>My favorite song is hi my name is</name>
-                            <artist>twocolors</artist>
-                        </song-info>
-                        <length>03:29</length>
-                        <input type="hidden" name="song" value="12-34098">
-                    </li>
+                    <!-- dynamic auto completion is done here via js -->
                 </div>
-                <div id="test"> </div>
             </div>
             <form id="fav-songs" action="../result/" method="POST">
-                <input type="hidden" name="trackIds" id="trackIds">
-                <!-- {{ autocompletionList | safe }}
-                    search input -->
+                <!-- chosen songs are inserted to these <li> tags via select(this) function-->
                 <div class="select-area">
                     <li></li>
                     <li></li>
                     <li></li>
                 </div>
-                <!-- submit form: get() -->
-                <button>submit</button> 
+                <!-- submit form -->
+                <button onclick="submitForm()">submit</button> 
                 <!-- cookie validator -->
                 {%csrf_token%}
+                <!-- value to send -->
+                <input type="hidden" name="trackToSend" id="tracksToSend">
                 <input type="hidden" name="rec-kind" value="by-song">
             </form>
-
         </div>
 
             <!-- javascript link -->
-            <script src="{% static 'web/js/songsRec.js' %}"></script>
-            <script src="{% static 'web/js/suggestions.js' %}"></script>
-            <script>
-                autoComCell;
-            </script>
+            <script src="{% static 'web/js/song-recommendation.js' %}"></script>
+            <script src="{% static 'web/js/auto-completion.js' %}"></script>
         </body>
         </html>

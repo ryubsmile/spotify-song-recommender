@@ -70,6 +70,7 @@
 }
 
 html, body{
+    font-size: 1.25rem;
     height: 100%;
     width: inherit;
     margin: 0;
@@ -83,11 +84,10 @@ html, body{
 
 div, h1, header{
     font-family: inherit;
-    /* border: 1px solid red; */
 }
 
 header{
-    height: 150px;
+    height: 190px;
 }
 
 h1, h2{
@@ -97,7 +97,7 @@ h1, h2{
 h1{
     font-size: 2em;
     font-weight: 500;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 h2{
@@ -122,17 +122,15 @@ div.search-area{
     background-color: #202020;
 }
 
-div.search-area.active{
-}
-
 div.search-area input{
-    height: 40px;
+    height: 50px;
     width: 100%;
     padding: 0 20px;
     border: none;
     border-radius: 20px;
     font-family:'arial', sans-serif;
-    font: 'arial' 400 15px;
+    font: 'arial' 400;
+    font-size: 0.7em
 }
 
 div.search-area input[type=search]:focus{
@@ -140,7 +138,7 @@ div.search-area input[type=search]:focus{
 }
 
 div.search-area.active input{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 div.search-area div.autocom-box{
@@ -153,16 +151,16 @@ div.search-area.active div.autocom-box{
 
 li{
     list-style: none;
-    padding: 7px;
+    padding: 9px;
     cursor: default;
     display: grid;
-    grid-template-columns: 40px 1fr 40px;
+    grid-template-columns: 53px 1fr 50px;
     background-color: #101010;
     color: #FFFFFFAA;
     font-family: verdana, sans-serif;
     font-weight: 400;
-    border-radius: 5px;
-    margin-top: 8px;
+    border-radius: 7px;
+    margin-top: 10px;
   }
 
 li:hover{
@@ -170,15 +168,15 @@ li:hover{
 }
 
 li img{
-    height: 35px;
-    width: 35px;
+    height: 45px;
+    width: 45px;
     display: inline-block;
 }
 
 song-info{ 
     display:inline-block; 
     margin-top: auto;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 
 song-info, name, artist, length{ 
@@ -190,19 +188,19 @@ song-info, name, artist, length{
 }
 
 name{
-    margin-bottom: 3px;
+    margin-bottom: 5px;
     color: white;
+    font-size: 15px;
+    padding-right: 12px;
+}
+
+artist{
     font-size: 12px;
     padding-right: 10px;
 }
 
-artist{
-    font-size: 9px;
-    padding-right: 8px;
-}
-
 length{
-    font-size: 9px;
+    font-size: 12px;
     margin: auto 10px auto 0;
 }
 
@@ -210,9 +208,10 @@ div.select-area{
 }
 
 div.select-area li{
-    height: 35px;
+    height: 45px;
     width: 80%;
     margin-bottom: 30px;
+    margin-top: 4px;
     background-color: #FFFFFF11;
     /* display: none; */
 }

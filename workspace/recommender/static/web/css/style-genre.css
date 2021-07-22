@@ -70,6 +70,7 @@
 }
 
 html, body{
+    font-size: 1.25rem;
     height: 100%;
     width: inherit;
     margin: 0;
@@ -82,12 +83,8 @@ html, body{
     text-align: center;
 }
 
-div, h1, header{
-    /* border: 1px solid red; */
-}
-
 header{
-    height: 150px;
+    height: 200px;
 }
 
 a.refresh{
@@ -110,22 +107,18 @@ a.refresh img:hover{
         transform: none;
     }
 
-    40%{
+    30%{
         transform: rotate(180deg);
     }
 
-    60%{
-        transform: rotate(360deg);
-    }
-
     100%{
-        transform: rotate(360deg);
+        transform: rotate(180deg);
 
     }
 }
 
 div.header-texts{
-    margin-top: 50px;
+    margin-top: 80px;
     align-items: center;
 }
 
@@ -184,6 +177,7 @@ a.tile{
     justify-content: center;
     position: relative;
     color: white;
+    font-size: 0.7em;
 }
 
 :root{

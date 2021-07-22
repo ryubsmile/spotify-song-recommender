@@ -70,6 +70,7 @@
 }
 
 html, body, div {
+    font-size: 1.25rem;
     background-color: #111;
     height: inherit;
     width: inherit;
@@ -90,7 +91,7 @@ h1, h2{
 h1{
     font-size: 2em;
     font-weight: 500;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 h2{
@@ -100,7 +101,7 @@ h2{
 }
 
 header{
-    height: 150px;
+    height: 190px;
 }
 
 a{
