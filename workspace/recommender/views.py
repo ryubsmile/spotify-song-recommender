@@ -45,7 +45,6 @@ def reload(request):
         keyword = request.body.decode("UTF-8");
         emptyList = [{}]
         searchedTracks = json.dumps(spotify.searchTrack(keyword)) if keyword != "" else emptyList
-        print(searchedTracks) 
 
         return HttpResponse(searchedTracks)
 

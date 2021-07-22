@@ -82,10 +82,6 @@ html, body{
     text-align: center;
 }
 
-div, h1, header{
-    /* border: 1px solid red; */
-}
-
 header{
     height: 150px;
 }
@@ -110,16 +106,12 @@ a.refresh img:hover{
         transform: none;
     }
 
-    40%{
+    30%{
         transform: rotate(180deg);
     }
 
-    60%{
-        transform: rotate(360deg);
-    }
-
     100%{
-        transform: rotate(360deg);
+        transform: rotate(180deg);
 
     }
 }
