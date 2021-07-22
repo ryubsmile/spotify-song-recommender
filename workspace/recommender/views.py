@@ -17,6 +17,7 @@ for i in genre:
 # Home Page
 def index(request):
     if request.method == 'GET':
+        print(spotify.getAudioFeatures("2bgTY4UwhfBYhGT4HUYStN"))
         return render(request, 'recommender/index.html',
             {
             }
@@ -50,6 +51,7 @@ def reload(request):
 
 # Result Page
 def result(request):
+    
     if request.is_ajax and request.method == 'POST':
         recType = request.POST.get('rec-kind') # 'by-genre' or 'by-song'
         
@@ -66,6 +68,7 @@ def result(request):
 
         if recType == "by-song":
             # somehow get data 
+            
             return render(request, 'recommender/result.html', 
                 {
                     'recType': recType,
