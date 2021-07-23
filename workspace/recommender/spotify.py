@@ -4,6 +4,7 @@ import os
 import base64
 import json
 import requests
+from models import Tracks
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 ### Credentials for spotify api request
@@ -85,22 +86,25 @@ def searchTrack(search):
 Butter
 artist_id : 3Nrfpe0tUJi4K4DXYWgMUX
 track_id: 2bgTY4UwhfBYhGT4HUYStN
-
-danceability
-energy
-key
-loudness
-mode
-speechiness
-acousticness
-instrumentalness
-livness
-valence
-tempo
 """
+
 # Get Audio Features of a track
 def getAudioFeatures(trackId):
     url = "https://api.spotify.com/v1/audio-features/{}".format(trackId)
     headers = get_headers(client_id, client_secret)
     r = requests.get(url, headers = headers)
     raw = json.loads(r.text)
+
+# Add tracks csv to the model
+def addToModel(file):
+    f = open('data.txt', 'r')  
+    for line in f:  
+        line =  line.split(';')  
+        product = Tracks()  
+        product.name = line[2] + '(' + line[1] + ')'  
+        product.description = line[4]  
+        product.price = '' #data is missing from file  
+        product.save()  
+
+    f.close()  
+
