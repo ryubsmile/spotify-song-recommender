@@ -1,7 +1,6 @@
 # spotify-song-recommendation web app
 
-### Spotify song recommender web app (in progress)
-1. Get tracks recommendations based on your favourite three tracks (item-based collaborative filtering)
+1. Get tracks recommendations based on your favourite three tracks (content-based recommendation algorithm)
 2. Get tracks recommendations based on your choice of genre
 
 <br/>
@@ -22,8 +21,9 @@ sh run.sh
 
 ## Tech stacks
 - Django
-- Python
-- Html, css, Javascript
+- Python3
+- Sqlite
+- Html, css, Javascript, Ajax
 - Spotify API
 
 <br/>
