@@ -1,6 +1,6 @@
 /* set these two variables in the html <script> tag. */
-let INPUT_TAG_ID;
-let FORM_TAG_ID;
+const INPUT_TAG_ID = 'input-send';
+const FORM_TAG_ID = 'tile-data';
 
 //embedded to the texts that send info
 function sendTextAsInput(inputText){
