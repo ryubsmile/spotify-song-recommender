@@ -5,6 +5,7 @@
 config.py
 
 ### Django ###
+*.csv
 *.log
 *.pot
 *.pyc
