@@ -54,7 +54,7 @@ def result(request):
     if request.method == 'POST':
         recType = request.POST.get('rec-kind') # 'by-genre' or 'by-song'
         
-        if recType == "by-genre":
+        if recType == "by-genre": # came from 'recommender/by-genre/'
             tile = request.POST.get('genre').lower()
             data = spotify.getPlaylist(tile)
             return render(request, 'recommender/result.html', 
@@ -64,12 +64,10 @@ def result(request):
                     'data': data,
                 }
             )
-          
-        if recType == "by-song":
+        if recType == "by-song": # came from 'recommender/by-song/'
             import re
-
-            rawUserSongs = request.POST.get('trackToSend')
-            userSongs = re.sub("},{", "}~{", rawUserSongs).split("~")
+            rawUserSongs = request.POST.get('trackToSend') # raw data
+            userSongs = re.sub("},{", "}~{", rawUserSongs).split("~") # parse data to usable format
             for i in range(len(userSongs)):
                 userSongs[i] = json.loads(userSongs[i])
 
@@ -78,7 +76,7 @@ def result(request):
             return render(request, 'recommender/result.html', 
                 {
                     'recType': recType,
-                    # 'title' : some text 
+                    # 'title' : "some text" 
                     # 'data': data, 
                 }
             )

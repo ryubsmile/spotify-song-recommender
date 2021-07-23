@@ -26,8 +26,8 @@ Checks if the 'keyPressed' is a valid key (not null, empty, or not giving any in
 If valid: set the search area class as 'active' & sends(posts) the value in search box and waits for search result. 
 If invalid: set the search area class as not 'active' and returns. */
 searchBox.onkeyup = (e) => {
-    let keyPressed = e.target.value;
-    if(keyPressed){
+    let keyPressedIsValid = e.target.value;
+    if(keyPressedIsValid){
         searchArea.classList.add('active');
         let searchKeyword = searchBox.value;
         postKeyword(searchKeyword);
@@ -76,20 +76,20 @@ function showAutoComBoxes(autoComList){
 /* using the search result data, update auto completion boxes
 by editing the inner HTML of each <li> tag. */
 function fillAutoComBox(autoComInfo, autoComCell){
-    let rawTime = autoComInfo['duration']; // e.g. 230.3242 (min)
+    let rawTime = autoComInfo.duration; // e.g. 230.3242 (min)
     let minutes = add0(Math.floor(rawTime)); // 230 min
     let seconds = add0(Math.floor((rawTime - minutes) * 60)); // 19s
     let time = minutes + ":" + seconds; // 230:19
 
     autoComCell.innerHTML = (
-        "<img src=\"" + autoComInfo['image'] + "\">" +
+        "<img src=\"" + autoComInfo.image + "\">" +
         "<song-info>" +
-            "<name>" + autoComInfo['songName'] + "</name>" +
-            "<artist>" + autoComInfo['artistName'] + "</artist>" + 
+            "<name>" + autoComInfo.songName + "</name>" +
+            "<artist>" + autoComInfo.artistName + "</artist>" + 
         "</song-info>" +
         "<length>" + time + "</length>" + 
-        "<input type=\"hidden\" name=\"songId\" value=\"" + autoComInfo["songId"] + "\">" +
-        "<input type=\"hidden\" name=\"artistId\" value=\"" + autoComInfo["artistId"] + "\">"
+        "<input type=\"hidden\" name=\"songId\" value=\"" + autoComInfo.songId + "\">" +
+        "<input type=\"hidden\" name=\"artistId\" value=\"" + autoComInfo.artistId + "\">"
     );
 
     autoComCell.setAttribute('onclick','select(this)'); //if each auto com is clicked, execute 'select' function
@@ -117,12 +117,12 @@ function select(selfElement){
 
 // to send song id & artist id to server, which are needed to recommend songs. 
 let trackIds = [];
-var test;
+
 function submitForm(){
     let songInfo = selectArea.querySelectorAll("input[name='songId']");
     let artistInfo = selectArea.querySelectorAll("input[name='artistId']");
     for(var i = 0; i < NUMBER_OF_SELECTIONS; i++){
-        if(songInfo[i]){
+        if(songInfo[i]){ // => has something to fill in to the info object that is formatted to json in trackIds
             // using json
             var info = {};
             info.songId = songInfo[i].value;
