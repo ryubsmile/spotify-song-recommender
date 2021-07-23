@@ -4,6 +4,7 @@ import os
 import base64
 import json
 import requests
+from models import Tracks
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 ### Credentials for spotify api request
@@ -50,7 +51,7 @@ def getPlaylist(genre):
     r = requests.get(url, headers=headers)
     raw = json.loads(r.text)
     data = []
-    # Get 9 tracks
+    # Get 13 tracks
     for i in range(13):
         songLink = raw['tracks']['items'][i]['track']['external_urls']['spotify']
         songImage = raw['tracks']['items'][i]['track']['album']['images'][0]['url']
@@ -62,13 +63,13 @@ def getPlaylist(genre):
     return data
 
 # Search a song by title
-def searchTrack(name):
-    url = "https://api.spotify.com/v1/search?q={}&type=track&limit=5".format(name)
+def searchTrack(search):
+    url = "https://api.spotify.com/v1/search?q={}&type=track&limit=5".format(search)
     headers = get_headers(client_id, client_secret)
     r = requests.get(url, headers = headers)
     raw = json.loads(r.text)
     data = []
-    # Get 5 tracks
+    # Get 5 tracks per search
     for i in range(5):
         songLink = raw['tracks']['items'][i]['external_urls']['spotify']
         songImage = raw['tracks']['items'][i]['album']['images'][0]['url']
@@ -81,4 +82,29 @@ def searchTrack(name):
         data.append({'songName': songName, 'songId': songId, 'albumName': albumName, 'artistName': artistName, 'artistId': artistId, 'image': songImage, 'link': songLink, 'duration': songLength})
     return data
 
-# Add more data : 
+"""
+Butter
+artist_id : 3Nrfpe0tUJi4K4DXYWgMUX
+track_id: 2bgTY4UwhfBYhGT4HUYStN
+"""
+
+# Get Audio Features of a track
+def getAudioFeatures(trackId):
+    url = "https://api.spotify.com/v1/audio-features/{}".format(trackId)
+    headers = get_headers(client_id, client_secret)
+    r = requests.get(url, headers = headers)
+    raw = json.loads(r.text)
+
+# Add tracks csv to the model
+def addToModel(file):
+    f = open('data.txt', 'r')  
+    for line in f:  
+        line =  line.split(';')  
+        product = Tracks()  
+        product.name = line[2] + '(' + line[1] + ')'  
+        product.description = line[4]  
+        product.price = '' #data is missing from file  
+        product.save()  
+
+    f.close()  
+

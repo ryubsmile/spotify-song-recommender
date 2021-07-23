@@ -17,6 +17,7 @@ for i in genre:
 # Home Page
 def index(request):
     if request.method == 'GET':
+        print(spotify.getAudioFeatures("2bgTY4UwhfBYhGT4HUYStN"))
         return render(request, 'recommender/index.html',
             {
             }
@@ -63,7 +64,7 @@ def result(request):
                     'data': data,
                 }
             )
-
+          
         if recType == "by-song":
             import re
 
@@ -74,7 +75,6 @@ def result(request):
 
             # access to the data like 
             # print(userSongs[0]["songId"])
-
             return render(request, 'recommender/result.html', 
                 {
                     'recType': recType,
