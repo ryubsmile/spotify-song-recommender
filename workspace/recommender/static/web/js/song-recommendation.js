@@ -82,14 +82,14 @@ function fillAutoComBox(autoComInfo, autoComCell){
     let time = minutes + ":" + seconds; // 230:19
 
     autoComCell.innerHTML = (
-        `<img src="${autoComInfo.image}">` +
-        `<song-info>` +
-            `<name>${autoComInfo.songName}</name>` +
-            `<artist>${autoComInfo.artistName}</artist>` + 
-        `</song-info>` +
-        `<length>${time}</length>` + 
-        `<input type="hidden" name="songId" value="${autoComInfo.songId}">` +
-        `<input type="hidden" name="artistId" value="${autoComInfo.artistId}">`
+       `<img src="${autoComInfo.image}">
+        <song-info>
+            <name>${autoComInfo.songName}</name>
+            <artist>${autoComInfo.artistName}</artist> 
+        </song-info>
+        <length>${time}</length> 
+        <input type="hidden" name="songId" value="${autoComInfo.songId}">
+        <input type="hidden" name="artistId" value="${autoComInfo.artistId}">`
     );
 
     autoComCell.setAttribute('onclick','select(this)'); //if each auto com is clicked, execute 'select' function
