@@ -4,9 +4,12 @@ from django.db import models
 Spotify Tracks data
 """
 class Tracks(models.Model):
+    app_label  = 'tracks'
+
     # Get Track info API
     track_id = models.IntegerField(default=0)
-    artist_id = models.IntegerField(default=0)
+    #artist_id = models.IntegerField(default=0)
+    artists = models.CharField(default = '', max_length = 200)
     year = models.IntegerField(default=0)
     popularity = models.IntegerField(default=0)
     release_date = models.IntegerField(default=0)
@@ -24,3 +27,4 @@ class Tracks(models.Model):
     tempo = models.FloatField(default=0)
     key = models.IntegerField(default=0)
     mode = models.IntegerField(default=0)
+
