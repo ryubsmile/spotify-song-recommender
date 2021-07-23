@@ -1,11 +1,14 @@
-let GENRE_DICT;
-let GENRE;
-let NUMBER_OF_TILES;
+let GENRE_DICT; // from the HTML file, get the genre list as dictionary
+let GENRE; // the genre user clicked on the previous page
+const NUMBER_OF_TILES = 6; // self-explanatory.
 
+
+// when html body is loaded, make tiles.
 window.onload = function(){
     renderTiles(NUMBER_OF_TILES);
 }
 
+// 
 function renderTiles(tileAmount){
     const randomIntArray = pickRandomIndices(GENRE.length, tileAmount);
 
