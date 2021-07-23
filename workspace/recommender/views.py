@@ -51,7 +51,8 @@ def reload(request):
 
 # Result Page
 def result(request):
-    if request.method == 'POST':
+    
+    if request.is_ajax and request.method == 'POST':
         recType = request.POST.get('rec-kind') # 'by-genre' or 'by-song'
         
         if recType == "by-genre":
@@ -64,22 +65,15 @@ def result(request):
                     'data': data,
                 }
             )
-          
+
         if recType == "by-song":
-            import re
-
-            rawUserSongs = request.POST.get('trackToSend')
-            userSongs = re.sub("},{", "}~{", rawUserSongs).split("~")
-            for i in range(len(userSongs)):
-                userSongs[i] = json.loads(userSongs[i])
-
-            # access to the data like 
-            # print(userSongs[0]["songId"])
+            # somehow get data 
+            
             return render(request, 'recommender/result.html', 
                 {
                     'recType': recType,
-                    # 'title' : some text 
-                    # 'data': data, 
+                    
+                    #'data': data, 
                 }
             )
         

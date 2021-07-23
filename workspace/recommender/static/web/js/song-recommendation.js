@@ -4,12 +4,11 @@ const suggBox = searchArea.querySelector('.autocom-box'); // the drop-down box f
 
 const selectArea= document.querySelector('.select-area'); // the whole area where selected songs are listed
 const selectBoxes = selectArea.querySelectorAll('li'); // each box that contains selected songs
-const selectForm = document.getElementById('fav-songs'); // form that sends user-selected songs to server
 
 // when body loads, 'setUpSuggBox' function is immediately called.
 window.onload = function(){
     setupSuggBox(); 
-};
+}
 
 /* <li> tags are created according to the 'NUMBER_OF_AUTOCOMS' variable.
 each tag is put inside the 'suggBox' element as a child */
@@ -34,7 +33,7 @@ searchBox.onkeyup = (e) => {
     }else{
         searchArea.classList.remove('active');
     }
-};
+}
 
 /* posts the parameter to the server to 'recommender/reload/' url. 
 1. csrfToken is issued to allow POST action
@@ -64,7 +63,7 @@ function postKeyword(userData){
 execute 'fillAutoComBox' function if the data responded is valid. */
 function showAutoComBoxes(autoComList){
     let autoComBoxes = suggBox.querySelectorAll('li');
-    if(autoComList !== undefined){
+    if(autoComList != undefined){
         for(var i = 0; i < Math.min(NUMBER_OF_AUTOCOMS, autoComList.length); i++){
             let autoComBox = autoComBoxes[i];
             let autoComInfo = autoComList[i];
@@ -117,37 +116,29 @@ function select(selfElement){
 
 //to send song id & artist id to server, which are needed to recommend songs. 
 let trackIds = [];
-var test;
 function submitForm(){
     let songInfo = selectArea.querySelectorAll("input[name='songId']");
     let artistInfo = selectArea.querySelectorAll("input[name='artistId']");
     for(var i = 0; i < NUMBER_OF_SELECTIONS; i++){
         if(songInfo[i]){
-            // using json
-            var info = {};
+            /*//using json
+            var info = new Object();
             info.songId = songInfo[i].value;
             info.artistId = artistInfo[i].value;
-            trackIds[i] = JSON.stringify(info);
+            trackIds[i] = JSON.stringify(info); //or just info
+            */
+            trackIds[i] = new Array(2);
+            trackIds[i][0] = songInfo[i].value;
+            trackIds[i][1] = artistInfo[i].value;
         }else{
-            alert('Not enough songs! Please fill in all the blanks.');
-            // redirect to the same page again
-            selectForm.action = "";
-            selectForm.method = "GET";
-            // remove all the inputs: so to hide possibly sensitive data
-            let inputTags = selectForm.querySelectorAll("input");
-            var j = 0;
-            while(inputTags[j] !== undefined){
-                inputTags[j++].remove();
-            }
-            
+            alert('not enough songs!');
             break;
         }
     }
-    let inputTag = document.getElementById('trackToSend');
+    let inputTag = document.getElementById('tracksToSend');
     inputTag.value = trackIds;
 }
 
-// correctly formats time 
 function add0(num){
     if(num < 10) return "0" + num;
     return num;
