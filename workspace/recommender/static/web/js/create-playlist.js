@@ -30,21 +30,21 @@ function createSingleSongCell(index){
 
     //draw html
     aSongRow.innerHTML = (
-        "<index>" + (index + 1) + "</index>" + 
-        "<div class=\"main\">" + 
-            "<img class=\"image\" src=\"" + playlist[index].image + "\">" +
-            "<song-info>" + 
-                "<name>" + playlist[index].songName + "</name>" +
-                "<artist>" + playlist[index].artistName + "</artist>" +
-            "</song-info>" +
-        "</div>" +
-        "<div class=\"album\">" + playlist[index].albumName + "</div>" + 
-        "<div class=\"length\">" + minutes + ":" + seconds + "</div>" +
-        "<div class=\"img\">" + 
-            "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + playlist[index].link + "\">" +
-            "<img class=\"play\" src=\"../../static/web/images/images.png\">" +
-            "</a>" +
-        "</div>"
+        `<index>${index + 1}</index>` + 
+        `<div class="main">` + 
+            `<img class="image" src="${playlist[index].image}">` +
+            `<song-info>` + 
+                `<name>${playlist[index].songName}</name>` +
+                `<artist>${playlist[index].artistName}</artist>` +
+            `</song-info>` +
+        `</div>` +
+        `<div class="album">${playlist[index].albumName}</div>` + 
+        `<div class="length">${minutes}:${seconds}</div>` +
+        `<div class="img">` + 
+            `<a target="_blank" rel="noopener noreferrer" href="${playlist[index].link}">` +
+            `<img class="play" src="../../static/web/images/images.png">` +
+            `</a>` +
+        `</div>`
     );
     //attribute for hover
     aSongRow.setAttribute('onmouseover', 'displayButton(this);');
