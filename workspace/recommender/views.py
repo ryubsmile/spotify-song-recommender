@@ -64,7 +64,7 @@ def result(request):
                     'data': data,
                 }
             )
-
+          
         if recType == "by-song":
             import re
 
@@ -75,7 +75,6 @@ def result(request):
 
             # access to the data like 
             # print(userSongs[0]["songId"])
-
             return render(request, 'recommender/result.html', 
                 {
                     'recType': recType,
