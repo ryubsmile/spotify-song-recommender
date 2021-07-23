@@ -76,16 +76,16 @@ function showAutoComBoxes(autoComList){
 /* using the search result data, update auto completion boxes
 by editing the inner HTML of each <li> tag. */
 function fillAutoComBox(autoComInfo, autoComCell){
-    let rawTime = autoComInfo["duration"]; // e.g. 230.3242 (min)
+    let rawTime = autoComInfo['duration']; // e.g. 230.3242 (min)
     let minutes = add0(Math.floor(rawTime)); // 230 min
     let seconds = add0(Math.floor((rawTime - minutes) * 60)); // 19s
     let time = minutes + ":" + seconds; // 230:19
 
     autoComCell.innerHTML = (
-        "<img src=\"" + autoComInfo["image"] + "\">" +
+        "<img src=\"" + autoComInfo['image'] + "\">" +
         "<song-info>" +
-            "<name>" + autoComInfo["songName"] + "</name>" +
-            "<artist>" + autoComInfo["artistName"] + "</artist>" + 
+            "<name>" + autoComInfo['songName'] + "</name>" +
+            "<artist>" + autoComInfo['artistName'] + "</artist>" + 
         "</song-info>" +
         "<length>" + time + "</length>" + 
         "<input type=\"hidden\" name=\"songId\" value=\"" + autoComInfo["songId"] + "\">" +
@@ -115,7 +115,7 @@ function select(selfElement){
     searchArea.classList.remove('active');
 }
 
-//to send song id & artist id to server, which are needed to recommend songs. 
+// to send song id & artist id to server, which are needed to recommend songs. 
 let trackIds = [];
 var test;
 function submitForm(){
@@ -128,7 +128,7 @@ function submitForm(){
             info.songId = songInfo[i].value;
             info.artistId = artistInfo[i].value;
             trackIds[i] = JSON.stringify(info);
-        }else{
+        }else{ // => not enough number of songs to run recommendation algo
             alert('Not enough songs! Please fill in all the blanks.');
             // redirect to the same page again
             selectForm.action = "";

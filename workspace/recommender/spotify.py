@@ -4,7 +4,7 @@ import os
 import base64
 import json
 import requests
-from models import Tracks
+from recommender.models import Tracks
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 ### Credentials for spotify api request
