@@ -5,6 +5,7 @@ import base64
 import json
 import requests
 from recommender.models import Tracks
+
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 ### Credentials for spotify api request
@@ -94,40 +95,5 @@ def getAudioFeatures(trackId):
     headers = get_headers(client_id, client_secret)
     r = requests.get(url, headers = headers)
     raw = json.loads(r.text)
-
-# Add tracks csv to the model: Called only once for database migration
-# ['valence,year,acousticness,artists,danceability,duration_ms,energy,explicit,id,instrumentalness,key,liveness,loudness,mode,name,popularity,release_date,speechiness,tempo\n']
-def addToModel():
-    f = open('/Users/sehwaryu/Documents/spotify-song-recommender/workspace/recommender/data.csv', 'r')  
-    cnt = 0
-    for line in f:  
-        if cnt > 5:
-            break
-        line =  line.split(',')  
-        product = Tracks()  
-        if cnt != 0:
-            print(line)
-            product.valence = line[0]
-            product.year = line[1]  
-            product.acousticness = line[2]  
-            product.artists = line[3]  
-            product.danceability = line[4]  
-            product.duration_ms = line[5]  
-            product.energy = line[6]  
-            product.explicit = line[7]  
-            product.id = line[8]  
-            product.instrumentalness = line[9]  
-            product.key = line[10]  
-            product.liveness = line[11]  
-            product.loudness = line[12]  
-            product.mode = line[13]  
-            product.name = line[14]  
-            product.release_date = line[15]  
-            product.speechiness = line[16]  
-            product.tempo = line[17]  
-            print('save done')
-        cnt += 1
-        product.save()  
-    f.close()
 
 

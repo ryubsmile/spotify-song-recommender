@@ -7,8 +7,7 @@ class Tracks(models.Model):
     app_label  = 'tracks'
 
     # Get Track info API
-    track_id = models.IntegerField(default=0)
-    #artist_id = models.IntegerField(default=0)
+    track_id = models.CharField(default = '', max_length = 200)
     artists = models.CharField(default = '', max_length = 200)
     year = models.IntegerField(default=0)
     popularity = models.IntegerField(default=0)
@@ -27,4 +26,6 @@ class Tracks(models.Model):
     tempo = models.FloatField(default=0)
     key = models.IntegerField(default=0)
     mode = models.IntegerField(default=0)
-
+    # Added
+    explicit = models.IntegerField(default=0)
+    track_name = models.CharField(default = '', max_length = 200)

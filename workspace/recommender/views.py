@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
-
 import sys
 import os
 import json
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 import spotify
+import upload
 
 genre = ['chill', 'pop', 'sleep', 'workout', 'party', 'summer', 'holidays', 'classical', 'ambient']
 genre_dict = {}
@@ -18,7 +18,7 @@ for i in genre:
 def index(request):
     if request.method == 'GET':
         #print(spotify.getAudioFeatures("2bgTY4UwhfBYhGT4HUYStN"))
-        #print(spotify.addToModel())
+        upload.addToModel()
         return render(request, 'recommender/index.html',
             {
             }
