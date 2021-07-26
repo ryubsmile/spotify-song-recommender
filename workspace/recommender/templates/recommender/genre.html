@@ -11,7 +11,7 @@
 
         <!-- javascript link -->
         <script src="{% static 'web/js/genre-recommendation.js' %}"></script>
-        <script src="{% static 'web/js/sender.js' %}"></script>
+        <script src="{% static 'web/js/genre-data-sender.js' %}"></script>
 
 
         <!-- favicon settings -->
@@ -24,13 +24,11 @@
         <title>Recommendations by Genre</title>
 
         <script>
-            INPUT_TAG_ID = 'input-send';
-            FORM_TAG_ID = 'tile-data';
+            
 
             //data receive
             GENRE_DICT = {{ genre_dict | safe }};
             GENRE = {{ genre | safe }};
-            NUMBER_OF_TILES = 6; 
             //edit as you update
         </script>
     </head>

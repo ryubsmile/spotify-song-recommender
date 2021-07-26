@@ -7,6 +7,7 @@ import json
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 import spotify
 import upload
+from recommendation import Recommendation
 
 genre = ['chill', 'pop', 'sleep', 'workout', 'party', 'summer', 'holidays', 'classical', 'ambient']
 genre_dict = {}
@@ -18,7 +19,8 @@ for i in genre:
 def index(request):
     if request.method == 'GET':
         #print(spotify.getAudioFeatures("2bgTY4UwhfBYhGT4HUYStN"))
-        upload.addToModel()
+        #upload.addToModel()
+        Recommendation().cluster()
         return render(request, 'recommender/index.html',
             {
             }
@@ -52,8 +54,7 @@ def reload(request):
 
 # Result Page
 def result(request):
-    
-    if request.is_ajax and request.method == 'POST':
+    if request.method == 'POST':
         recType = request.POST.get('rec-kind') # 'by-genre' or 'by-song'
         
         if recType == "by-genre":
@@ -66,15 +67,22 @@ def result(request):
                     'data': data,
                 }
             )
-
+          
         if recType == "by-song":
-            # somehow get data 
-            
+            import re
+
+            rawUserSongs = request.POST.get('trackToSend')
+            userSongs = re.sub("},{", "}~{", rawUserSongs).split("~")
+            for i in range(len(userSongs)):
+                userSongs[i] = json.loads(userSongs[i])
+
+            # access to the data like 
+            # print(userSongs[0]["songId"])
             return render(request, 'recommender/result.html', 
                 {
                     'recType': recType,
-                    
-                    #'data': data, 
+                    # 'title' : some text 
+                    # 'data': data, 
                 }
             )
         
