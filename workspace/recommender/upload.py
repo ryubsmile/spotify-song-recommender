@@ -1,8 +1,5 @@
 # Add tracks csv to the model: Called only once for database migration
 # ['valence,year,acousticness,artists,danceability,duration_ms,energy,explicit,id,instrumentalness,key,liveness,loudness,mode,name,popularity,release_date,speechiness,tempo\n']
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.http import JsonResponse
 import sys
 import os
 import pandas as pd
