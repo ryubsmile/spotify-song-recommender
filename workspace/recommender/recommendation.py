@@ -6,6 +6,7 @@ from collections import defaultdict
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import config
+import sqlite3
 
 # Libraries for recommendation
 from sklearn.cluster import KMeans
@@ -23,14 +24,26 @@ Recommendation algorithm based on the three tracks user requested
 class Recommendation:
     def __init__(self):
         # Read in data for test
-        self.df = pd.read_csv('/Users/sehwaryu/Documents/spotify-song-recommender/workspace/recommender/data.csv')
+        #self.df = pd.read_csv('/Users/sehwaryu/Documents/spotify-song-recommender/workspace/recommender/data.csv') 
+        con = sqlite3.connect("db.sqlite3")
+        df = pd.read_sql("SELECT * from recommender_tracks", con)
+        self.df = df
+        #self.df = self.connection()
+        #con.close()
         self.number_cols = ['valence', 'year', 'acousticness', 'danceability', 'duration_ms', 'energy', 'explicit',
  'instrumentalness', 'key', 'liveness', 'loudness', 'mode', 'popularity', 'speechiness', 'tempo']
         self.sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id= config.cid,
-                                                           client_secret=config.secret))
+                                                  client_secret=config.secret))
+    
+    # def connection(self):
+    #     con = sqlite3.connect("db.sqlite3")
+    #     df = pd.read_sql_query("SELECT * from recommender_tracks", con)
+    #     con.close()
+    #     return df
+
 
     def test(self):
-        # print(self.df.head())
+        #print(self.df.head())
         # print(self.find_song('BTS', 2021))
         print(self.recommend_songs([{'name': 'Butter', 'year': 2021},
                 {'name': 'Permission to Dance', 'year': 2021},
