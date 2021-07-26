@@ -20,7 +20,7 @@ def index(request):
     if request.method == 'GET':
         #print(spotify.getAudioFeatures("2bgTY4UwhfBYhGT4HUYStN"))
         #upload.addToModel()
-        Recommendation().cluster()
+        Recommendation().test()
         return render(request, 'recommender/index.html',
             {
             }
