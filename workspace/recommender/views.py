@@ -18,9 +18,6 @@ for i in genre:
 # Home Page
 def index(request):
     if request.method == 'GET':
-        #print(spotify.getAudioFeatures("2bgTY4UwhfBYhGT4HUYStN"))
-        #upload.addToModel()
-        Recommendation().test()
         return render(request, 'recommender/index.html',
             {
             }

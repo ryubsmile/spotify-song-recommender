@@ -97,3 +97,8 @@ def getAudioFeatures(trackId):
     raw = json.loads(r.text)
 
 
+def getRecommendation():
+    # recommend_songs([{'name': 'Butter', 'year': 2021},
+    # #             {'name': 'Permission to Dance', 'year': 2021},
+    # #             {'name': 'Dynamite', 'year': 2020}],  self.df)
+    pass

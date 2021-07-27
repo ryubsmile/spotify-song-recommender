@@ -23,54 +23,45 @@ Recommendation algorithm based on the three tracks user requested
 
 class Recommendation:
     def __init__(self):
-        # Read in data for test
-        #self.df = pd.read_csv('/Users/sehwaryu/Documents/spotify-song-recommender/workspace/recommender/data.csv') 
-        con = sqlite3.connect("db.sqlite3")
-        df = pd.read_sql("SELECT * from recommender_tracks", con)
-        self.df = df
-        #self.df = self.connection()
-        #con.close()
-        self.number_cols = ['valence', 'year', 'acousticness', 'danceability', 'duration_ms', 'energy', 'explicit',
- 'instrumentalness', 'key', 'liveness', 'loudness', 'mode', 'popularity', 'speechiness', 'tempo']
+        # Read in data from sqlite3 database
+        df = self.connection()
+        self.df = df.drop(['id'], axis = 1)
+        # Columns to use for clustering
+        self.number_cols = ['valence', 'year', 'acousticness', 'danceability', 'duration_ms', 'energy', 'explicit', 'instrumentalness', 'key', 'liveness', 'loudness', 'mode', 'popularity', 'speechiness', 'tempo']
+        # Spotify credentials request
         self.sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id= config.cid,
                                                   client_secret=config.secret))
     
-    # def connection(self):
-    #     con = sqlite3.connect("db.sqlite3")
-    #     df = pd.read_sql_query("SELECT * from recommender_tracks", con)
-    #     con.close()
-    #     return df
+    def connection(self):
+        """
+        Connects to database and retrieves the data in a dataframe format
+        """
+        con = sqlite3.connect("db.sqlite3")
+        df = pd.read_sql_query("SELECT * from recommender_tracks", con)
+        con.close()
+        return df
 
-
-    def test(self):
-        #print(self.df.head())
-        # print(self.find_song('BTS', 2021))
-        print(self.recommend_songs([{'name': 'Butter', 'year': 2021},
-                {'name': 'Permission to Dance', 'year': 2021},
-                {'name': 'Dynamite', 'year': 2020}],  self.df))
-        
-                                                
-    """
-    Perform cluster of the tracks data with Kmeans
-    - Divide the dataset into 20 clusters based on the tracks' features
-    """
     def cluster(self):
+        """
+        Performs cluster of the tracks data with Kmeans
+        - Divide the dataset into 20 clusters based on the tracks' features
+        """
         song_cluster_pipeline = Pipeline([('scaler', StandardScaler()), 
                                   ('kmeans', KMeans(n_clusters=20, 
                                    verbose=2, n_jobs=4))], verbose=True)
         X = self.df.select_dtypes(np.number)
         self.number_cols = list(X.columns)
         song_cluster_pipeline.fit(X)
-
         song_cluster_labels = song_cluster_pipeline.predict(X)
+        # Label each data with clustered result
         self.df['cluster_label'] = song_cluster_labels
         return song_cluster_pipeline
 
-    """
-    Find songs that are not in the dataset and return it as a dataframe form
-    """
-    def find_song(self, name, year):
     
+    def find_song(self, name, year):
+        """
+        Finds tracks that are not in the dataset and return it as a dataframe form
+        """
         song_data = defaultdict()
         results = self.sp.search(q= 'track: {} year: {}'.format(name,
                                                         year), limit=1)
@@ -93,11 +84,11 @@ class Recommendation:
         
         return pd.DataFrame(song_data)
 
-    """
-    Get the tracks' audio feature meta data from the dataframe
-    """
+    
     def get_song_data(self, song, track_data):
-        # Get the audio feature meta data from the dataframe
+        """
+        Get the tracks' audio feature meta data from the dataframe
+        """
         try:
             song_data = track_data[(track_data['name'] == song['name']) 
                                     & (track_data['year'] == song['year'])].iloc[0]
@@ -106,10 +97,11 @@ class Recommendation:
         except IndexError:
             return self.find_song(song['name'], song['year'])
 
-    """
-    Calculate the average vectors of each track
-    """
+    
     def get_mean_vector(self, song_list, track_data):
+        """
+        Calculates the mean vectors of every track
+        """
         song_vectors = []
         for song in song_list:
             # Retrieve aduio features of the input track
@@ -124,7 +116,9 @@ class Recommendation:
         return np.mean(song_matrix, axis=0)
     
     def flatten_dict_list(self, dict_list):
-    
+        """
+        Converts dictionary format into {name: ['name1', 'name2'], year: [2021, 2020]}
+        """
         flattened_dict = defaultdict()
         for key in dict_list[0].keys():
             flattened_dict[key] = []
@@ -136,7 +130,9 @@ class Recommendation:
         return flattened_dict
 
     def recommend_songs(self, song_list, track_data, n_songs=10):
-    
+        """
+        Executes recommendation engine
+        """
         metadata_cols = ['name', 'year', 'artists']
         song_dict = self.flatten_dict_list(song_list)        
         song_center = self.get_mean_vector(song_list, track_data)
