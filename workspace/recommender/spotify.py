@@ -5,7 +5,7 @@ import base64
 import json
 import requests
 from recommender.models import Tracks
-
+from recommendation import Recommendation
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 ### Credentials for spotify api request
@@ -97,8 +97,8 @@ def getAudioFeatures(trackId):
     raw = json.loads(r.text)
 
 
+# Get recommendation based on three songs
 def getRecommendation():
-    # recommend_songs([{'name': 'Butter', 'year': 2021},
-    # #             {'name': 'Permission to Dance', 'year': 2021},
-    # #             {'name': 'Dynamite', 'year': 2020}],  self.df)
-    pass
+    songs_data = ['2bgTY4UwhfBYhGT4HUYStN', '0LThjFY2iTtNdd4wviwVV2', '3AgMOlgdrG9RJXDWifcjVd']
+    rec = Recommendation()
+    return rec.recommend_songs(songs_data)

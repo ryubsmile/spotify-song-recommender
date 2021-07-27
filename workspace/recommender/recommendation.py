@@ -31,7 +31,7 @@ class Recommendation:
         # Spotify credentials request
         self.sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id= config.cid,
                                                   client_secret=config.secret))
-    
+
     def connection(self):
         """
         Connects to database and retrieves the data in a dataframe format
@@ -49,6 +49,7 @@ class Recommendation:
         song_cluster_pipeline = Pipeline([('scaler', StandardScaler()), 
                                   ('kmeans', KMeans(n_clusters=20, 
                                    verbose=2, n_jobs=4))], verbose=True)
+        # Select numerical features for training
         X = self.df.select_dtypes(np.number)
         self.number_cols = list(X.columns)
         song_cluster_pipeline.fit(X)
@@ -58,92 +59,69 @@ class Recommendation:
         return song_cluster_pipeline
 
     
-    def find_song(self, name, year):
+    def find_song(self, track_id):
         """
-        Finds tracks that are not in the dataset and return it as a dataframe form
+        Finds tracks that are not in the database and return it as a dataframe form
         """
         song_data = defaultdict()
-        results = self.sp.search(q= 'track: {} year: {}'.format(name,
-                                                        year), limit=1)
-        if results['tracks']['items'] == []:
-            return None
-        
-        results = results['tracks']['items'][0]
-
-        track_id = results['id']
-        audio_features = self.sp.audio_features(track_id)[0]
-        
-        song_data['name'] = [name]
-        song_data['year'] = [year]
+        results = self.sp.track(track_id)
+        audio_features = self.sp.audio_features(track_id)
+        song_data['name'] = [results['name']]
+        song_data['year'] = [int(results['album']['release_date'][0:4])]
         song_data['explicit'] = [int(results['explicit'])]
         song_data['duration_ms'] = [results['duration_ms']]
         song_data['popularity'] = [results['popularity']]
-        
-        for key, value in audio_features.items():
+        for key, value in audio_features[0].items():
             song_data[key] = value
+
+        # Need to add to the database as well
         
         return pd.DataFrame(song_data)
 
     
-    def get_song_data(self, song, track_data):
+    def get_song_data(self, track_id, track_data):
         """
         Get the tracks' audio feature meta data from the dataframe
         """
         try:
-            song_data = track_data[(track_data['name'] == song['name']) 
-                                    & (track_data['year'] == song['year'])].iloc[0]
+            song_data = track_data[(track_data['track_id'] == track_id)].iloc[0]
             return song_data
         # If the track data does not exist, search from spotify
         except IndexError:
-            return self.find_song(song['name'], song['year'])
+            return self.find_song(track_id)
 
-    
     def get_mean_vector(self, song_list, track_data):
         """
         Calculates the mean vectors of every track
         """
         song_vectors = []
-        for song in song_list:
+        for track_id in song_list:
             # Retrieve aduio features of the input track
-            song_data = self.get_song_data(song, track_data)
+            song_data = self.get_song_data(track_id, track_data)
             if song_data is None:
-                print('Warning: {} does not exist in Spotify or in database'.format(song['name']))
+                print('Warning: {} does not exist in Spotify or in database'.format(track_id))
                 continue
             song_vector = song_data[self.number_cols].values
             song_vectors.append(song_vector)  
         
         song_matrix = np.array(list(song_vectors))
         return np.mean(song_matrix, axis=0)
-    
-    def flatten_dict_list(self, dict_list):
-        """
-        Converts dictionary format into {name: ['name1', 'name2'], year: [2021, 2020]}
-        """
-        flattened_dict = defaultdict()
-        for key in dict_list[0].keys():
-            flattened_dict[key] = []
-        
-        for dictionary in dict_list:
-            for key, value in dictionary.items():
-                flattened_dict[key].append(value)
-                
-        return flattened_dict
 
-    def recommend_songs(self, song_list, track_data, n_songs=10):
+    def recommend_songs(self, song_list, n_songs=10):
         """
         Executes recommendation engine
+        Call this function to get recommendation
         """
+        # Return data features
         metadata_cols = ['name', 'year', 'artists']
-        song_dict = self.flatten_dict_list(song_list)        
-        song_center = self.get_mean_vector(song_list, track_data)
+        song_center = self.get_mean_vector(song_list, self.df)
         scaler = self.cluster().steps[0][1]     # song cluster pipeline
-        scaled_data = scaler.transform(track_data[self.number_cols])
+        scaled_data = scaler.transform(self.df[self.number_cols])
         scaled_song_center = scaler.transform(song_center.reshape(1, -1))
         distances = cdist(scaled_song_center, scaled_data, 'cosine')
         index = list(np.argsort(distances)[:, :n_songs][0])
         
-        rec_songs = track_data.iloc[index]
-        rec_songs = rec_songs[~rec_songs['name'].isin(song_dict['name'])]
+        rec_songs = self.df.iloc[index]
         return rec_songs[metadata_cols].to_dict(orient='records')
         
 
