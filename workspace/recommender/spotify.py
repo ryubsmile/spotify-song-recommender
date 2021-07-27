@@ -4,7 +4,8 @@ import os
 import base64
 import json
 import requests
-from models import Tracks
+from recommender.models import Tracks
+from recommendation import Recommendation
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 ### Credentials for spotify api request
@@ -95,16 +96,9 @@ def getAudioFeatures(trackId):
     r = requests.get(url, headers = headers)
     raw = json.loads(r.text)
 
-# Add tracks csv to the model
-def addToModel(file):
-    f = open('data.txt', 'r')  
-    for line in f:  
-        line =  line.split(';')  
-        product = Tracks()  
-        product.name = line[2] + '(' + line[1] + ')'  
-        product.description = line[4]  
-        product.price = '' #data is missing from file  
-        product.save()  
 
-    f.close()  
-
+# Get recommendation based on three songs
+def getRecommendation():
+    songs_data = ['2bgTY4UwhfBYhGT4HUYStN', '0LThjFY2iTtNdd4wviwVV2', '7iAgNZdotu40NwtoIWJHFe']
+    rec = Recommendation()
+    return rec.recommend_songs(songs_data)
