@@ -1,4 +1,3 @@
-import spotify
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
@@ -6,6 +5,8 @@ from django.http import JsonResponse
 import sys
 import os
 import json
+import spotify
+
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 genre = ['chill', 'pop', 'sleep', 'workout', 'party',
