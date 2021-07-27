@@ -88,8 +88,7 @@ function fillAutoComBox(autoComInfo, autoComCell){
             <artist>${autoComInfo.artistName}</artist> 
         </song-info>
         <length>${time}</length> 
-        <input type="hidden" name="songId" value="${autoComInfo.songId}">
-        <input type="hidden" name="artistId" value="${autoComInfo.artistId}">`
+        <input type="hidden" name="songId" value="${autoComInfo.songId}">`
     );
 
     autoComCell.setAttribute('onclick','select(this)'); //if each auto com is clicked, execute 'select' function
@@ -115,36 +114,24 @@ function select(selfElement){
     searchArea.classList.remove('active');
 }
 
-// to send song id & artist id to server, which are needed to recommend songs. 
+// to send song id &  to server, which are needed to recommend songs. 
 let trackIds = [];
-
-function submitForm(){
-    let songInfo = selectArea.querySelectorAll("input[name='songId']");
-    let artistInfo = selectArea.querySelectorAll("input[name='artistId']");
-    for(var i = 0; i < NUMBER_OF_SELECTIONS; i++){
-        if(songInfo[i]){ // => has something to fill in to the info object that is formatted to json in trackIds
-            // using json
-            var info = {};
-            info.songId = songInfo[i].value;
-            info.artistId = artistInfo[i].value;
-            trackIds[i] = JSON.stringify(info);
-        }else{ // => not enough number of songs to run recommendation algo
-            alert('Not enough songs! Please fill in all the blanks.');
-            // redirect to the same page again
-            selectForm.action = "";
-            selectForm.method = "GET";
-            // remove all the inputs: so to hide possibly sensitive data
-            let inputTags = selectForm.querySelectorAll("input");
-            var j = 0;
-            while(inputTags[j] !== undefined){
-                inputTags[j++].remove();
-            }
-            
-            break;
+const button = document.querySelector('button');
+button.onclick = (e) => {
+  let songInfo = selectArea.querySelectorAll("input[name='songId']");
+  for(var i = 0; i < NUMBER_OF_SELECTIONS; i++){
+      if(songInfo[i]){ // => has something to fill in to the info object that is formatted to json in trackIds
+          // using json
+          trackIds[i] = JSON.stringify(songInfo[i].value);
+      }else{ // => not enough number of songs to run recommendation algo
+          alert('Not enough songs! Please fill in all the blanks.');
+          // redirect to the same page again
+          e.preventDefault();
+          break;
         }
-    }
-    let inputTag = document.getElementById('trackToSend');
-    inputTag.value = trackIds;
+  }
+  let inputTag = document.getElementById('trackToSend');
+  inputTag.value = trackIds;
 }
 
 // correctly formats time 
