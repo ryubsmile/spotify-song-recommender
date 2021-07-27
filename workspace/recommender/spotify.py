@@ -99,6 +99,6 @@ def getAudioFeatures(trackId):
 
 # Get recommendation based on three songs
 def getRecommendation():
-    songs_data = ['2bgTY4UwhfBYhGT4HUYStN', '0LThjFY2iTtNdd4wviwVV2', '3AgMOlgdrG9RJXDWifcjVd']
+    songs_data = ['2bgTY4UwhfBYhGT4HUYStN', '0LThjFY2iTtNdd4wviwVV2', '7iAgNZdotu40NwtoIWJHFe']
     rec = Recommendation()
     return rec.recommend_songs(songs_data)

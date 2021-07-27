@@ -24,8 +24,7 @@ Recommendation algorithm based on the three tracks user requested
 class Recommendation:
     def __init__(self):
         # Read in data from sqlite3 database
-        df = self.connection()
-        self.df = df.drop(['id'], axis = 1)
+        self.df = self.connection()
         # Columns to use for clustering
         self.number_cols = ['valence', 'year', 'acousticness', 'danceability', 'duration_ms', 'energy', 'explicit', 'instrumentalness', 'key', 'liveness', 'loudness', 'mode', 'popularity', 'speechiness', 'tempo']
         # Spotify credentials request
@@ -38,6 +37,7 @@ class Recommendation:
         """
         con = sqlite3.connect("db.sqlite3")
         df = pd.read_sql_query("SELECT * from recommender_tracks", con)
+        df = df.drop(['id'], axis = 1)
         con.close()
         return df
 
@@ -98,14 +98,25 @@ class Recommendation:
         for track_id in song_list:
             # Retrieve aduio features of the input track
             song_data = self.get_song_data(track_id, track_data)
-            if song_data is None:
-                print('Warning: {} does not exist in Spotify or in database'.format(track_id))
-                continue
             song_vector = song_data[self.number_cols].values
             song_vectors.append(song_vector)  
         
         song_matrix = np.array(list(song_vectors))
         return np.mean(song_matrix, axis=0)
+
+    def song_features(self, track_id):
+        data = []
+        for id in track_id:
+            results = self.sp.track(id)
+            songName = results['name']
+            songLink = results['external_urls']['spotify']
+            songImage = results['images'][0]['url']
+            albumName = results['album']['name']
+            artistName = results['artists'][0]['name']
+            artistId = results['artists'][0]['id']
+            songLength = results['duration_ms'] / 60000
+            data.append({'songName': songName, 'songId': songId, 'albumName': albumName, 'artistName': artistName, 'artistId': artistId, 'image': songImage, 'link': songLink, 'duration': songLength})
+        return data
 
     def recommend_songs(self, song_list, n_songs=10):
         """
@@ -122,6 +133,8 @@ class Recommendation:
         index = list(np.argsort(distances)[:, :n_songs][0])
         
         rec_songs = self.df.iloc[index]
+        # Exclude tracks data in input
+        rec_songs = rec_songs[~rec_songs['track_id'].isin(song_list)]
         return rec_songs[metadata_cols].to_dict(orient='records')
         
 
