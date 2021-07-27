@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
-
 import sys
 import os
 import json
 import spotify
+import upload
+from recommendation import Recommendation
 
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
@@ -19,8 +20,11 @@ for i in genre:
 # Home Page
 def index(request):
     if request.method == 'GET':
-        print(spotify.getAudioFeatures("2bgTY4UwhfBYhGT4HUYStN"))
-        return render(request, 'recommender/index.html')
+        print(spotify.getRecommendation())
+        return render(request, 'recommender/index.html',
+                      {
+                      }
+                      )
 
 # Genre Page
 
@@ -80,11 +84,11 @@ def result(request):
                 userSongs[i] = json.loads(userSongs[i])
 
             # access to the data like
-            # print(userSongs[0]["songId"])
+            # print(userSongs[0])
             return render(request, 'recommender/result.html',
                           {
                               'recType': recType,
-                              # 'title' : "some text"
+                              # 'title' : some text
                               # 'data': data,
                           }
                           )
