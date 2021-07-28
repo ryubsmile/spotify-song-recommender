@@ -4,21 +4,19 @@ from django.http import JsonResponse
 import sys
 import os
 import json
+import re
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 import spotify
-import upload
-from recommendation import Recommendation
 
+# Genre kinds
 genre = ['chill', 'pop', 'sleep', 'workout', 'party', 'summer', 'holidays', 'classical', 'ambient']
 genre_dict = {}
 for i in genre:
     genre_dict[i] = 'web/images/{}.jpg'.format(i)
 
-
 # Home Page
 def index(request):
     if request.method == 'GET':
-        print(spotify.getRecommendation())
         return render(request, 'recommender/index.html',
             {
             }
@@ -67,20 +65,19 @@ def result(request):
             )
           
         if recType == "by-song":
-            import re
-
             rawUserSongs = request.POST.get('trackToSend')
             userSongs = re.sub("},{", "}~{", rawUserSongs).split("~")
             for i in range(len(userSongs)):
                 userSongs[i] = json.loads(userSongs[i])
 
-            # access to the data like 
-            print(userSongs[0])
+            # access to the data like
+            track_ids = [userSongs[0]['songId'], userSongs[1]['songId'], userSongs[2]['songId']]
+            data = spotify.getRecommendation(track_ids)
             return render(request, 'recommender/result.html', 
                 {
                     'recType': recType,
-                    # 'title' : some text 
-                    # 'data': data, 
+                    'title' : 'Recommendations',
+                    'data': data, 
                 }
             )
         
