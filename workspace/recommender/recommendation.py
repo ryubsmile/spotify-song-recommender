@@ -1,5 +1,3 @@
-import sys
-import os
 import pandas as pd
 import numpy as np
 from collections import defaultdict
@@ -14,7 +12,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import euclidean_distances
 from scipy.spatial.distance import cdist
-import difflib
 
 """
 Recommendation algorithm based on the three tracks user requested
@@ -33,7 +30,7 @@ class Recommendation:
 
     def connection(self):
         """
-        Connects to database and retrieves the data in a dataframe format
+        Connects to database and retrieves the data in a pandas dataframe format
         """
         con = sqlite3.connect("db.sqlite3")
         df = pd.read_sql_query("SELECT * from recommender_tracks", con)
@@ -43,7 +40,7 @@ class Recommendation:
 
     def cluster(self):
         """
-        Performs cluster of the tracks data with Kmeans
+        Performs cluster of the tracks data with Kmeans algorithm
         - Divide the dataset into 20 clusters based on the tracks' features
         """
         song_cluster_pipeline = Pipeline([('scaler', StandardScaler()), 
@@ -105,28 +102,31 @@ class Recommendation:
         return np.mean(song_matrix, axis=0)
 
     def song_features(self, track_id):
+        """
+        Retrieve tracks features of newly recommended tracks
+        """
         data = []
+        
         for id in track_id:
             results = self.sp.track(id)
             songName = results['name']
             songLink = results['external_urls']['spotify']
-            songImage = results['images'][0]['url']
+            songImage = results['album']['images'][0]['url']
             albumName = results['album']['name']
             artistName = results['artists'][0]['name']
             artistId = results['artists'][0]['id']
             songLength = results['duration_ms'] / 60000
-            data.append({'songName': songName, 'songId': songId, 'albumName': albumName, 'artistName': artistName, 'artistId': artistId, 'image': songImage, 'link': songLink, 'duration': songLength})
+            data.append({'songName': songName, 'albumName': albumName, 'artistName': artistName, 'artistId': artistId, 'image': songImage, 'link': songLink, 'duration': songLength})
         return data
 
     def recommend_songs(self, song_list, n_songs=10):
         """
         Executes recommendation engine
-        Call this function to get recommendation
+        Call this function to get recommendation result
         """
         # Return data features
-        metadata_cols = ['name', 'year', 'artists']
         song_center = self.get_mean_vector(song_list, self.df)
-        scaler = self.cluster().steps[0][1]     # song cluster pipeline
+        scaler = self.cluster().steps[0][1]
         scaled_data = scaler.transform(self.df[self.number_cols])
         scaled_song_center = scaler.transform(song_center.reshape(1, -1))
         distances = cdist(scaled_song_center, scaled_data, 'cosine')
@@ -135,6 +135,8 @@ class Recommendation:
         rec_songs = self.df.iloc[index]
         # Exclude tracks data in input
         rec_songs = rec_songs[~rec_songs['track_id'].isin(song_list)]
-        return rec_songs[metadata_cols].to_dict(orient='records')
+        track_ids = [i for i in rec_songs['track_id']]
+        rec_results = self.song_features(track_ids)
+        return rec_results
         
 

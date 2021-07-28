@@ -4,23 +4,19 @@ from django.http import JsonResponse
 import sys
 import os
 import json
-from . import spotify
-import upload
-from recommendation import Recommendation
-
+import re
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+import spotify
 
-genre = ['chill', 'pop', 'sleep', 'workout', 'party',
-         'summer', 'holidays', 'classical', 'ambient']
+# Genre kinds
+genre = ['chill', 'pop', 'sleep', 'workout', 'party', 'summer', 'holidays', 'classical', 'ambient']
 genre_dict = {}
 for i in genre:
     genre_dict[i] = 'web/images/{}.jpg'.format(i)
 
-
 # Home Page
 def index(request):
     if request.method == 'GET':
-        print(spotify.getRecommendation())
         return render(request, 'recommender/index.html',
                       {
                       }
@@ -67,28 +63,30 @@ def result(request):
         if recType == "by-genre":  # came from 'recommender/by-genre/'
             tile = request.POST.get('genre').lower()
             data = spotify.getPlaylist(tile)
-            return render(request, 'recommender/result.html',
-                          {
-                              'recType': recType,
-                              'title': tile,
-                              'data': data,
-                          }
-                          )
-        if recType == "by-song":  # came from 'recommender/by-song/'
-            import re
-            rawUserSongs = request.POST.get('trackToSend')  # raw data
-            print(rawUserSongs)
-            userSongs = re.sub("},{", "}~{", rawUserSongs).split(
-                "~")  # parse data to usable format
+            return render(request, 'recommender/result.html', 
+                {
+                    'recType': recType,
+                    'title': tile,
+                    'data': data,
+                }
+            )
+          
+        if recType == "by-song":
+            rawUserSongs = request.POST.get('trackToSend')
+            userSongs = re.sub("},{", "}~{", rawUserSongs).split("~")
             for i in range(len(userSongs)):
                 userSongs[i] = json.loads(userSongs[i])
 
             # access to the data like
-            # print(userSongs[0])
-            return render(request, 'recommender/result.html',
-                          {
-                              'recType': recType,
-                              # 'title' : some text
-                              # 'data': data,
-                          }
-                          )
+            track_ids = [userSongs[0]['songId'], userSongs[1]['songId'], userSongs[2]['songId']]
+            data = spotify.getRecommendation(track_ids)
+            return render(request, 'recommender/result.html', 
+                {
+                    'recType': recType,
+                    'title' : 'Recommendations',
+                    'data': data, 
+                }
+            )
+        
+        
+        
