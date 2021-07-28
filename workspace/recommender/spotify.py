@@ -1,10 +1,9 @@
-import config
+from . import config
 import sys
 import os
 import base64
 import json
 import requests
-from recommender.models import Tracks
 from recommendation import Recommendation
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 

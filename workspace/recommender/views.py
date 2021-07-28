@@ -4,7 +4,7 @@ from django.http import JsonResponse
 import sys
 import os
 import json
-import spotify
+from . import spotify
 import upload
 from recommendation import Recommendation
 
