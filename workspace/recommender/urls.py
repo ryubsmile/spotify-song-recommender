@@ -1,6 +1,11 @@
-from django.urls import path
-
 from . import views
+from django.urls import path
+import sys
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BASE_DIR)
+
 
 urlpatterns = [
     path('', views.index, name='index'),

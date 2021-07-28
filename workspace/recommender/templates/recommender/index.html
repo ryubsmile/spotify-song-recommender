@@ -1,52 +1,64 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- css link -->
-        <link rel="stylesheet" type="text/css" href="{% static 'web/css/style-index.css' %}">
+    <!-- css link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'web/css/style-index.css' %}">
 
-        <!-- javascript link -->
-        <!-- <script src="{% static 'web/js/sender.js' %}"></script> -->
+    <!-- javascript link -->
+    <!-- <script src="{% static 'web/js/sender.js' %}"></script> -->
 
-        <!-- favicon settings -->
-        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/images/favicon-32x32.png' %}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/images/favicon-16x16.png' %}">
-        <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}">
-        <!-- favicon settings end -->
-        
-        <title>Spotify Song Recommender</title>
+    <!-- favicon settings -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/images/favicon-16x16.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}">
+    <!-- favicon settings end -->
+    
+    <title>Spotify Song Recommender</title>
 
-        <script>
-        </script>
-    </head>
-    <body>
-        <!-- start of header -->
-        <header>
-            <h1>Song Recommender</h1>
-            <h2>Get Recommendations Based on </h2>
-        </header>
-        <!-- end of header -->
+    <script>
+    </script>
+  </head>
+  <body>
+    <!-- start of header -->
+    <header>
+      <h1>Song Recommender</h1>
+      <h2>Get Recommendations Based on </h2>
+    </header>
+    <!-- end of header -->
 
-        <!-- start of main container -->
-        <div class="container">
-            <div id="choice-container">
-                <a href="by-song/">
-                    <div class="tile">
-                        Song
-                    </div>
-                </a>
-                <a href="by-genre/">
-                    <div class="tile">
-                        Genre
-                    </div>
-                </a>
-            </div>
-        </div>
-        <!-- end of main container -->
-    </body>
+    <!-- start of main container -->
+    <div class="container">
+      <div id="choice-container">
+        <a href="by-song/">
+          <div class="tile" onmouseover="toggleAlpha(this);" onmouseout="toggleAlpha(this);" style="background-image: url({% static 'web/images/bySong.jpeg' %})">
+            Song
+          </div>
+        </a>
+        <a href="by-genre/">
+          <div class="tile" onmouseover="toggleAlpha(this);" onmouseout="toggleAlpha(this);" style="background-image: url({% static 'web/images/byGenre.jpeg' %})">
+            Genre
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- end of main container -->
+    <footer style="padding-bottom: 30px;">
+      <a style="text-decoration: none;" href="https://github.com/ryubsmile/spotify-song-recommender" target="_blank" rel="noopener noreferrer">
+        <img src="{% static 'web/images/github.png'%}" height="30px">
+      </a>
+      <img src="{% static 'web/images/spotify.png'%}" height="30px" />
+    </footer>
+
+    <script>
+      function toggleAlpha(selfElement){
+        selfElement.id = (selfElement.id === "")? "highlighted" : "";
+      }
+    </script>
+  </body>
 </html>

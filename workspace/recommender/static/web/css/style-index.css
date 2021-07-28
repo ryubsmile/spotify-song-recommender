@@ -80,10 +80,6 @@ html, body, div {
     font-family: 'Spotify', Helvetica, sans-serif;
 }
 
-div, h1, header{
-    /* border: 1px solid orange; */
-}
-
 h1, h2{
     margin: 0;
 }
@@ -107,6 +103,7 @@ header{
 a{
     text-decoration: none;
     color: inherit;
+    z-index: 2;
 }
 
 div#choice-container{
@@ -119,15 +116,51 @@ div#choice-container{
     gap: 30px;
 }
 
-div.tile{
-    font-family: 'verdana', 'arial', sans-serif;
-    width: 100%;
-    height: 100%;
-    background-color: gray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.tile{
+  font-family: 'verdana', 'arial', sans-serif;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; 
+  font-size: 30pt;
+  color: #FFF;
+  z-index: 1;
+  position: relative;
+  color: white;
 }
+
+:root{
+  --image-alpha: rgba(0,0,0, 0.7);
+  --image-alpha-recover: rgba(0,0,0,0.3);
+}
+
+div.tile::before{
+  z-index: -1;
+  position: absolute;
+  top: 0px; bottom: 0px; left: 0px; right: 0px; 
+  content: "";
+  background-color: var(--image-alpha);
+}
+
+div.tile#highlighted{
+  animation: change-bg-size 0.7s forwards;
+  animation-fill-mode: forwards;
+}
+@keyframes change-bg-size {
+  0%{ background-size: auto 100%;}
+  100%{ background-size: auto 110%;}
+}
+
+div.tile#highlighted::before{
+  animation: change-alpha 1s forwards;
+  animation-fill-mode: forwards;
+}
+@keyframes change-alpha { 100%{background-color: var(--image-alpha-recover);}}
+
 
 @media(max-width: 600px){
     div#choice-container{

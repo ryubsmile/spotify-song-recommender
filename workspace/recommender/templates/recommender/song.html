@@ -54,9 +54,14 @@
                     <li></li>
                     <li></li>
                     <li></li>
-                </div>
+                  </div>
+                <li id="submit-button">
+                  <a href="genre.html">
+                    Go!
+                  </a>
+                </li>
                 <!-- submit form -->
-                <button>submit</button> 
+                <!-- <button>submit</button>  -->
                 <!-- cookie validator -->
                 {%csrf_token%}
                 <!-- value to send -->
@@ -64,9 +69,13 @@
                 <input type="hidden" name="rec-kind" value="by-song">
             </form>
         </div>
-
+        <footer style="padding-bottom: 30px;">
+          <a style="text-decoration: none;" href="https://github.com/ryubsmile/spotify-song-recommender" target="_blank" rel="noopener noreferrer">
+            <img src="{% static 'web/images/github.png'%}" height="30px">
+          </a>
+          <img src="{% static 'web/images/spotify.png'%}" height="30px" />
+        </footer>
             <!-- javascript link -->
             <script src="{% static 'web/js/song-recommendation.js' %}"></script>
-            <script src="{% static 'web/js/auto-completion.js' %}"></script>
         </body>
         </html>

@@ -116,7 +116,7 @@ function select(selfElement){
 
 // to send song id &  to server, which are needed to recommend songs. 
 let trackIds = [];
-const button = document.querySelector('button');
+const button = document.getElementById('submit-button');
 
 button.onclick = (e) => {
   let songInfo = selectArea.querySelectorAll("input[name='songId']");

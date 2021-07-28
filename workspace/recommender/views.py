@@ -72,14 +72,13 @@ def result(request):
             )
           
         if recType == "by-song":
-            rawUserSongs = request.POST.get('trackToSend')
-            userSongs = re.sub("},{", "}~{", rawUserSongs).split("~")
+            rawUserSongs = (request.POST.get('trackToSend'))
+            userSongs = rawUserSongs.split(",")
             for i in range(len(userSongs)):
                 userSongs[i] = json.loads(userSongs[i])
 
             # access to the data like
-            track_ids = [userSongs[0]['songId'], userSongs[1]['songId'], userSongs[2]['songId']]
-            data = spotify.getRecommendation(track_ids)
+            data = spotify.getRecommendation(userSongs)
             return render(request, 'recommender/result.html', 
                 {
                     'recType': recType,

@@ -88,6 +88,8 @@ div, h1, header{
 
 header{
     height: 190px;
+    text-align: left;
+    padding-left: 8vw;
 }
 
 h1, h2{
@@ -110,6 +112,7 @@ div.container{
     display: grid;
     grid-template-columns: 5fr 4fr;
     font-family: 'verdana', 'arial', sans-serif;
+    padding-bottom: 50px;
 }
 
 div.search-area{
@@ -151,7 +154,6 @@ div.search-area.active div.autocom-box{
 
 li{
     list-style: none;
-    padding: 9px;
     cursor: default;
     display: grid;
     grid-template-columns: 53px 1fr 50px;
@@ -159,6 +161,7 @@ li{
     color: #FFFFFFAA;
     font-family: verdana, sans-serif;
     font-weight: 400;
+    padding: 9px;
     border-radius: 7px;
     margin-top: 10px;
   }
@@ -204,9 +207,6 @@ length{
     margin: auto 10px auto 0;
 }
 
-div.select-area{
-}
-
 div.select-area li{
     height: 45px;
     width: 80%;
@@ -214,4 +214,25 @@ div.select-area li{
     margin-top: 4px;
     background-color: #FFFFFF11;
     /* display: none; */
+}
+
+li#submit-button {
+  display: block;
+  background-color: purple;
+  height: 45px;
+  width: 40%;
+  margin-left: 20%;
+  margin-right: auto;
+  margin-bottom: 30px;
+  margin-top: 4px;
+  font-size: 15pt;
+}
+
+#submit-button a{
+  height: 100%; 
+  width: 100%; 
+  line-height: 40px;
+  display: block; 
+  text-decoration: none; 
+  color: black;
 }
