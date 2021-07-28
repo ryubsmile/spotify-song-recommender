@@ -4,9 +4,8 @@ import os
 import base64
 import json
 import requests
-from recommender.models import Tracks
-from recommendation import Recommendation
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+from recommendation import Recommendation
 
 ### Credentials for spotify api request
 client_id = config.cid
@@ -78,24 +77,9 @@ def searchTrack(search):
         songId = raw['tracks']['items'][i]['id']
         albumName = raw['tracks']['items'][i]['album']['name']
         artistName = raw['tracks']['items'][i]['artists'][0]['name']
-        artistId = raw['tracks']['items'][i]['artists'][0]['id']
         songLength = raw['tracks']['items'][i]['duration_ms'] / 60000
-        data.append({'songName': songName, 'songId': songId, 'albumName': albumName, 'artistName': artistName, 'artistId': artistId, 'image': songImage, 'link': songLink, 'duration': songLength})
+        data.append({'songName': songName, 'songId': songId, 'albumName': albumName, 'artistName': artistName, 'image': songImage, 'link': songLink, 'duration': songLength})
     return data
-
-"""
-Butter
-artist_id : 3Nrfpe0tUJi4K4DXYWgMUX
-track_id: 2bgTY4UwhfBYhGT4HUYStN
-"""
-
-# Get Audio Features of a track
-def getAudioFeatures(trackId):
-    url = "https://api.spotify.com/v1/audio-features/{}".format(trackId)
-    headers = get_headers(client_id, client_secret)
-    r = requests.get(url, headers = headers)
-    raw = json.loads(r.text)
-
 
 # Get recommendation based on three songs
 def getRecommendation(songs_data):

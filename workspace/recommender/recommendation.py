@@ -1,5 +1,3 @@
-import sys
-import os
 import pandas as pd
 import numpy as np
 from collections import defaultdict
@@ -14,7 +12,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import euclidean_distances
 from scipy.spatial.distance import cdist
-import difflib
 
 """
 Recommendation algorithm based on the three tracks user requested
@@ -33,7 +30,7 @@ class Recommendation:
 
     def connection(self):
         """
-        Connects to database and retrieves the data in a dataframe format
+        Connects to database and retrieves the data in a pandas dataframe format
         """
         con = sqlite3.connect("db.sqlite3")
         df = pd.read_sql_query("SELECT * from recommender_tracks", con)
@@ -43,7 +40,7 @@ class Recommendation:
 
     def cluster(self):
         """
-        Performs cluster of the tracks data with Kmeans
+        Performs cluster of the tracks data with Kmeans algorithm
         - Divide the dataset into 20 clusters based on the tracks' features
         """
         song_cluster_pipeline = Pipeline([('scaler', StandardScaler()), 
@@ -125,12 +122,11 @@ class Recommendation:
     def recommend_songs(self, song_list, n_songs=10):
         """
         Executes recommendation engine
-        Call this function to get recommendation
+        Call this function to get recommendation result
         """
         # Return data features
-        metadata_cols = ['name', 'year', 'artists']
         song_center = self.get_mean_vector(song_list, self.df)
-        scaler = self.cluster().steps[0][1]     # song cluster pipeline
+        scaler = self.cluster().steps[0][1]
         scaled_data = scaler.transform(self.df[self.number_cols])
         scaled_song_center = scaler.transform(song_center.reshape(1, -1))
         distances = cdist(scaled_song_center, scaled_data, 'cosine')
