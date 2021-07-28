@@ -105,17 +105,21 @@ class Recommendation:
         return np.mean(song_matrix, axis=0)
 
     def song_features(self, track_id):
+        """
+        Retrieve tracks features of newly recommended tracks
+        """
         data = []
+        
         for id in track_id:
             results = self.sp.track(id)
             songName = results['name']
             songLink = results['external_urls']['spotify']
-            songImage = results['images'][0]['url']
+            songImage = results['album']['images'][0]['url']
             albumName = results['album']['name']
             artistName = results['artists'][0]['name']
             artistId = results['artists'][0]['id']
             songLength = results['duration_ms'] / 60000
-            data.append({'songName': songName, 'songId': songId, 'albumName': albumName, 'artistName': artistName, 'artistId': artistId, 'image': songImage, 'link': songLink, 'duration': songLength})
+            data.append({'songName': songName, 'albumName': albumName, 'artistName': artistName, 'artistId': artistId, 'image': songImage, 'link': songLink, 'duration': songLength})
         return data
 
     def recommend_songs(self, song_list, n_songs=10):
@@ -135,6 +139,8 @@ class Recommendation:
         rec_songs = self.df.iloc[index]
         # Exclude tracks data in input
         rec_songs = rec_songs[~rec_songs['track_id'].isin(song_list)]
-        return rec_songs[metadata_cols].to_dict(orient='records')
+        track_ids = [i for i in rec_songs['track_id']]
+        rec_results = self.song_features(track_ids)
+        return rec_results
         
 

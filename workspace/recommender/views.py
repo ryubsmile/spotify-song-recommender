@@ -18,7 +18,7 @@ for i in genre:
 # Home Page
 def index(request):
     if request.method == 'GET':
-        print(spotify.getRecommendation())
+        #print(spotify.getRecommendation())
         return render(request, 'recommender/index.html',
             {
             }
@@ -74,13 +74,14 @@ def result(request):
             for i in range(len(userSongs)):
                 userSongs[i] = json.loads(userSongs[i])
 
-            # access to the data like 
-            print(userSongs[0])
+            # access to the data like
+            track_ids = [userSongs[0]['songId'], userSongs[1]['songId'], userSongs[2]['songId']]
+            data = spotify.getRecommendation(track_ids)
             return render(request, 'recommender/result.html', 
                 {
                     'recType': recType,
-                    # 'title' : some text 
-                    # 'data': data, 
+                    'title' : 'Recommendations',
+                    'data': data, 
                 }
             )
         
