@@ -4,8 +4,8 @@ import os
 import base64
 import json
 import requests
-from recommendation import Recommendation
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+from recommendation import Recommendation
 
 # Credentials for spotify api request
 client_id = config.cid
