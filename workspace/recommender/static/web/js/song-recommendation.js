@@ -112,6 +112,10 @@ function select(selfElement){
     
     searchBox.value = "";
     searchArea.classList.remove('active');
+
+    if(numOfSelections === 3){
+      button.className += 'popup';
+    }
 }
 
 // to send song id &  to server, which are needed to recommend songs. 
@@ -128,11 +132,13 @@ button.onclick = (e) => {
           alert('Not enough songs! Please fill in all the blanks.');
           // redirect to the same page again
           e.preventDefault();
-          break;
+          return;
         }
   }
   let inputTag = document.getElementById('trackToSend');
   inputTag.value = trackIds;
+  loading();
+  selectForm.submit();
 }
 
 // correctly formats time 
@@ -157,3 +163,26 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+
+
+const loading = () => {
+  document.querySelector('#container').style.opacity = "0.3";
+  document.querySelector('.loading').style.display= "block";
+  document.querySelector('.loading-group').style.display= "block";
+
+  const loadBars = document.querySelectorAll('.load-bar');
+  
+  let i = 0;
+
+  let stopper = setInterval(() => {
+    loadBars[i].style.left = 50 * i + "px";
+    makeJump(loadBars[i++]);
+    if(i >= loadBars.length){ clearInterval(stopper); }
+  },(i===1)?500:100);
+
+}
+
+const makeJump = element => {
+  element.className += " jump"
+};
