@@ -1,58 +1,61 @@
-function setGenreFirstLetterCap(){
-    target = document.getElementById('genre');
-    genre = genre.replace(genre[0], genre[0].toUpperCase());
-    target.textContent = genre;
+function setTitleFirstLetterCap(){
+    title = title.replace(title[0], title[0].toUpperCase());
+    target = document.getElementById('title');
+    target.textContent = title;
 }
 
-function createSingleSongCell(index){
-    
-    //the row
-    var aSongRow = document.createElement('div');
-    aSongRow.className = 'a-song song-cell';
-    var target = document.getElementById('result');
-    hr = document.createElement('hr');
-    target.appendChild(aSongRow);
-    target.appendChild(hr);
-
-    var rawTime = playlist[index]["duration"];
-    var minutes = add0(Math.floor(rawTime));
-    var seconds = add0(Math.floor((rawTime - minutes) * 60));
-
-    //draw html
-    aSongRow.innerHTML = (
-        "<index>" + (index + 1) + "</index>" + 
-        "<div class=\"main\">" + 
-            "<img class=\"image\" src=\"" + playlist[index]["image"] + "\">" +
-            "<song-info>" + 
-                "<name>" + playlist[index]["songName"] + "</name>" +
-                "<artist>" + playlist[index]["artistName"] + "</artist>" +
-            "</song-info>" +
-        "</div>" +
-        "<div class=\"album\">" + playlist[index]["albumName"] + "</div>" + 
-        "<div class=\"length\">" + minutes + ":" + seconds + "</div>" +
-        "<div class=\"img\">" + 
-            "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + playlist[index]["link"] + "\">" +
-            "<img class=\"play\" src=\"../../static/web/images/images.png\">" +
-            "</a>" +
-        "</div>"
-    );
-    //attribute for hover
-    aSongRow.setAttribute('onmouseover', 'displayButton(this);');
-    aSongRow.setAttribute('onmouseout', 'hideButton(this);');
-    aSongRow.setAttribute('onclick', 'selectedRow(this);')
-}
-
-function add0(num){
-    if(num < 10){
-        return "0" + num;
-    }
-    return num;
-}
-
+// create n=playlist.length song rows 
 function createPlaylist(){
     for(var i = 0; i < playlist.length; i++){
         createSingleSongCell(i);
     }
+}
+
+// creates a single row for the song in a playlist data
+function createSingleSongCell(index){
+    // the row
+    var aSongRow = document.createElement('div');
+    aSongRow.className = 'a-song song-cell';
+
+    // a small line that gives space between displayed songs
+    var hr = document.createElement('hr');
+    //
+    var target = document.getElementById('result');
+    target.appendChild(aSongRow);
+    target.appendChild(hr);
+
+    let rawTime = playlist[index].duration;
+    let minutes = add0(Math.floor(rawTime));
+    let seconds = add0(Math.floor((rawTime - minutes) * 60));
+
+    //draw html
+    aSongRow.innerHTML = (
+       `<index>${index + 1}</index>
+        <div class="main">
+            <img class="image" src="${playlist[index].image}">
+            <song-info>
+                <name>${playlist[index].songName}</name>
+                <artist>${playlist[index].artistName}</artist>
+            </song-info>
+        </div>
+        <div class="album">${playlist[index].albumName}</div> 
+        <div class="length">${minutes}:${seconds}</div>
+        <div class="img"> 
+            <a target="_blank" rel="noopener noreferrer" href="${playlist[index].link}">
+                <img class="play" src="../../static/web/images/images.png">
+            </a>
+        </div>`
+    );
+    //attribute for hover
+    aSongRow.setAttribute('onmouseover', 'displayButton(this);');
+    aSongRow.setAttribute('onmouseout', 'hideButton(this);');
+    //if selected, make it brighter
+    aSongRow.setAttribute('onclick', 'selectedRow(this);');
+}
+
+function add0(num){
+    if(num < 10) return "0" + num;
+    return num;
 }
 
 //show button on mouse over
@@ -74,12 +77,11 @@ function selectedRow(rowSelected){
 
     //null check, for initial none-selected.
     if(rowSelectedBefore !== null){ 
-        //row before loses the id
+        //'row before' loses the id,
+        // and its button gets hidden
         rowSelectedBefore.id = '';
-        //and its button gets hidden
         hideButton(rowSelectedBefore); 
     }
-
     //for the case of same row getting clicked again, lose (not gain) its property.
     if(rowSelected !== rowSelectedBefore){
         rowSelected.id = 'selected';

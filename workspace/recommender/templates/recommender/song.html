@@ -1,72 +1,93 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- css link -->
-        <link rel="stylesheet" type="text/css" href="{% static 'web/css/style-song.css' %}">
-        
-        <!-- favicon settings -->
-        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/images/favicon-32x32.png' %}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/images/favicon-16x16.png' %}">
-        <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}">
-        <!-- favicon settings end -->
-        
-        <title>Recommendations Based On Your Picks</title>
+    <!-- css link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'web/css/style-song.css' %}">
 
-        <script>
+    <!-- favicon settings -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'web/images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'web/images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'web/images/favicon-16x16.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}">
+    <!-- favicon settings end -->
 
-        </script>
-    </head>
-    <body>
-        <!-- start of header -->
-        <header>
-            <h1>Choose By Your Favorite Songs</h1>
-            <h2>Search and Pick 3 Songs You Like</h2>
-        </header>
-        <!-- end of header -->
-        
-        <!-- main container -->
-        <div class="container">
-            <div class="search-area">
-                <!-- search input -->
-                <input 
-                type="search" 
-                name="search" 
-                id="search"
-                placeholder="Maroon 5 Sugar"
-                spellcheck="false"
-                autocomplete="off"
-                autofocus="true"
-                >
-                <!-- cookie validator -->
-                <div class="autocom-box"> 
-                    <!-- dynamic auto completion is done here via js -->
-                </div>
-            </div>
-            <form id="fav-songs" action="../result/" method="POST">
-                <!-- chosen songs are inserted to these <li> tags via select(this) function-->
-                <div class="select-area">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </div>
-                <!-- submit form -->
-                <button onclick="submitForm()">submit</button> 
-                <!-- cookie validator -->
-                {%csrf_token%}
-                <!-- value to send -->
-                <input type="hidden" name="trackToSend" id="trackToSend">
-                <input type="hidden" name="rec-kind" value="by-song">
-            </form>
+    <title>Recommendations Based On Your Picks</title>
+  </head>
+  <body>
+    <style id="style">
+      #container{
+        transition: 0.3s opacity;
+      }
+    </style>
+    <div id="container">
+
+      <!-- start of header -->
+      <header>
+        <h1>Choose By Your Favorite Songs</h1>
+        <h2>Search and Pick 3 Songs You Like</h2>
+      </header>
+      <!-- end of header -->
+  
+      <!-- main container -->
+      <div class="container">
+        <div class="search-area">
+          <!-- search input -->
+          <input 
+          type="search" 
+          name="search" 
+          id="search"
+          placeholder="Maroon 5 Sugar"
+          spellcheck="false"
+          autocomplete="off"
+          autofocus="true"
+          >
+          <!-- cookie validator -->
+          <div class="autocom-box"> 
+          <!-- dynamic auto completion is done here via js -->
+          </div>
         </div>
+        <form id="fav-songs" action="../result/" method="POST">
+          <!-- chosen songs are inserted to these <li> tags via select(this) function-->
+          <div class="select-area">
+            <li></li>
+            <li></li>
+            <li></li>
+          </div>
+          <li id="submit-button">
+            <a href="javascript:void(0);">
+              Go!
+            </a>
+          </li>
+          <!-- submit form -->
+          <!-- <button>submit</button>  -->
+          <!-- cookie validator -->
+          {%csrf_token%}
+          <!-- value to send -->
+          <input type="hidden" name="trackToSend" id="trackToSend">
+          <input type="hidden" name="rec-kind" value="by-song">
+        </form>
+      </div>
+      <footer style="padding-bottom: 30px;">
+      <a style="text-decoration: none;" href="https://github.com/ryubsmile/spotify-song-recommender" target="_blank" rel="noopener noreferrer">
+      <img src="{% static 'web/images/github.png'%}" height="30px">
+      </a>
+      <img src="{% static 'web/images/spotify.png'%}" height="30px" />
+      </footer>
+    </div>
 
-            <!-- javascript link -->
-            <script src="{% static 'web/js/song-recommendation.js' %}"></script>
-            <script src="{% static 'web/js/auto-completion.js' %}"></script>
-        </body>
-        </html>
+    <div class="loading">Calculating based on your choices ... </div>
+    <div class="loading-group">
+      <div class="load-bar bar1"></div>
+      <div class="load-bar bar2"></div>
+      <div class="load-bar bar3"></div>
+      <div class="load-bar bar4"></div>
+    </div>
+    <!-- javascript link -->
+    <script src="{% static 'web/js/song-recommendation.js' %}"></script>
+  </body>
+</html>

@@ -24,8 +24,6 @@
         <title>Recommendations by Genre</title>
 
         <script>
-            
-
             //data receive
             GENRE_DICT = {{ genre_dict | safe }};
             GENRE = {{ genre | safe }};
@@ -60,5 +58,11 @@
             </form>
         </div>
         <!-- end of main container -->
+          <footer style="padding-bottom: 30px;">
+            <a style="text-decoration: none; width: max-content; display: inline" href="https://github.com/ryubsmile/spotify-song-recommender" target="_blank" rel="noopener noreferrer">
+              <img src="{% static 'web/images/github.png'%}" height="30px">
+            </a>
+            <img src="{% static 'web/images/spotify.png'%}" height="30px" />
+          </footer>
     </body>
 </html>

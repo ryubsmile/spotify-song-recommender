@@ -7,15 +7,17 @@ import requests
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 from recommendation import Recommendation
 
-### Credentials for spotify api request
+# Credentials for spotify api request
 client_id = config.cid
 client_secret = config.secret
+
 
 def get_headers(client_id, client_secret):
     """Authorization for Spotify API request"""
 
     endpoint = "https://accounts.spotify.com/api/token"
-    encoded = base64.b64encode("{}:{}".format(client_id, client_secret).encode('utf-8')).decode('ascii')
+    encoded = base64.b64encode("{}:{}".format(
+        client_id, client_secret).encode('utf-8')).decode('ascii')
 
     headers = {
         "Authorization": "Basic {}".format(encoded)
@@ -35,8 +37,11 @@ def get_headers(client_id, client_secret):
     return headers
 
 # Get playlist Id's of a genre
+
+
 def getGenrePlaylist(genre):
-    url = "https://api.spotify.com/v1/browse/categories/{}/playlists?limit=10".format(genre)
+    url = "https://api.spotify.com/v1/browse/categories/{}/playlists?limit=10".format(
+        genre)
     headers = get_headers(client_id, client_secret)
     r = requests.get(url, headers=headers)
     raw = json.loads(r.text)
@@ -44,6 +49,8 @@ def getGenrePlaylist(genre):
     return playlistId
 
 # Get tracks of a playlist
+
+
 def getPlaylist(genre):
     playListId = getGenrePlaylist(genre)
     url = "https://api.spotify.com/v1/playlists/{}".format(playListId)
@@ -59,14 +66,18 @@ def getPlaylist(genre):
         albumName = raw['tracks']['items'][i]['track']['album']['name']
         artistName = raw['tracks']['items'][i]['track']['artists'][0]['name']
         songLength = raw['tracks']['items'][i]['track']['duration_ms'] / 60000
-        data.append({'songName': songName, 'albumName': albumName, 'artistName': artistName, 'image': songImage, 'link': songLink, 'duration': songLength})
+        data.append({'songName': songName, 'albumName': albumName, 'artistName': artistName,
+                    'image': songImage, 'link': songLink, 'duration': songLength})
     return data
 
 # Search a song by title
+
+
 def searchTrack(search):
-    url = "https://api.spotify.com/v1/search?q={}&type=track&limit=5".format(search)
+    url = "https://api.spotify.com/v1/search?q={}&type=track&limit=5".format(
+        search)
     headers = get_headers(client_id, client_secret)
-    r = requests.get(url, headers = headers)
+    r = requests.get(url, headers=headers)
     raw = json.loads(r.text)
     data = []
     # Get 5 tracks per search

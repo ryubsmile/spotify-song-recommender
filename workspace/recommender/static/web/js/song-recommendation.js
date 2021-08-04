@@ -26,8 +26,8 @@ Checks if the 'keyPressed' is a valid key (not null, empty, or not giving any in
 If valid: set the search area class as 'active' & sends(posts) the value in search box and waits for search result. 
 If invalid: set the search area class as not 'active' and returns. */
 searchBox.onkeyup = (e) => {
-    let keyPressed = e.target.value;
-    if(keyPressed){
+    let keyPressedIsValid = e.target.value;
+    if(keyPressedIsValid){
         searchArea.classList.add('active');
         let searchKeyword = searchBox.value;
         postKeyword(searchKeyword);
@@ -76,20 +76,19 @@ function showAutoComBoxes(autoComList){
 /* using the search result data, update auto completion boxes
 by editing the inner HTML of each <li> tag. */
 function fillAutoComBox(autoComInfo, autoComCell){
-    let rawTime = autoComInfo["duration"]; // e.g. 230.3242 (min)
+    let rawTime = autoComInfo.duration; // e.g. 230.3242 (min)
     let minutes = add0(Math.floor(rawTime)); // 230 min
     let seconds = add0(Math.floor((rawTime - minutes) * 60)); // 19s
     let time = minutes + ":" + seconds; // 230:19
 
     autoComCell.innerHTML = (
-        "<img src=\"" + autoComInfo["image"] + "\">" +
-        "<song-info>" +
-            "<name>" + autoComInfo["songName"] + "</name>" +
-            "<artist>" + autoComInfo["artistName"] + "</artist>" + 
-        "</song-info>" +
-        "<length>" + time + "</length>" + 
-        "<input type=\"hidden\" name=\"songId\" value=\"" + autoComInfo["songId"] + "\">" +
-        "<input type=\"hidden\" name=\"artistId\" value=\"" + autoComInfo["artistId"] + "\">"
+       `<img src="${autoComInfo.image}">
+        <song-info>
+            <name>${autoComInfo.songName}</name>
+            <artist>${autoComInfo.artistName}</artist> 
+        </song-info>
+        <length>${time}</length> 
+        <input type="hidden" name="songId" value="${autoComInfo.songId}">`
     );
 
     autoComCell.setAttribute('onclick','select(this)'); //if each auto com is clicked, execute 'select' function
@@ -113,38 +112,33 @@ function select(selfElement){
     
     searchBox.value = "";
     searchArea.classList.remove('active');
+
+    if(numOfSelections === 3){
+      button.className += 'popup';
+    }
 }
 
-//to send song id & artist id to server, which are needed to recommend songs. 
+// to send song id &  to server, which are needed to recommend songs. 
 let trackIds = [];
-var test;
-function submitForm(){
-    let songInfo = selectArea.querySelectorAll("input[name='songId']");
-    let artistInfo = selectArea.querySelectorAll("input[name='artistId']");
-    for(var i = 0; i < NUMBER_OF_SELECTIONS; i++){
-        if(songInfo[i]){
-            // using json
-            var info = {};
-            info.songId = songInfo[i].value;
-            info.artistId = artistInfo[i].value;
-            trackIds[i] = JSON.stringify(info);
-        }else{
-            alert('Not enough songs! Please fill in all the blanks.');
-            // redirect to the same page again
-            selectForm.action = "";
-            selectForm.method = "GET";
-            // remove all the inputs: so to hide possibly sensitive data
-            let inputTags = selectForm.querySelectorAll("input");
-            var j = 0;
-            while(inputTags[j] !== undefined){
-                inputTags[j++].remove();
-            }
-            
-            break;
+const button = document.getElementById('submit-button');
+
+button.onclick = (e) => {
+  let songInfo = selectArea.querySelectorAll("input[name='songId']");
+  for(var i = 0; i < NUMBER_OF_SELECTIONS; i++){
+      if(songInfo[i]){ // => has something to fill in to the info object that is formatted to json in trackIds
+          // using json
+          trackIds[i] = JSON.stringify(songInfo[i].value);
+      }else{ // => not enough number of songs to run recommendation algo
+          alert('Not enough songs! Please fill in all the blanks.');
+          // redirect to the same page again
+          e.preventDefault();
+          return;
         }
-    }
-    let inputTag = document.getElementById('trackToSend');
-    inputTag.value = trackIds;
+  }
+  let inputTag = document.getElementById('trackToSend');
+  inputTag.value = trackIds;
+  loading();
+  selectForm.submit();
 }
 
 // correctly formats time 
@@ -169,3 +163,26 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+
+
+const loading = () => {
+  document.querySelector('#container').style.opacity = "0.3";
+  document.querySelector('.loading').style.display= "block";
+  document.querySelector('.loading-group').style.display= "block";
+
+  const loadBars = document.querySelectorAll('.load-bar');
+  
+  let i = 0;
+
+  let stopper = setInterval(() => {
+    loadBars[i].style.left = 50 * i + "px";
+    makeJump(loadBars[i++]);
+    if(i >= loadBars.length){ clearInterval(stopper); }
+  },(i===1)?500:100);
+
+}
+
+const makeJump = element => {
+  element.className += " jump"
+};

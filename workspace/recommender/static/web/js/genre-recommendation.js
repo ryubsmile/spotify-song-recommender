@@ -2,14 +2,13 @@ let GENRE_DICT; // from the HTML file, get the genre list as dictionary
 let GENRE; // the genre user clicked on the previous page
 const NUMBER_OF_TILES = 6; // self-explanatory.
 
-
 // when html body is loaded, make tiles.
 window.onload = function(){
-    renderTiles(NUMBER_OF_TILES);
-}
+    showTiles(NUMBER_OF_TILES);
+};
 
-// 
-function renderTiles(tileAmount){
+// pick 6 random numbers between 0~genre.length, and show them as tiles
+function showTiles(tileAmount){
     const randomIntArray = pickRandomIndices(GENRE.length, tileAmount);
 
     for(var i = 0; i < tileAmount; i++){
@@ -27,8 +26,8 @@ function createTile(genreIndex){
     tile.href = "javascript:;";
     tile.style.backgroundImage = "url(../../static/" + GENRE_DICT[GENRE[genreIndex]] + ")";
     tile.setAttribute('onclick', 'sendTextAsInput(\"' + textString + '\")');
-    tile.setAttribute('onmouseover', 'toggleAlpha(this);')
-    tile.setAttribute('onmouseout', 'toggleAlpha(this);')
+    tile.setAttribute('onmouseover', 'toggleAlpha(this);');
+    tile.setAttribute('onmouseout', 'toggleAlpha(this);');
 
     var parent = document.getElementById('tile-container');
     parent.appendChild(tile);
@@ -54,6 +53,5 @@ function pickRandomIndices(max, size){
             i++;
         }
     }
-
     return indices;
 }

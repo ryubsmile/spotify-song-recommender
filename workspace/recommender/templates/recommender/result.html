@@ -25,12 +25,12 @@
 
         <script>
             let playlist;
-            let genre;
+            let title;
             
             window.onload = function(){
                 playlist = {{ data|safe }};
-                genre = "{{ title|safe }}";
-                setGenreFirstLetterCap();
+                title = "{{ title|safe }}";
+                setTitleFirstLetterCap();
                 createPlaylist();
                 setBgColor();
             };
@@ -40,7 +40,7 @@
         <div class="container">
             <div class="header-gradient">
                 <header>
-                    <h1 id="genre">ERROR</h1> 
+                    <h1 id="title">ERROR</h1> 
                     <!-- 여기 크게 지금 선택한 사진 보이게 하면 조을듯 근데 시작땐 애니메이션으로 -->
 
                     <!-- incompatible genres: 
@@ -93,5 +93,11 @@
                 </div>
             </div>
         </div>
+        <footer style="padding-bottom: 30px; text-align: center">
+          <a style="text-decoration: none;" href="https://github.com/ryubsmile/spotify-song-recommender" target="_blank" rel="noopener noreferrer">
+            <img src="{% static 'web/images/github.png'%}" height="30px">
+          </a>
+          <img src="{% static 'web/images/spotify.png'%}" height="30px" />
+        </footer>
     </body>
 </html>
