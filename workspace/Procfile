@@ -1,1 +1,1 @@
-web: gunicorn mysite.wsgi --log-file -
+web: gunicorn sheltered-castle-06122.wsgi --log-file -
