@@ -16,6 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 import os
+import dj_database_url
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 os.path.join(SETTINGS_PATH, 'templates')
 
@@ -26,10 +27,10 @@ os.path.join(SETTINGS_PATH, 'templates')
 SECRET_KEY = 'django-insecure-1_h=w2(4kgch#sr(&a#a+fcs=f#bq*&zfk8+jmv@vm94%90jnp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -138,3 +139,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Activate Heroku
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
